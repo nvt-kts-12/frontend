@@ -20,4 +20,4 @@ before_script:
 script:
 - ng lint
 - ng build --prod
-# - sonar-scanner
+- sonar-scanner
