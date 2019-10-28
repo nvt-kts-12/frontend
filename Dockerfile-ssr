@@ -1,0 +1,17 @@
+FROM node:8.12-alpine
+
+WORKDIR /app
+
+# Use cache for dependencies if possible
+COPY package.json .
+COPY yarn.lock .
+RUN yarn
+
+# Copy source files
+COPY . .
+
+# Build SSR 
+RUN yarn build:ssr
+
+# Run Express server
+CMD ["yarn", "serve:ssr"]

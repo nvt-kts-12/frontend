@@ -1,0 +1,11 @@
+<div class="register-container">
+  <form (ngSubmit)="onSubmit()">
+    <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
+    <input name="email" required type="email" [(ngModel)]="email"/>
+    <label for="password">{{ 'COMMON.PASSWORD' | translate }}</label>
+    <input name="password" required type="password" [(ngModel)]="password"/>
+    <label for="username">{{ 'COMMON.USERNAME' | translate }}</label>
+    <input name="username" required type="text" [(ngModel)]="username"/>
+    <input type="submit"/>
+  </form>
+</div>

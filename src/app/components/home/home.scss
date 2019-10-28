@@ -1,0 +1,9 @@
+@import "_variables";
+
+.rise-navbar {
+    height: 70px;
+}
+
+.rise-main-container-wrapper {
+    height: calc(100vh - 70px);
+}
