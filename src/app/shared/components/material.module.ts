@@ -5,6 +5,10 @@ import {
   MatFormFieldModule,
   MatCheckboxModule,
   MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
@@ -13,6 +17,10 @@ const MATERIAL_MODULES = [
   MatFormFieldModule,
   MatCheckboxModule,
   MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
