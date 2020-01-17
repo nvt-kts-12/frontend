@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './components/home/home.module';
 import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor } from './shared/config';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
@@ -18,7 +19,8 @@ export function HttpLoaderFactory(handler: HttpBackend) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,

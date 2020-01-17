@@ -38,7 +38,8 @@ export class HttpApiInterceptor implements HttpInterceptor {
           'Authorization': `Bearer ${token}`,
         }
         : {};
-
+      
+      
       req = req.clone({
         url: url + req.url,
         setHeaders: {
@@ -47,12 +48,16 @@ export class HttpApiInterceptor implements HttpInterceptor {
           ...authHeaders
         },
       });
+
+      console.log(req);
+
       observable = next.handle(req).pipe(catchError((error) => {
         if (error instanceof HttpErrorResponse && error.status === 403) {
           this.handleAuthError(error);
         }
         return of(error);
       }));
+
     });
 
     return observable

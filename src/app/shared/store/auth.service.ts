@@ -4,10 +4,13 @@ import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { AuthStore } from './auth.store';
+import { Response } from '@angular/http';
+import { stringify } from 'querystring';
 
 const ENDPOINTS = {
-  LOGIN: '/login',
-  REGISTER: '/register'
+  LOGIN: '/auth/login',
+  REGISTER: '/register',
+  ME: '/user/me'
 };
 
 @Injectable({
@@ -32,14 +35,32 @@ export class AuthService {
    * @returns Observable<any>
    */
   login(data: any): Observable<any> {
-    return this.http.post(ENDPOINTS.LOGIN, data).pipe(
-      tap((data: { token: string }) => {
+     return this.http.post(ENDPOINTS.LOGIN, data).pipe(
+      tap((data: { accessToken: string }) => {
+        console.log(data);
+
         this.authStore.updateRoot((state) => ({
-          token: data.token,
-          user: {
-            email: 'jon@doe.com' // TODO: change this after implementation
-          }
-        }));
+          token: data.accessToken
+        }));        
+      })
+    ).pipe(
+      // tap(() => {
+      //   this.http.get(ENDPOINTS.ME).pipe(
+      //     tap((data: {username: string, firstName: string, lastName: string, email: string}) => {
+      //       this.authStore.updateRoot((state) => ({
+      //         user: data
+      //       })
+      //     );
+      //   }
+      // })
+      tap(() => {
+        this.http.get(ENDPOINTS.ME).pipe(
+          tap((data: {username: string, firstName: string, lastName: string, email: string}) => {
+            this.authStore.updateRoot((state) => ({
+                      user: data
+            }));
+          })
+        )
       })
     );
   }

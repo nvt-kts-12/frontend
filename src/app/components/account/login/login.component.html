@@ -3,15 +3,13 @@
     <mat-form-field>
       <input
         matInput
-        placeholder="{{ 'COMMON.EMAIL' | translate }}"
-        [formControl]="email"
+        placeholder="{{ 'COMMON.USERNAME' | translate }}"
         required
-        type="email"
+        [formControl]="username"
+        type="text"
       >
-      <mat-error
-        *ngIf="email.invalid"
-      >
-      {{ getErrorMessage('email') | translate }}
+      <mat-error>
+        {{ getErrorMessage('username') | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -22,17 +20,15 @@
           required
           type="password"
         >
-        <mat-error
-          *ngIf="email.invalid"
-        >
-        {{ getErrorMessage('password') | translate }}
+        <mat-error>
+          {{ getErrorMessage('password') | translate }}
         </mat-error>
       </mat-form-field>
       <button
         mat-raised-button
         type="submit"
         color="primary"
-        [disabled]="!email.valid || !password.valid"
+        [disabled]="!username.valid || !password.valid"
       >
       {{ 'COMMON.LOGIN' | translate }}
       </button>
