@@ -16,9 +16,4 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.auth.logout();
   }
-
-  show() {
-    this.auth.showUser().subscribe(() => console.log("SHOW"));
-  }
-
 }

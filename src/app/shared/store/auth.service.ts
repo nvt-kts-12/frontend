@@ -44,15 +44,6 @@ export class AuthService {
         }));        
       })
     ).pipe(
-      // tap(() => {
-      //   this.http.get(ENDPOINTS.ME).pipe(
-      //     tap((data: {username: string, firstName: string, lastName: string, email: string}) => {
-      //       this.authStore.updateRoot((state) => ({
-      //         user: data
-      //       })
-      //     );
-      //   }
-      // })
       tap(() => {
         this.http.get(ENDPOINTS.ME).pipe(
           tap((data: {username: string, firstName: string, lastName: string, email: string}) => {
