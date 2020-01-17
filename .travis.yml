@@ -1,0 +1,23 @@
+language: node_js
+dist: trusty
+
+node_js:
+  - "10"
+
+sudo: required
+branches:
+  only:
+  - master
+
+addons:
+  sonarcloud:
+    organization: "nvt-kts-12"
+    token:
+      secure: $SONAR_TOKEN # encrypted value of your token
+
+before_script:
+  - npm install -g @angular/cli
+script:
+# - ng lint
+- ng build --prod
+# - sonar-scanner
