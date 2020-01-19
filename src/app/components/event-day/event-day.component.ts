@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EventDayComponent implements OnInit {
 
-  @Input() eventDay: object
+  @Input() eventDay: any
 
   displayedColumns: string[] = ['type', 'price', 'vip'];
 

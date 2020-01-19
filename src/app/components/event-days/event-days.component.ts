@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class EventDaysComponent implements OnInit {
 
   eventId: string;
-  event: object;
+  event: any;
   eventDays: []
   errorMsg: string;
 
