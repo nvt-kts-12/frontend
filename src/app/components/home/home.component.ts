@@ -1,55 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import {PageEvent} from '@angular/material/paginator';
 
 import { SiteRoutes } from './../../shared/constants';
-import { AuthService, AuthQuery, User } from './../../shared/store';
+import {EventService} from "../../shared/services/event/event.service";
+import { EventComponent } from '../event/event.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: [ './home.scss' ]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
-  /**
-   * Holds current active user
-   * @type User
-   */
-  public currentUser$: Observable<Partial<User>>;
+  data = {
+    events: [],
+    numberOfElements: 0
+  }
 
-  /**
-   * Is logged in user
-   * @type boolean
-   */
-  public isLoggedIn: boolean;
+  pagination = {
+    pageSize: 5,
+    pageSizeOptions: [5,10,25],
+    pageIndex: 0
+  }
 
-  constructor(
-    private authQuery: AuthQuery,
-    private authService: AuthService,
-    private router: Router
+  searchQuery: string = "";
+  pageEvent: PageEvent;
+
+  public constructor(
+    private eventService: EventService
   ) {}
 
   ngOnInit() {
-    this.currentUser$ = this.authQuery.user$;
-    this.authQuery.isLoggedIn$.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-    });
+   this.fetchData(null);
   }
+  
+  fetchData(event?:PageEvent) {
+    // fetch data
+    this.pagination.pageIndex = event ? event.pageIndex : 0;
+    this.eventService.getEvents(this.pagination, this.searchQuery).subscribe((res) => {
+      this.data = res;
+    })
 
-  /**
-   * Navigates user to the login page
-   * @returns void
-   */
-  goToLogin(): void {
-    this.router.navigate([SiteRoutes.LOGIN]);
-  }
-
-  /**
-   * Logout user
-   * @returns void
-   */
-  logout(): void {
-    this.authService.logout();
+    return event;
   }
 }

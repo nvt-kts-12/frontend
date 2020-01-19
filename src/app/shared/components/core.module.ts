@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from './material.module'
 import { CommonStoreModule } from './../store'
+import { RouterModule } from '@angular/router';
+
+
 
 @NgModule({
   imports: [
@@ -13,7 +16,8 @@ import { CommonStoreModule } from './../store'
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    CommonStoreModule
+    CommonStoreModule,
+    RouterModule
   ],
   exports: [
     TranslateModule,
@@ -21,7 +25,8 @@ import { CommonStoreModule } from './../store'
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    CommonStoreModule
+    CommonStoreModule,
+    RouterModule
   ]
 })
 export class CoreModulesModule {}
