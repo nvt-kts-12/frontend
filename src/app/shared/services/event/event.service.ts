@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Observable, of, throwError as observableThrowError} from 'rxjs';
 import { PageEvent } from '@angular/material';
 import { HttpErrorResponse} from '@angular/common/http';
@@ -20,9 +20,9 @@ export class EventService {
   ) { }
 
 
-  getEvents(pagination: any, searchQuery: string): Observable<any> {
+  getEvents(pagination: any, searchTerm: string): Observable<any> {
 
-    let url = ENDPOINTS.EVENTS + "?page=" + pagination.pageIndex + "&size=" + pagination.pageSize + "&searchQuery=" + searchQuery;
+    let url = ENDPOINTS.EVENTS + "?page=" + pagination.pageIndex + "&size=" + pagination.pageSize + "&searchQuery=" + searchTerm;
 
     return this.http.get(url);
   }
