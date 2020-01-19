@@ -1,0 +1,28 @@
+<div>
+  <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    [(ngModel)]="eventType"
+    (change)="typeChanged($event)">
+    <mat-radio-button class="example-radio-button" *ngFor="let eventType of eventTypes" [value]="eventType">
+      {{eventType}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="dateChanged($event)" [(ngModel)]="filter.date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <button mat-button *ngIf='filter.date' matSuffix mat-icon-button aria-label="Clear" (click)="clearDate()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Location</mat-label>
+    <mat-select (selectionChange)="locationChanged($event)">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let location of locationSchemes" [value]="location.name">
+        {{location.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

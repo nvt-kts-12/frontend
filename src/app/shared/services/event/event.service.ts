@@ -20,9 +20,23 @@ export class EventService {
   ) { }
 
 
-  getEvents(pagination: any, searchTerm: string): Observable<any> {
+  getEvents(pagination: any, searchTerm: string, filter: any): Observable<any> {
 
     let url = ENDPOINTS.EVENTS + "?page=" + pagination.pageIndex + "&size=" + pagination.pageSize + "&searchQuery=" + searchTerm;
+
+    if (filter) {
+      if (filter.type) {
+        url += "&typeFilter=" + filter.type;
+      }
+      if (filter.date) {
+        url += "&dateFilter=" + filter.date;
+      }
+      if (filter.location) {
+        url += "&locationFilter=" + filter.location;
+      }
+
+    }
+    
 
     return this.http.get(url);
   }
