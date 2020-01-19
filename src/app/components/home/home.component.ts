@@ -20,43 +20,53 @@ export class HomeComponent implements OnInit{
     numberOfElements: 0
   }
 
+  searchTerm: string = "";
+  filter: {
+    type: string,
+    date: string,
+    location: any
+  }
+
   pagination = {
     pageSize: 5,
     pageSizeOptions: [5,10,25],
     pageIndex: 0
   }
 
-  searchTerm: string = "";
-  searchChanged: Subject<string> = new Subject<string>();
   pageEvent: PageEvent;
 
   public constructor(
     private eventService: EventService
   ) {
-    this.searchChanged.pipe(
-      debounceTime(400),
-      distinctUntilChanged()
-    ).subscribe(term => {
-      this.searchTerm = term;
-      if (this.pageEvent) {
-        this.pageEvent.pageIndex = 0;
-      }
-
-      this.pageEvent = this.fetchData(this.pageEvent);
-    })
   }
 
   ngOnInit() {
    this.fetchData(null);
   }
 
-  search(text: string) {
-    this.searchChanged.next(text);
+  searchChangedCallback(event: any) {
+    this.searchTerm = event;
+    this.callFetch();
+  }
+
+  filterChangedCallback(event: any) {
+
+    console.log(event);
+    this.filter = event;
+    this.callFetch();
+
+  }
+
+  callFetch() {
+    if (this.pageEvent) {
+      this.pageEvent.pageIndex = 0;
+    }
+    this.pageEvent = this.fetchData(this.pageEvent);
   }
   
   fetchData(event?:PageEvent) {
     this.pagination.pageIndex = event ? event.pageIndex : 0;
-    this.eventService.getEvents(this.pagination, this.searchTerm).subscribe((res) => {
+    this.eventService.getEvents(this.pagination, this.searchTerm, this.filter).subscribe((res) => {
       this.data = res;
     })
 
