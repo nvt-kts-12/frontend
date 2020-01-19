@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {PageEvent} from '@angular/material/paginator';
 
 import { SiteRoutes } from './../../shared/constants';
 import {EventService} from "../../shared/services/event/event.service";
 import { EventComponent } from '../event/event.component';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -25,21 +26,37 @@ export class HomeComponent implements OnInit{
     pageIndex: 0
   }
 
-  searchQuery: string = "";
+  searchTerm: string = "";
+  searchChanged: Subject<string> = new Subject<string>();
   pageEvent: PageEvent;
 
   public constructor(
     private eventService: EventService
-  ) {}
+  ) {
+    this.searchChanged.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe(term => {
+      this.searchTerm = term;
+      if (this.pageEvent) {
+        this.pageEvent.pageIndex = 0;
+      }
+
+      this.pageEvent = this.fetchData(this.pageEvent);
+    })
+  }
 
   ngOnInit() {
    this.fetchData(null);
   }
+
+  search(text: string) {
+    this.searchChanged.next(text);
+  }
   
   fetchData(event?:PageEvent) {
-    // fetch data
     this.pagination.pageIndex = event ? event.pageIndex : 0;
-    this.eventService.getEvents(this.pagination, this.searchQuery).subscribe((res) => {
+    this.eventService.getEvents(this.pagination, this.searchTerm).subscribe((res) => {
       this.data = res;
     })
 

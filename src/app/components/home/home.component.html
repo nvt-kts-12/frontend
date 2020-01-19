@@ -2,19 +2,20 @@
   <mat-card class="events-container">
     <h1>Upcoming events</h1>
     <mat-form-field class="example-form-field">
-        <input matInput type="text" placeholder="Search" [(ngModel)]="searchQuery">
-        <button mat-button *ngIf="searchQuery" matSuffix mat-icon-button aria-label="Clear" (click)="searchQuery=''">
+        <input matInput type="text" placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="search($event)">
+        <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="search('')">
           <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
     <div fxLayout="column wrap"  fxLayoutAlign="Space-between" fxLayout.lg="row" fxLayout.md="row"> 
-      <event-component *ngFor="let event of data.events" [event]="event" fxFlex.md="20%" fxFlex.lg="20%" ></event-component>
+      <event-component *ngFor="let event of data.events" [event]="event" fxFlex.md="25%" fxFlex.lg="25%" ></event-component>
     </div>
 
     <mat-paginator
       [length]="data.numberOfElements"
       [pageSize]="pagination.pageSize"
       [pageSizeOptions]="pagination.pageSizeOptions"
+      [pageIndex]="pagination.pageIndex"
       (page)="pageEvent = fetchData($event)"
     ></mat-paginator>
   </mat-card>

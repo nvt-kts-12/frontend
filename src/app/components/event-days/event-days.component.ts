@@ -40,7 +40,6 @@ export class EventDaysComponent implements OnInit {
     this.eventService.getEventDays(this.eventId).subscribe((res) => {
       this.eventDays = res;
       this.event = res[0].event;
-      console.log("SUPERICA");
     },
     error => {
       this.router.navigate(['/']);
