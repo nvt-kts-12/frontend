@@ -1,0 +1,12 @@
+<mat-card fxLayout="column" class="event-card">
+  <h1>
+    {{event.name}}
+  </h1>
+  <div>
+      <span *ngFor="let date of event.dates" class="event-date">{{date}}</span>
+  </div>
+  <a [routerLink]="['event/', event.id]"><button mat-button>+ More information</button></a>
+  <p>
+    {{event.category}}
+  </p>
+</mat-card>

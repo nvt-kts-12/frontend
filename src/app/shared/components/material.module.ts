@@ -8,8 +8,17 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatExpansionModule,
+  MatDividerModule,
+  MatChipsModule,
 } from '@angular/material';
+
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 const MATERIAL_MODULES = [
   BrowserAnimationsModule,
@@ -20,7 +29,15 @@ const MATERIAL_MODULES = [
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatProgressSpinnerModule
+  MatCardModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatToolbarModule,
+  FlexLayoutModule,
+  MatExpansionModule,
+  MatDividerModule,
+  MatChipsModule
 ];
 
 @NgModule({

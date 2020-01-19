@@ -1,10 +1,33 @@
-<mat-toolbar class="rise-navbar">
+<div>
+  <mat-card class="events-container">
+    <h1>Upcoming events</h1>
+    <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Search" [(ngModel)]="searchQuery">
+        <button mat-button *ngIf="searchQuery" matSuffix mat-icon-button aria-label="Clear" (click)="searchQuery=''">
+          <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <div fxLayout="column wrap"  fxLayoutAlign="Space-between" fxLayout.lg="row" fxLayout.md="row"> 
+      <event-component *ngFor="let event of data.events" [event]="event" fxFlex.md="20%" fxFlex.lg="20%" ></event-component>
+    </div>
+
+    <mat-paginator
+      [length]="data.numberOfElements"
+      [pageSize]="pagination.pageSize"
+      [pageSizeOptions]="pagination.pageSizeOptions"
+      (page)="pageEvent = fetchData($event)"
+    ></mat-paginator>
+  </mat-card>
+</div>
+
+
+<!-- <mat-toolbar class="rise-navbar">
   <span>Rise</span>
 </mat-toolbar>
 
 <div class="rise-main-container-wrapper">
 
-</div>
+</div> -->
 <!-- TODO: Add Slider after MVP -->
 <!-- <mat-drawer-container
   class="rise-main-container-wrapper"

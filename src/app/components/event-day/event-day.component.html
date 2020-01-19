@@ -1,0 +1,35 @@
+<div>
+  <mat-divider></mat-divider>
+  <div>
+    <h5>When?</h5>
+      <h3>
+        {{eventDay.date}}
+      </h3>
+    <h5>Where?</h5>
+    <h3>
+      {{eventDay.locationName}} ({{eventDay.locationAddress}})
+    </h3>
+    <h5>Tickets</h5>
+    <table mat-table [dataSource]="eventDay.sectors" class="mat-elevation-z3">
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let element">{{element.sectorType}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let element">{{element.price}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="vip">
+        <th mat-header-cell *matHeaderCellDef>Vip</th>
+        <td mat-cell *matCellDef="let element">{{element.vip ? "No" : "Yes"}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <button mat-raised-button class="continue-button" color='primary' (click)="continue()">Continue</button>
+  </div>
+</div>

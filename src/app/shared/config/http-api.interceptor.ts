@@ -1,7 +1,7 @@
 
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of , throwError} from 'rxjs';
 
 import { environment } from './../../../environments/environment';
 import { AuthQuery, AuthService } from './../store';
@@ -49,17 +49,14 @@ export class HttpApiInterceptor implements HttpInterceptor {
         },
       });
 
-      console.log(req);
-
       observable = next.handle(req).pipe(catchError((error) => {
         if (error instanceof HttpErrorResponse && error.status === 403) {
           this.handleAuthError(error);
         }
-        return of(error);
+        return throwError(error);
       }));
 
     });
-
     return observable
   }
 

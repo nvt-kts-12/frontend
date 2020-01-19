@@ -45,12 +45,12 @@ export class AuthService {
       })
     ).pipe(
       tap(() => {
-        this.http.get(ENDPOINTS.ME).pipe(
-          tap((data: {username: string, firstName: string, lastName: string, email: string}) => {
+        this.http.get(ENDPOINTS.ME).subscribe(
+          res => {
             this.authStore.updateRoot((state) => ({
-                      user: data
-            }));
-          })
+              user: res
+            }))
+          }
         )
       })
     );

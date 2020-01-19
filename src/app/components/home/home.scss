@@ -1,9 +1,14 @@
 @import "_variables";
 
-.rise-navbar {
-    height: 70px;
+.events-container {
+    margin: 10px;
+    padding: 10px;
 }
 
-.rise-main-container-wrapper {
-    height: calc(100vh - 70px);
+.example-form-field {
+    width: 200px;
 }
+
+mat-grid-tile {
+    background: lightblue;
+  }
