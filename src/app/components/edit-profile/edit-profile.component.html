@@ -1,0 +1,55 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Edit profile</legend>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="username">Username</label>  
+  <div class="col-md-4">
+  <input id="username" name="username" type="text" placeholder="{{user.username}}" class="form-control input-md" [(ngModel)] = "user.username">   
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="email">Email</label>  
+  <div class="col-md-4">
+  <input id="email" name="email" type="text" placeholder="{{user.email}}" class="form-control input-md" [(ngModel)] = "user.email">   
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="firstName">Name</label>  
+  <div class="col-md-4">
+  <input id="firstName" name="firstName" type="text" placeholder="{{user.firstName}}" class="form-control input-md" [(ngModel)] = "user.firstName">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="lastName">Last name</label>  
+  <div class="col-md-4">
+  <input id="lastName" name="lastName" type="text" placeholder="{{user.lastName}}" class="form-control input-md" [(ngModel)] = "user.lastName">   
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" (click)="update($user)" class="btn btn-primary">Edit</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+</div>

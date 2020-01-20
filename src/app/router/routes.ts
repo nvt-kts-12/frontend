@@ -5,6 +5,8 @@ import { LoggedInGuard } from './guards/logged-in.guard';
 import { RegisterComponent } from '../components/account/register/register.component';
 import { LoginComponent } from '../components/account/login/login.component';
 import { EventDaysComponent } from '../components/event-days/event-days.component';
+import { UserProfileComponent } from '../components/user-profile/user-profile.component';
+import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +25,14 @@ export const routes: Routes = [
   {
     path: 'event/:id',
     component: EventDaysComponent
+  },
+  {
+    path:'profile',
+    component: UserProfileComponent
+  },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent
   },
   ...accountRouting
 ];

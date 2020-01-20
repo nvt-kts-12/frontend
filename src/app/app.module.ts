@@ -12,6 +12,8 @@ import { HomeModule } from './components/home/home.module';
 import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor } from './shared/config';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
@@ -20,7 +22,9 @@ export function HttpLoaderFactory(handler: HttpBackend) {
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,
