@@ -4,6 +4,8 @@ import { CoreModulesModule } from './../../shared/components/core.module';
 import { EventComponent } from '../event/event.component';
 import { EventDaysComponent } from '../event-days/event-days.component';
 import { EventDayComponent } from '../event-day/event-day.component';
+import { TicketReservationComponent } from '../ticket-reservation/ticket-reservation.component';
+import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
 
 
 @NgModule({
@@ -11,11 +13,14 @@ import { EventDayComponent } from '../event-day/event-day.component';
     HomeComponent,
     EventComponent,
     EventDaysComponent,
-    EventDayComponent
+    EventDayComponent,
+    TicketReservationComponent,
+    PopupDialogComponent
   ],
   imports: [
     CoreModulesModule
   ],
-  exports: [HomeComponent, EventComponent, EventDaysComponent]
+  exports: [HomeComponent, EventComponent, EventDaysComponent, TicketReservationComponent],
+  entryComponents:[PopupDialogComponent]
 })
 export class HomeModule { }

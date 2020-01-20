@@ -5,6 +5,7 @@ import { LoggedInGuard } from './guards/logged-in.guard';
 import { RegisterComponent } from '../components/account/register/register.component';
 import { LoginComponent } from '../components/account/login/login.component';
 import { EventDaysComponent } from '../components/event-days/event-days.component';
+import { TicketReservationComponent } from '../components/ticket-reservation/ticket-reservation.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'event/:id',
     component: EventDaysComponent
+  },
+  {
+    path: 'event/:eventId/event-day/:dayId',
+    component: TicketReservationComponent
   },
   ...accountRouting
 ];
