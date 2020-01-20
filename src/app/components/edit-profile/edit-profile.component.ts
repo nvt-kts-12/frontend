@@ -10,8 +10,8 @@ import { first } from 'rxjs/operators';
 })
 export class EditProfileComponent implements OnInit {
 
-  private user : User
-  private test : any 
+  user : User
+  test : any 
   editprofileService : EditProfileService
   router: any;
  
