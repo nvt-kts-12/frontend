@@ -1,4 +1,22 @@
-<div id="navbar">
-  navbar
-  <a href="/profile" id="profileLink">Profile</a>
-</div>
+
+<mat-toolbar>
+  <button mat-icon-button color="primary" aria-label="Home" routerLink="/">
+    <mat-icon>home</mat-icon>
+  </button>
+  <span class="navbar-spacer"></span>
+
+  <div *ngIf="isAdmin()">
+    Admin Panel
+  </div>
+  <div *ngIf="isUser()">
+    <button mat-icon-button color="primary" aria-label="Profile" routerLink="/profile">
+      <mat-icon>person</mat-icon>
+    </button>
+  </div>
+
+  <button mat-button (click)="logout()" *ngIf="loggedIn" >Logout</button>
+  <div *ngIf="!loggedIn">
+    <button mat-button routerLink="/register" *ngIf="!isRegistrationPage()">Register</button>
+    <button mat-button routerLink="/login" *ngIf="!isLoginPage()">Login</button>
+  </div>
+</mat-toolbar>
