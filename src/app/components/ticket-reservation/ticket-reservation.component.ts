@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { MatDialog } from '@angular/material';
 import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
+import { EventDay } from '../../shared/model/EventDay';
+import { Sector } from '../../shared/model/Sector';
 
 
 export interface Ticket {
@@ -25,7 +27,8 @@ export class TicketReservationComponent implements OnInit {
 
   eventId: string;
   eventDayId: string;
-  eventDay: any;
+  eventDay: EventDay;
+  sectors: Array<Sector>;
 
   displayedColumns: string[] = ['id', 'sectorType', 'price', 'vip'];
   dataSource = tickets;
@@ -46,6 +49,21 @@ export class TicketReservationComponent implements OnInit {
     this.fetchData();
   }
 
+  drawSectors() {
+    if (this.eventDay != undefined) {
+      var canvas: any = document.getElementById("locationCanvas");
+      var ctx = canvas.getContext("2d");
+      this.eventDay.sectors.forEach(sector => {
+        ctx.beginPath();
+        var width = sector.bottomRightX - sector.topLeftX;
+        var height = sector.topLeftY - sector.bottomRightY;
+        ctx.rect(sector.topLeftX, sector.topLeftY, width, height);
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+      });
+    }
+  }
+
   ticket: {
     id: string,
     sectorType: string,
@@ -53,43 +71,70 @@ export class TicketReservationComponent implements OnInit {
     vip: boolean
   };
 
-  numOfChoosenPlaces: 0;   
+  numOfChoosenPlaces: 0;
+
+  open(): void{
+    console.log("asdsad");
+  }
 
   openPopup(sector: any): void {
     console.log(sector)
-    this.ticket = {
-      id: sector.sectorId,
-      sectorType: sector.sectorType,
-      price: sector.price,
-      vip: sector.vip
-    }
+
     const dialogRef = this.dialog.open(PopupDialogComponent, {
-      data: this.ticket
+      data: sector
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      tickets.push(this.ticket);
       this.numOfChoosenPlaces = result;
       console.log('Taken places: ' + this.numOfChoosenPlaces);
-      console.log(tickets);
-      this.dataSource = tickets;
     });
   }
 
   fetchData() {
-    this.eventService.getEventDays(this.eventId).subscribe((res) => {
-      res.forEach(day => {
-        if (day.id == parseInt(this.eventDayId)) {
-          this.eventDay = day;
-          console.log(this.eventDay);
-        }
-      });
-      console.log("Top top topcina");
+    this.eventService.getEventDay(this.eventDayId).subscribe((res) => {
+      this.eventDay = res;
+      console.log(this.eventDay);
+
+      /*Hard code **********************************************************/
+      /* */
+      /*********************************************************************/
+      this.eventDay.sectors[0].topLeftX = 25;
+      this.eventDay.sectors[0].topLeftY = 10;
+      this.eventDay.sectors[0].bottomRightX = 65;
+      this.eventDay.sectors[0].bottomRightY = -100;
+
+      this.eventDay.sectors[1].topLeftX = 235;
+      this.eventDay.sectors[1].topLeftY = 10;
+      this.eventDay.sectors[1].bottomRightX = 275;
+      this.eventDay.sectors[1].bottomRightY = -100;
+
+      this.eventDay.sectors[2].topLeftX = 85;
+      this.eventDay.sectors[2].topLeftY = 10;
+      this.eventDay.sectors[2].bottomRightX = 215;
+      this.eventDay.sectors[2].bottomRightY = -20;
+
+      this.drawSectors();
+
+      this.eventDay.sectors.forEach(sector => {
+        var canvas: any = document.getElementById("locationCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.font = "8px Comic Sans MS";
+        var width = sector.bottomRightX - sector.topLeftX;
+        var height = sector.topLeftY - sector.bottomRightY;
+
+        var x = sector.topLeftX + (width / 2);
+        var y = sector.topLeftY + (height / 2);
+        ctx.fillText(sector.type[0], x, y);
+      })
+      /*********************************************************************/
+      /* */
+      /*Hard code ************************************************************/
+
+      // todo: get places left by sector
     },
       error => {
         this.router.navigate(['/']);
-      })
+      });
   }
 }
 

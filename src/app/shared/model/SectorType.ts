@@ -1,0 +1,3 @@
+enum SectorType {
+    PARTER, GRANDSTAND
+}

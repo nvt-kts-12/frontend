@@ -1,14 +1,29 @@
+<!-- <div>
+  <canvas id="locationCanvas" style="border:3px solid #d3d3d3;" style="z-index:1">
+
+  </canvas>
+
+  <input type="button" style="z-index:2; position:relative; top:0; left:0" value="test"  />
+</div> -->
+
+
+<svg width="400" height="300">
+  <rect x="15" y="100" width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" 
+  (click)="open()"/>
+</svg>
+
+
 <mat-grid-list cols="3" rowHeight="3:1" *ngIf="eventDay!=undefined">
   <ng-container *ngFor="let sector of eventDay.sectors">
     <mat-grid-tile>
       <button matTooltip="enter number of tickets you want" (click)="openPopup(sector)">
-        {{sector.sectorType}} - {{sector.price}}
+        {{sector.type}} - {{sector.price}}
       </button>
     </mat-grid-tile>
   </ng-container>
 </mat-grid-list>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> id </th>
@@ -32,4 +47,4 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+</table> -->

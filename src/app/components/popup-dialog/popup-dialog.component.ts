@@ -15,6 +15,7 @@ export interface PopupData {
   styleUrls: ['./popup-dialog.component.scss']
 })
 export class PopupDialogComponent implements OnInit {
+
   ngOnInit(): void {
   }
 

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
-import { Observable, of, throwError as observableThrowError} from 'rxjs';
+import { Observable, of, throwError as observableThrowError } from 'rxjs';
 import { PageEvent } from '@angular/material';
-import { HttpErrorResponse} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 const ENDPOINTS = {
   EVENTS: '/event/show-events',
-  EVENT: "/event/"
+  EVENT: "/event/",
+  EVENTDAY: "/event/eventDay/"
 };
 
 @Injectable({
@@ -29,5 +30,9 @@ export class EventService {
 
   getEventDays(eventId: string): Observable<any> {
     return this.http.get(ENDPOINTS.EVENT + eventId);
+  }
+
+  getEventDay(eventDayId: string): Observable<any> {
+    return this.http.get(ENDPOINTS.EVENTDAY + eventDayId);
   }
 }
