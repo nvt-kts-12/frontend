@@ -5,8 +5,8 @@
   <div>
       <span *ngFor="let date of event.dates" class="event-date">{{date}}</span>
   </div>
-  <a [routerLink]="['event/', event.id]"><button mat-button>+ More information</button></a>
   <p>
     {{event.category}}
   </p>
+  <button mat-button [routerLink]="['event/', event.id]">+ More information</button>
 </mat-card>
