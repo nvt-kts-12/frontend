@@ -14,6 +14,11 @@ export class EventDayComponent implements OnInit {
   constructor(
     ) { }
 
+  continue() {
+
+    // TODO
+  }
+
   ngOnInit() {
   }
 

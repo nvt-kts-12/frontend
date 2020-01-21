@@ -19,6 +19,10 @@ import {
   MatGridListModule,
   MatTooltipModule,
   MatDialogModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule,
 } from '@angular/material';
 
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -44,6 +48,11 @@ const MATERIAL_MODULES = [
   MatGridListModule,
   MatTooltipModule,
   MatDialogModule,
+  MatChipsModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule,
 ];
 
 @NgModule({

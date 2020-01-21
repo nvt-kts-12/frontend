@@ -1,53 +1,22 @@
 <div>
   <mat-card class="events-container">
     <h1>Upcoming events</h1>
-    <mat-form-field class="example-form-field">
-        <input matInput type="text" placeholder="Search" [(ngModel)]="searchQuery">
-        <button mat-button *ngIf="searchQuery" matSuffix mat-icon-button aria-label="Clear" (click)="searchQuery=''">
-          <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-    <div fxLayout="column wrap"  fxLayoutAlign="Space-between" fxLayout.lg="row" fxLayout.md="row"> 
-      <event-component *ngFor="let event of data.events" [event]="event" fxFlex.md="20%" fxFlex.lg="20%" ></event-component>
+    <div fxLayout="row wrap">
+      <div fxFlex.lg="20%" fxFlex.md="20%">
+        <app-search (onChange)="searchChangedCallback($event)"></app-search>
+        <app-filter (onChange)="filterChangedCallback($event)"></app-filter>
+      </div>
+      <div fxLayout="column layout-wrap" fxLayoutAlign="stretch" fxLayout.lg="row wrap" fxLayout.md="row wrap" fxFlex="auto" fxFlex.lg="80%" fxFlex.md="80%"> 
+        <event-component *ngFor="let event of data.events" [event]="event" fxFlex.md="30%" fxFlex.lg="30%" ></event-component>
+      </div>
     </div>
-
+    
     <mat-paginator
       [length]="data.numberOfElements"
       [pageSize]="pagination.pageSize"
       [pageSizeOptions]="pagination.pageSizeOptions"
+      [pageIndex]="pagination.pageIndex"
       (page)="pageEvent = fetchData($event)"
     ></mat-paginator>
   </mat-card>
 </div>
-
-
-<!-- <mat-toolbar class="rise-navbar">
-  <span>Rise</span>
-</mat-toolbar>
-
-<div class="rise-main-container-wrapper">
-
-</div> -->
-<!-- TODO: Add Slider after MVP -->
-<!-- <mat-drawer-container
-  class="rise-main-container-wrapper"
-  autosize
->
-  <mat-drawer
-    #drawer class="rise-sidenav"
-    mode="side"
-    position="end"
-  >
-    <p>Auto-resizing sidenav</p>
-    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button>
-  </mat-drawer>
-
-  <div class="rise-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
-  </div>
-</mat-drawer-container> -->

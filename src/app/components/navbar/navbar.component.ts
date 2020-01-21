@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/store';
+import { AuthService, AuthQuery } from 'src/app/shared/store';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,12 +9,45 @@ import { AuthService } from 'src/app/shared/store';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+
+  loggedIn: boolean;
+  role: string;
+
+  constructor(private auth: AuthService,
+              private router: Router,
+              private authQuery: AuthQuery
+  ) {
+
+    this.authQuery.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.loggedIn = isLoggedIn;
+    });
+
+    this.authQuery.role$.subscribe((role) => {
+      this.role = role;
+    })
+   }
 
   ngOnInit() {
   }
 
+  isAdmin() {
+    return this.role === "ROLE_ADMIN";
+  }
+
+  isUser() {
+    return this.role === "ROLE_REGISTERED";
+  }
+
   logout() {
     this.auth.logout();
+    this.router.navigate(['/'])
+  }
+
+  isRegistrationPage() {
+    return this.router.url === "/register";
+  }
+
+  isLoginPage() {
+    return this.router.url === "/login";
   }
 }

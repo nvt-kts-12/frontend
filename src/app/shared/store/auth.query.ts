@@ -12,4 +12,5 @@ export class AuthQuery extends QueryEntity<AuthState, User> {
   user$ = this.select(state => state.user);
   token$ = this.select(state => state.token);
   isLoggedIn$ = this.select(state => !!state.token);
+  role$ = this.select(state => state.user ? state.user.role : null)
 }

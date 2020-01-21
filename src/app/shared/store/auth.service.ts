@@ -37,8 +37,6 @@ export class AuthService {
   login(data: any): Observable<any> {
      return this.http.post(ENDPOINTS.LOGIN, data).pipe(
       tap((data: { accessToken: string }) => {
-        console.log(data);
-
         this.authStore.updateRoot((state) => ({
           token: data.accessToken
         }));        

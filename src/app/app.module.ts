@@ -12,6 +12,7 @@ import { HomeModule } from './components/home/home.module';
 import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor } from './shared/config';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarModule } from './components/navbar/navbar.module';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
@@ -26,6 +27,7 @@ export function HttpLoaderFactory(handler: HttpBackend) {
     CommonModule,
     BrowserModule.withServerTransition({ appId: 'angular-app' }),
     AppRoutingModule,
+    NavbarModule,
     HomeModule,
     AccountModule,
     FormsModule,
