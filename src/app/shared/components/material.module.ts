@@ -45,7 +45,7 @@ const MATERIAL_MODULES = [
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSelectModule
+  MatSelectModule,
 ];
 
 @NgModule({
