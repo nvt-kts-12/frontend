@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User, AuthStore,AuthQuery } from '../../store';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -17,19 +17,29 @@ export class EditProfileService {
    }
 
 
-  update(user: User): Promise<User> {
-    const url = "/user/edit-profile";
-    const token = JSON.parse(localStorage.getItem("AkitaStores")).auth.token;
-    let headers = {'Content-Type':'application/json', "Authorization":"Bearer " + token };
-   
-    return this.http
-      .put(url, JSON.stringify(user), {headers: headers})
-      .toPromise()
-      .then((user) => this.authStore.updateRoot((state) => ({
-        user: user
-      })))
+  update(user: User): Observable<User> {
 
-      .catch(this.handleError); 
+    const url = "/user/edit-profile";
+
+    return this.http.put<User>(url, user).pipe(
+      tap(user => {
+        this.authStore.updateRoot((state) => ({
+          user: user
+        }));
+      })
+    );
+
+    // const token = JSON.parse(localStorage.getItem("AkitaStores")).auth.token;
+    // let headers = {'Content-Type':'application/json', "Authorization":"Bearer " + token };
+   
+    // return this.http
+    //   .put(url, JSON.stringify(user), {headers: headers})
+    //   .toPromise()
+    //   .then((user) => this.authStore.updateRoot((state) => ({
+    //     user: user
+    //   })))
+
+    //   .catch(this.handleError); 
   }
  
   handleError(handleError: Error): Promise<any> {

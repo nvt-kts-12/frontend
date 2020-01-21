@@ -28,11 +28,13 @@ export const routes: Routes = [
   },
   {
     path:'profile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [ LoggedInGuard ]
   },
   {
     path: 'edit-profile',
-    component: EditProfileComponent
+    component: EditProfileComponent,
+    canActivate: [ LoggedInGuard ]
   },
   ...accountRouting
 ];

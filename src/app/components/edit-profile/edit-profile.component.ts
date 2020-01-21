@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/store';
 import { EditProfileService } from 'src/app/shared/services/user-profile/edit-profile.service';
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,11 +13,9 @@ export class EditProfileComponent implements OnInit {
 
   user : User
   test : any 
-  editprofileService : EditProfileService
-  router: any;
  
-  constructor(editprofileService : EditProfileService) { 
-    this.editprofileService = editprofileService
+  constructor(private editprofileService : EditProfileService,
+              private router: Router) { 
   }
 
   ngOnInit() {
@@ -25,7 +24,16 @@ export class EditProfileComponent implements OnInit {
   }
 
   update(): void{
-    this.editprofileService.update(this.user)
+    this.editprofileService.update(this.user).subscribe(
+      res => {
+        this.router.navigate(["/profile"]);
+        // TODO SNACKBAR        
+      },
+      error => {
+        console.log("error");
+        // TODO SNACKBAR
+      }
+    )
   }
 
   

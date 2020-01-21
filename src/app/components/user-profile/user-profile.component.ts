@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthStore, User } from 'src/app/shared/store';
+import { AuthStore, User, AuthQuery } from 'src/app/shared/store';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,15 +7,15 @@ import { AuthStore, User } from 'src/app/shared/store';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  private authStore : AuthStore
-  private user : User
+  private user : Partial<User>
   private test : any 
   
-  constructor() { }
+  constructor(private authQuery: AuthQuery) { }
 
   ngOnInit() {
-    this.test =JSON.parse(localStorage.getItem("AkitaStores"))
-    this.user = this.test.auth.user
+    this.authQuery.user$.subscribe((user) => {
+      this.user = user;
+    })
   }
 
 
