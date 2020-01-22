@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarModule } from './components/navbar/navbar.module';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { SnackbarComponent } from './components/common/snackbar/snackbar.component';
+import { AdminModule } from './components/admin/admin.module';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
@@ -43,6 +44,7 @@ export function HttpLoaderFactory(handler: HttpBackend) {
             deps: [HttpBackend]
         }
     }),
+    AdminModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en' },
