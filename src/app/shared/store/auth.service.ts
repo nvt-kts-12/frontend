@@ -43,10 +43,19 @@ export class AuthService {
       })
     ).pipe(
       tap(() => {
-        this.http.get(ENDPOINTS.ME).subscribe(
+        this.http.get<any>(ENDPOINTS.ME).subscribe(
           res => {
+            
+            let userFromResponse = {
+              username: res.username,
+              firstName: res.firstName,
+              lastName: res.lastName,
+              email: res.lastName,
+              authority: res.authorities[0].authority
+            }
+            
             this.authStore.updateRoot((state) => ({
-              user: res
+              user: userFromResponse
             }))
           }
         )
