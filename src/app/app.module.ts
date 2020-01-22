@@ -13,6 +13,7 @@ import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor } from './shared/config';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarModule } from './components/navbar/navbar.module';
+import { AdminModule } from './components/admin/admin.module';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
@@ -39,6 +40,7 @@ export function HttpLoaderFactory(handler: HttpBackend) {
             deps: [HttpBackend]
         }
     }),
+    AdminModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en' },
