@@ -18,7 +18,7 @@ import { DatePipe } from '@angular/common';
     FilterComponent,
   ],
   imports: [
-    CoreModulesModule
+    CoreModulesModule,
   ],
   providers: [
     DatePipe
