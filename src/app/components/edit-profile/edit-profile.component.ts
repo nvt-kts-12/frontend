@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/store';
-import { EditProfileService } from 'src/app/shared/services/user/user.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class EditProfileComponent implements OnInit {
   user : User
   test : any 
  
-  constructor(private editprofileService : EditProfileService,
+  constructor(private userService : UserService,
               private router: Router) { 
   }
 
@@ -24,7 +24,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   update(): void{
-    this.editprofileService.update(this.user).subscribe(
+    this.userService.update(this.user).subscribe(
       res => {
         this.router.navigate(["/profile"]);
         // TODO SNACKBAR        

@@ -37,7 +37,6 @@ export class FilterComponent implements OnInit {
   }
 
   locationChanged(e: MatSelectChange) {
-    console.log(e);
     this.filter.location = e.value === undefined ? null : e.value;
     this.emitAction();
   }

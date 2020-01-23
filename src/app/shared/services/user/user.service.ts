@@ -6,19 +6,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const ENDPOINTS = {
   UPDATE: '/user/edit-profile',
+  RESERVATIONS: '/user/reservations',
+  BOUGHT_TICKETS: "/user/bought"
 };
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class EditProfileService {
+export class UserService {
   user: User;
   
   constructor(private http: HttpClient, private authStore : AuthStore) {
      
    }
-
 
   update(user: User): Observable<User> {
 
@@ -31,12 +32,14 @@ export class EditProfileService {
         }));
       })
     );
+  }
+  
+  getReservations(): Observable<any> {
+    return this.http.get(ENDPOINTS.RESERVATIONS);
+  }
 
+  getBoughtTickets(): Observable<any> {
+    return this.http.get(ENDPOINTS.BOUGHT_TICKETS);
   }
  
-  handleError(handleError: Error): Promise<any> {
-    throw new Error(handleError.message);
-  }
 }
-
-
