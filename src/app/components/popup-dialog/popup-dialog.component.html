@@ -19,8 +19,7 @@
       </tr>
       <tr aria-colspan="2">
         <mat-form-field>
-          <!-- [max]="data.numOfAvailablePlaces"  -->
-          <input placeholder="Number of tickets" type="number" matInput
+          <input placeholder="Number of tickets" type="number" matInput [max]="data.numOfAvailablePlaces"
             [(ngModel)]="numberOfTickets">
         </mat-form-field>
       </tr>

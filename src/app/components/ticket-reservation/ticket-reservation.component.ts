@@ -19,13 +19,12 @@ import { SeatDto } from 'src/app/shared/model/SeatDto';
 })
 export class TicketReservationComponent implements OnInit {
 
-
   eventId: string;
   eventDayId: string;
   eventDay: EventDay;
   sectors: any;
   displayedColumns: string[] = ['sectorId', 'numberOfTickets', 'price'];
-  displayedColumnsSeats: string[] = ['sectorId', 'row/col', 'vip', 'price'];
+  displayedColumnsSeats: string[] = ['sectorId', 'row/col', 'vip', 'price', 'cancel'];
   numberOfTickets: number;
 
 
@@ -59,6 +58,17 @@ export class TicketReservationComponent implements OnInit {
     this.parters = new Array<ParterDto>();
     this.seats = new Array<SeatDto>();
     this.fetchData();
+  }
+
+  cancelSeat(seat: any): void{
+    const index: number = this.seats.indexOf(seat);
+    console.log(index);
+    if (index !== -1) {
+        this.seats.splice(index, 1);
+        let cloned = this.seats.slice();
+        this.seats = cloned;
+        this.totalPrice -= seat.price;
+    }  
   }
 
   openPopup(sector: any): void {
@@ -121,6 +131,15 @@ export class TicketReservationComponent implements OnInit {
 
     let cloned = this.parters.slice();
     this.parters = cloned;
+    
+    this.sectors.forEach(singleSector => {
+      if(singleSector.id === sector.id){
+        singleSector.numOfAvailablePlaces -= result;
+      }
+    });
+    
+    let clonedSec = this.sectors.slice();
+    this.sectors = clonedSec;
   }
 
 
@@ -150,11 +169,6 @@ export class TicketReservationComponent implements OnInit {
       /* */
       /*Hard code ************************************************************/
 
-
-      this.eventDay.sectors.forEach(sector => {
-        this.sectors.push(sector);
-      })
-      // console.log(this.sectors);
       // todo: get places left by sector
     },
       error => {
