@@ -22,7 +22,7 @@ import { EditProfileComponent } from '../edit-profile/edit-profile.component';
     EditProfileComponent
   ],
   imports: [
-    CoreModulesModule
+    CoreModulesModule,
   ],
   providers: [
     DatePipe

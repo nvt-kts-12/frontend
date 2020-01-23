@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
 
   loggedIn: boolean;
   role: string;
+  admin: boolean;
 
   constructor(private auth: AuthService,
               private router: Router,
@@ -25,9 +26,14 @@ export class NavbarComponent implements OnInit {
     this.authQuery.role$.subscribe((role) => {
       this.role = role;
     })
+
+    this.authQuery.isAdmin$.subscribe((admin) => {
+      this.admin = admin
+    })
    }
 
   ngOnInit() {
+    
   }
 
   isAdmin() {
