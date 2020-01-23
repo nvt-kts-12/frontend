@@ -7,10 +7,10 @@ import { AuthStore, User, AuthQuery } from 'src/app/shared/store';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  private user : Partial<User>
-  private test : any 
+   user : Partial<User>
+   test : any 
   
-  constructor(private authQuery: AuthQuery) { }
+  constructor(public authQuery: AuthQuery) { }
 
   ngOnInit() {
     this.authQuery.user$.subscribe((user) => {

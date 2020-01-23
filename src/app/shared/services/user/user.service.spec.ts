@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EditProfileService } from './edit-profile.service';
+import { EditProfileService } from './user.service';
 
 describe('EditProfileService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

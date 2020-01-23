@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/store';
-import { EditProfileService } from 'src/app/shared/services/user-profile/edit-profile.service';
+import { EditProfileService } from 'src/app/shared/services/user/user.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 

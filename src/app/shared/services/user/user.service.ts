@@ -4,13 +4,16 @@ import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const ENDPOINTS = {
+  UPDATE: '/user/edit-profile',
+};
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class EditProfileService {
   user: User;
-  private headers = new Headers({'Content-Type': 'application/json'});
   
   constructor(private http: HttpClient, private authStore : AuthStore) {
      
@@ -19,7 +22,7 @@ export class EditProfileService {
 
   update(user: User): Observable<User> {
 
-    const url = "/user/edit-profile";
+    let url = ENDPOINTS.UPDATE;
 
     return this.http.put<User>(url, user).pipe(
       tap(user => {
@@ -29,17 +32,6 @@ export class EditProfileService {
       })
     );
 
-    // const token = JSON.parse(localStorage.getItem("AkitaStores")).auth.token;
-    // let headers = {'Content-Type':'application/json', "Authorization":"Bearer " + token };
-   
-    // return this.http
-    //   .put(url, JSON.stringify(user), {headers: headers})
-    //   .toPromise()
-    //   .then((user) => this.authStore.updateRoot((state) => ({
-    //     user: user
-    //   })))
-
-    //   .catch(this.handleError); 
   }
  
   handleError(handleError: Error): Promise<any> {
