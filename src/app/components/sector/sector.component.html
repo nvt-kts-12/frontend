@@ -1,0 +1,7 @@
+<svg id="layout">
+  <rect id="sectorRect" *ngFor="let sector of sectors" [attr.x]="sector.topLeftX" [attr.y]="sector.topLeftY"
+    [attr.width]="calculateWidth(sector)" [attr.height]="calculateHeight(sector)" position="absolute"
+    (click)="open(sector)">
+    <title>{{sector.type}}, price: ${{sector.price}}</title>
+  </rect>
+</svg>

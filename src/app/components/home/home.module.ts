@@ -9,6 +9,8 @@ import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
 import { SearchComponent } from '../common/search/search.component';
 import { FilterComponent } from '../filter/filter.component';
 import { DatePipe } from '@angular/common';
+import { SectorComponent } from '../sector/sector.component';
+import { SectorPopupComponent } from '../sector-popup/sector-popup.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { DatePipe } from '@angular/common';
     FilterComponent,
     EventDayComponent,
     TicketReservationComponent,
-    PopupDialogComponent
+    PopupDialogComponent,
+    SectorComponent,
+    SectorPopupComponent
   ],
   imports: [
     CoreModulesModule
@@ -28,6 +32,6 @@ import { DatePipe } from '@angular/common';
     DatePipe
   ],
   exports: [HomeComponent, EventComponent, EventDaysComponent, TicketReservationComponent],
-  entryComponents:[PopupDialogComponent]
+  entryComponents:[PopupDialogComponent, SectorPopupComponent]
 })
 export class HomeModule { }

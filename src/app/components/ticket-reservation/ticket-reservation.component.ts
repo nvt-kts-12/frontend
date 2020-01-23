@@ -1,21 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { MatDialog } from '@angular/material';
 import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
 import { EventDay } from '../../shared/model/EventDay';
 import { Sector } from '../../shared/model/Sector';
-
-
-export interface Ticket {
-  id: string;
-  sectorType: string;
-  price: number;
-  vip: boolean;
-}
-const tickets: Ticket[] = [
-  { id: "1", sectorType: 'GRANDSTAND', price: 1.0079, vip: false },
-];
+import { EventDayReservationDTO } from '../../shared/model/EventDayReservationDto';
+import { SectorComponent } from '../sector/sector.component';
+import { ParterDto } from 'src/app/shared/model/ParterDto';
+import { SectorPopupComponent } from '../sector-popup/sector-popup.component';
+import { TicketService } from 'src/app/shared/services/ticket/ticket.service';
+import { SeatDto } from 'src/app/shared/model/SeatDto';
 
 @Component({
   selector: 'app-ticket-reservation',
@@ -28,17 +23,29 @@ export class TicketReservationComponent implements OnInit {
   eventId: string;
   eventDayId: string;
   eventDay: EventDay;
-  sectors: Array<Sector>;
+  sectors: any;
+  displayedColumns: string[] = ['sectorId', 'numberOfTickets', 'price'];
+  displayedColumnsSeats: string[] = ['sectorId', 'row/col', 'vip', 'price'];
+  numberOfTickets: number;
 
-  displayedColumns: string[] = ['id', 'sectorType', 'price', 'vip'];
-  dataSource = tickets;
+
+  parterTickets: [];
+  grandstandTickets: [];
+  parterPrice: number;
+
+  parters: any;
+  seats: any;
+  totalPrice: number;
 
 
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
+    private ticektService: TicketService,
     private router: Router,
-    public dialog: MatDialog
+    public parterDialog: MatDialog,
+    public grandstandDialog: MatDialog,
+    private changeDetectorRefs: ChangeDetectorRef
   ) {
     this.eventId = route.snapshot.params['eventId'];
     this.eventDayId = route.snapshot.params['dayId'];
@@ -46,49 +53,76 @@ export class TicketReservationComponent implements OnInit {
 
 
   ngOnInit() {
+    this.numberOfTickets = 0;
+    this.totalPrice = 0;
+    this.sectors = new Array<Sector>();
+    this.parters = new Array<ParterDto>();
+    this.seats = new Array<SeatDto>();
     this.fetchData();
   }
 
-  drawSectors() {
-    if (this.eventDay != undefined) {
-      var canvas: any = document.getElementById("locationCanvas");
-      var ctx = canvas.getContext("2d");
-      this.eventDay.sectors.forEach(sector => {
-        ctx.beginPath();
-        var width = sector.bottomRightX - sector.topLeftX;
-        var height = sector.topLeftY - sector.bottomRightY;
-        ctx.rect(sector.topLeftX, sector.topLeftY, width, height);
-        ctx.strokeStyle = "red";
-        ctx.stroke();
+  openPopup(sector: any): void {
+    if (sector.type === "PARTER") {
+      const dialogRef = this.parterDialog.open(PopupDialogComponent, {
+        data: sector
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != undefined) {
+          this.updateParter(sector, result);
+        }
+      });
+
+    } else if (sector.type === "GRANDSTAND") {
+
+      this.ticektService.getAllTickets(sector.id, Number(this.eventDayId)).subscribe((res) => {
+        console.log(sector);
+        const dialogRef = this.grandstandDialog.open(SectorPopupComponent, {
+          data: {
+            sector: sector,
+            tickets: res
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result != undefined) {
+            this.seats.push(result);
+            this.totalPrice += result.price;
+            
+            let cloned = this.seats.slice();
+            this.seats = cloned;
+          }
+        })
       });
     }
+
   }
+  updateParter(sector: any, result: any) {
+    let parter: ParterDto;
+    let exists = false;
+    this.totalPrice += result * sector.price;
 
-  ticket: {
-    id: string,
-    sectorType: string,
-    price: number,
-    vip: boolean
-  };
-
-  numOfChoosenPlaces: 0;
-
-  open(): void{
-    console.log("asdsad");
-  }
-
-  openPopup(sector: any): void {
-    console.log(sector)
-
-    const dialogRef = this.dialog.open(PopupDialogComponent, {
-      data: sector
+    this.parters.forEach((par) => {
+      if (par.sectorId === sector.id) {
+        par.numberOfTickets = par.numberOfTickets + result;
+        par.price = result * sector.price;
+        exists = true;
+      }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.numOfChoosenPlaces = result;
-      console.log('Taken places: ' + this.numOfChoosenPlaces);
-    });
+    if (!exists) {
+      parter = {
+        sectorId: sector.id,
+        numberOfTickets: result,
+        price: result * sector.price
+      }
+      this.parters.push(parter);
+    }
+
+    let cloned = this.parters.slice();
+    this.parters = cloned;
   }
+
 
   fetchData() {
     this.eventService.getEventDay(this.eventDayId).subscribe((res) => {
@@ -98,38 +132,29 @@ export class TicketReservationComponent implements OnInit {
       /*Hard code **********************************************************/
       /* */
       /*********************************************************************/
-      this.eventDay.sectors[0].topLeftX = 25;
-      this.eventDay.sectors[0].topLeftY = 10;
-      this.eventDay.sectors[0].bottomRightX = 65;
-      this.eventDay.sectors[0].bottomRightY = -100;
+      // this.eventDay.sectors[0].topLeftX = 25;
+      // this.eventDay.sectors[0].topLeftY = 10;
+      // this.eventDay.sectors[0].bottomRightX = 65;
+      // this.eventDay.sectors[0].bottomRightY = -100;
 
-      this.eventDay.sectors[1].topLeftX = 235;
-      this.eventDay.sectors[1].topLeftY = 10;
-      this.eventDay.sectors[1].bottomRightX = 275;
-      this.eventDay.sectors[1].bottomRightY = -100;
+      // this.eventDay.sectors[1].topLeftX = 235;
+      // this.eventDay.sectors[1].topLeftY = 10;
+      // this.eventDay.sectors[1].bottomRightX = 275;
+      // this.eventDay.sectors[1].bottomRightY = -100;
 
-      this.eventDay.sectors[2].topLeftX = 85;
-      this.eventDay.sectors[2].topLeftY = 10;
-      this.eventDay.sectors[2].bottomRightX = 215;
-      this.eventDay.sectors[2].bottomRightY = -20;
-
-      this.drawSectors();
-
-      this.eventDay.sectors.forEach(sector => {
-        var canvas: any = document.getElementById("locationCanvas");
-        var ctx = canvas.getContext("2d");
-        ctx.font = "8px Comic Sans MS";
-        var width = sector.bottomRightX - sector.topLeftX;
-        var height = sector.topLeftY - sector.bottomRightY;
-
-        var x = sector.topLeftX + (width / 2);
-        var y = sector.topLeftY + (height / 2);
-        ctx.fillText(sector.type[0], x, y);
-      })
+      // this.eventDay.sectors[2].topLeftX = 85;
+      // this.eventDay.sectors[2].topLeftY = 10;
+      // this.eventDay.sectors[2].bottomRightX = 215;
+      // this.eventDay.sectors[2].bottomRightY = -20;
       /*********************************************************************/
       /* */
       /*Hard code ************************************************************/
 
+
+      this.eventDay.sectors.forEach(sector => {
+        this.sectors.push(sector);
+      })
+      // console.log(this.sectors);
       // todo: get places left by sector
     },
       error => {

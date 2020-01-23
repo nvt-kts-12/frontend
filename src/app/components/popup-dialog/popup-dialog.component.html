@@ -14,27 +14,20 @@
         <td>{{data.capacity}}</td>
       </tr>
       <tr>
-        <td>Row num</td>
-        <td>{{data.rowNum}}</td>
-      </tr>
-      <tr>
-        <td>Col num</td>
-        <td>{{data.colNum}}</td>
-      </tr>
-      <tr>
         <td>Places left</td>
-        <td>TODO</td>
+        <td>{{data.numOfAvailablePlaces}}</td>
       </tr>
       <tr aria-colspan="2">
         <mat-form-field>
-          <input placeholder="Number of tickets" type="number" matInput [(ngModel)]="numOfChoosenPlaces">
+          <!-- [max]="data.numOfAvailablePlaces"  -->
+          <input placeholder="Number of tickets" type="number" matInput
+            [(ngModel)]="numberOfTickets">
         </mat-form-field>
       </tr>
     </table>
   </div>
   <div mat-dialog-actions>
     <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="numOfChoosenPlaces"
-      [disabled]="!(numOfChoosenPlaces > 0)">Ok</button>
+    <button mat-button [mat-dialog-close]="numberOfTickets" [disabled]="!(numberOfTickets > 0)">Ok</button>
   </div>
 </div>

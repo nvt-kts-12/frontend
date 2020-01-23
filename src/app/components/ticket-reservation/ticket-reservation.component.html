@@ -1,50 +1,70 @@
-<!-- <div>
-  <canvas id="locationCanvas" style="border:3px solid #d3d3d3;" style="z-index:1">
+<div *ngIf="eventDay != undefined" id="layout">
+  <mat-card class="layout-container">
+    <h1>{{eventDay.event.name}}</h1>
+    <h2>{{eventDay.locationName}} layout:</h2>
+    <sector-component id="sectorComponent" [sectors]="sectors" (onSelect)="openPopup($event)"></sector-component>
+    <mat-divider></mat-divider>
+    <h4>click on a sector you want to reserve</h4>
+  </mat-card>
+</div>
 
-  </canvas>
+<div *ngIf="seats.length > 0">
+  <mat-card class="grandstand-tickets-table">
+    <h1>Grandstand tickets:</h1>
 
-  <input type="button" style="z-index:2; position:relative; top:0; left:0" value="test"  />
-</div> -->
+    <table mat-table id="seatsTable" class="mat-elevation-z8" [dataSource]="seats">
 
+      <ng-container matColumnDef="sectorId">
+        <th mat-header-cell *matHeaderCellDef> sectorId </th>
+        <td mat-cell *matCellDef="let element"> {{element.sectorId}} </td>
+      </ng-container>
+      <!-- Sector id Column -->
+      <ng-container matColumnDef="row/col">
+        <th mat-header-cell *matHeaderCellDef> row/col </th>
+        <td mat-cell *matCellDef="let element"> {{element.seatRow}}/{{element.seatCol}} </td>
+      </ng-container>
+      <!-- Sector id Column -->
+      <ng-container matColumnDef="vip">
+        <th mat-header-cell *matHeaderCellDef> vip </th>
+        <td mat-cell *matCellDef="let element"> {{element.vip}} </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
 
-<svg width="400" height="300">
-  <rect x="15" y="100" width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" 
-  (click)="open()"/>
-</svg>
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsSeats"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsSeats;"></tr>
+    </table>
+  </mat-card>
+</div>
+<div *ngIf="parters.length > 0">
+  <mat-card class="parter-tickets-table">
+    <h1>Parter tickets:</h1>
 
+    <table mat-table id="parterTable" class="mat-elevation-z8" [dataSource]="parters">
 
-<mat-grid-list cols="3" rowHeight="3:1" *ngIf="eventDay!=undefined">
-  <ng-container *ngFor="let sector of eventDay.sectors">
-    <mat-grid-tile>
-      <button matTooltip="enter number of tickets you want" (click)="openPopup(sector)">
-        {{sector.type}} - {{sector.price}}
-      </button>
-    </mat-grid-tile>
-  </ng-container>
-</mat-grid-list>
+      <!-- Sector id Column -->
+      <ng-container matColumnDef="sectorId">
+        <th mat-header-cell *matHeaderCellDef> sectorId </th>
+        <td mat-cell *matCellDef="let element"> {{element.sectorId}} </td>
+      </ng-container>
+      <!-- Sector id Column -->
+      <ng-container matColumnDef="numberOfTickets">
+        <th mat-header-cell *matHeaderCellDef> numberOfTickets </th>
+        <td mat-cell *matCellDef="let element"> {{element.numberOfTickets}} </td>
+      </ng-container>
+      <!-- Sector id Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
 
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> id </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="sectorType">
-    <th mat-header-cell *matHeaderCellDef> sectorType </th>
-    <td mat-cell *matCellDef="let element"> {{element.sectorType}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> price </th>
-    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="vip">
-    <th mat-header-cell *matHeaderCellDef> vip </th>
-    <td mat-cell *matCellDef="let element"> {{element.vip}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+</div>
+<div *ngIf="totalPrice > 0">
+  <h1>Total price: {{totalPrice}}</h1>
+</div>

@@ -1,0 +1,45 @@
+<div *ngIf="data!=undefined">
+  <h1 mat-dialog-title>Sector {{data.sector.type}} {{data.sector.id}}</h1>
+  <mat-divider></mat-divider>
+  <h2>Seat price: {{data.sector.price}}</h2>
+  <div *ngIf="data.tickets.length > 0">
+    <mat-grid-list [cols]="data.sector.colNum" rowHeight="2:1" width="100px">
+      <mat-grid-tile *ngFor="let seat of data.tickets">
+        <button width="50px" height="100px" [disabled]="checkDisabled(seat)"
+          (click)="seatPicked(seat)">{{seat.seatRow}}/{{seat.seatCol}}</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div *ngIf="data.tickets.length < 1">
+    <h1>Sorry, no seats for you here.</h1>
+  </div>
+  <div *ngIf="chosenSeat!=undefined">
+    <mat-divider></mat-divider>
+    <table>
+      <tr>
+        <td>Seat row:</td>
+        <td>{{chosenSeat.seatRow}}</td>
+      </tr>
+      <tr>
+        <td>Seat col:</td>
+        <td>{{chosenSeat.seatCol}}</td>
+      </tr>
+      <tr>
+        <td>Type:</td>
+        <td *ngIf="chosenSeat.vip">VIP</td>
+        <td *ngIf="!chosenSeat.vip">REGULAR</td>
+      </tr>
+      <tr>
+        <td>Price:</td>
+        <td>{{chosenSeat.price}}</td>
+      </tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="chosenSeat" [disabled]="chosenSeat===undefined">Pick</button>
+  </div>
+</div>

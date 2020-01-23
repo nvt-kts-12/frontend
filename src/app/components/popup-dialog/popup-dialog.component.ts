@@ -21,7 +21,8 @@ export class PopupDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<PopupDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PopupData) { }
+    @Inject(MAT_DIALOG_DATA) public data: PopupData
+  ) { }
 
   onCancelClick(): void {
     this.dialogRef.close();
