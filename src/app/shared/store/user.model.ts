@@ -5,4 +5,5 @@ export type User = {
   lastName :string;
   username : string;
   role: string;
+  authority: string;
 }
