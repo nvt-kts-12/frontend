@@ -13,8 +13,6 @@ export class UserProfileComponent implements OnInit {
   reservations: []
   boughtTickets: []
 
-  displayedColumns: string[] = ['type', 'price', 'vip'];
-
   constructor(public authQuery: AuthQuery, private userService: UserService) { }
 
   ngOnInit() {

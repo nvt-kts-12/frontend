@@ -11,12 +11,21 @@ export class TicketComponent implements OnInit {
   @Input() tickets;
   @Input() title: string;
 
-  displayedColumns: string[] = ['id', 'event', 'date', 'location', 'category', 'type', 'sector', 'seatRow', 'seatCol', 'vip', 'price' ];
+  columnsReservations: string[] = ['id', 'event', 'date', 'location', 'category', 'type', 'sector', 'seatRow', 'seatCol', 'vip', 'price', 'expires' ];
+  columnsBoughtTickets: string[] = ['id', 'event', 'date', 'location', 'category', 'type', 'sector', 'seatRow', 'seatCol', 'vip', 'price' ];
+
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    
+  }
+
+  getColumns() {
+    if (this.title === "Reservations") {
+      return this.columnsReservations;
+    }
+
+    return this.columnsBoughtTickets;
   }
 
 }
