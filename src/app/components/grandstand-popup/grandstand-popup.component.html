@@ -18,15 +18,9 @@
   <mat-divider></mat-divider>
   <div *ngIf="chosenSeats.length > 0">
     <h1>Chosen seats:</h1>
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let seat of chosenSeats">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{seat.seatRow}}/{{seat.seatCol}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <div class="seats">
+      <mat-card *ngFor="let seat of chosenSeats" (click)="removeSeat(date)">{{seat.seatRow}}/{{seat.seatCol}}</mat-card>
+    </div>
 
 
 
