@@ -15,28 +15,30 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   reservations: []
   boughtTickets: []
 
-  authQuerySub: Subscription;
-  userServiceSub: Subscription;
+  userSub: Subscription;
+  getReservationsSub: Subscription;
+  getTicketsSub: Subscription;
 
   constructor(public authQuery: AuthQuery, private userService: UserService) { }
 
   ngOnInit() {
-    this.authQuerySub = this.authQuery.user$.subscribe((user) => {
+    this.userSub = this.authQuery.user$.subscribe((user) => {
       this.user = user;
     })
 
-    this.userService.getReservations().subscribe((res) => {
+    this.getReservationsSub = this.userService.getReservations().subscribe((res) => {
       this.reservations = res.tickets;
     })
 
-    this.userService.getBoughtTickets().subscribe((res) => {
+    this.getTicketsSub = this.userService.getBoughtTickets().subscribe((res) => {
       this.boughtTickets = res.tickets;
     })
   }
 
   ngOnDestroy(): void {
-    this.authQuerySub.unsubscribe();
-    this.userServiceSub.unsubscribe();
+    this.userSub.unsubscribe();
+    this.getReservationsSub.unsubscribe();
+    this.getTicketsSub.unsubscribe();
   }
 
 
