@@ -9,7 +9,7 @@ import { stringify } from 'querystring';
 
 const ENDPOINTS = {
   LOGIN: '/auth/login',
-  REGISTER: '/register',
+  REGISTER: '/auth/register',
   ME: '/user/me'
 };
 
@@ -50,7 +50,7 @@ export class AuthService {
               username: res.username,
               firstName: res.firstName,
               lastName: res.lastName,
-              email: res.lastName,
+              email: res.email,
               authority: res.authorities[0].authority
             }
             
