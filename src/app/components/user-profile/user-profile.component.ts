@@ -26,6 +26,18 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.user = user;
     })
 
+    this.fetchData();
+  }
+
+  ngOnDestroy(): void {
+
+    this.userSub.unsubscribe();
+    this.getReservationsSub.unsubscribe();
+    this.getTicketsSub.unsubscribe();
+  }
+
+  fetchData() {
+
     this.getReservationsSub = this.userService.getReservations().subscribe((res) => {
       this.reservations = res.tickets;
     })
@@ -34,12 +46,4 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.boughtTickets = res.tickets;
     })
   }
-
-  ngOnDestroy(): void {
-    this.userSub.unsubscribe();
-    this.getReservationsSub.unsubscribe();
-    this.getTicketsSub.unsubscribe();
-  }
-
-
 }

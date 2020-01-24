@@ -41,5 +41,5 @@ export class UserService {
   getBoughtTickets(): Observable<any> {
     return this.http.get(ENDPOINTS.BOUGHT_TICKETS);
   }
- 
+
 }
