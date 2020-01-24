@@ -21,6 +21,7 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatSnackBarModule,
+  MatDialogModule,
 } from '@angular/material';
 
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -48,6 +49,7 @@ const MATERIAL_MODULES = [
   MatNativeDateModule,
   MatSelectModule,
   MatSnackBarModule,
+  MatDialogModule
 ];
 
 @NgModule({
