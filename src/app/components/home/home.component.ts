@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import {PageEvent} from '@angular/material/paginator';
 
 import { SiteRoutes } from './../../shared/constants';
@@ -13,7 +13,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: [ './home.scss' ]
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, OnDestroy{
 
   data = {
     events: [],
@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit{
   }
 
   pageEvent: PageEvent;
+  eventServiceGetEventsSub: Subscription;
 
   public constructor(
     private eventService: EventService
@@ -44,6 +45,10 @@ export class HomeComponent implements OnInit{
    this.fetchData(null);
   }
 
+  ngOnDestroy() {
+    this.eventServiceGetEventsSub.unsubscribe();
+  }
+
   searchChangedCallback(event: any) {
     this.searchTerm = event;
     this.callFetch();
@@ -51,7 +56,6 @@ export class HomeComponent implements OnInit{
 
   filterChangedCallback(event: any) {
 
-    console.log(event);
     this.filter = event;
     this.callFetch();
 
@@ -66,7 +70,7 @@ export class HomeComponent implements OnInit{
   
   fetchData(event?:PageEvent) {
     this.pagination.pageIndex = event ? event.pageIndex : 0;
-    this.eventService.getEvents(this.pagination, this.searchTerm, this.filter).subscribe((res) => {
+    this.eventServiceGetEventsSub = this.eventService.getEvents(this.pagination, this.searchTerm, this.filter).subscribe((res) => {
       this.data = res;
     })
 

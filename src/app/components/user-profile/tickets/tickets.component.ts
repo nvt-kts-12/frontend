@@ -11,7 +11,7 @@ export class TicketComponent implements OnInit {
   @Input() tickets;
   @Input() title: string;
 
-  columnsReservations: string[] = ['id', 'event', 'date', 'location', 'category', 'type', 'sector', 'seatRow', 'seatCol', 'vip', 'price', 'expires' ];
+  columnsReservations: string[] = ['id', 'event', 'date', 'location', 'category', 'type', 'sector', 'seatRow', 'seatCol', 'vip', 'price', 'expires', 'action' ];
   columnsBoughtTickets: string[] = ['id', 'event', 'date', 'location', 'category', 'type', 'sector', 'seatRow', 'seatCol', 'vip', 'price' ];
 
 

@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthStore, User, AuthQuery } from 'src/app/shared/store';
 import { UserService } from 'src/app/shared/services/user/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
+  
   user : Partial<User>
   test : any 
   reservations: []
   boughtTickets: []
 
+  authQuerySub: Subscription;
+  userServiceSub: Subscription;
+
   constructor(public authQuery: AuthQuery, private userService: UserService) { }
 
   ngOnInit() {
-    this.authQuery.user$.subscribe((user) => {
+    this.authQuerySub = this.authQuery.user$.subscribe((user) => {
       this.user = user;
     })
 
@@ -29,6 +34,10 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    this.authQuerySub.unsubscribe();
+    this.userServiceSub.unsubscribe();
+  }
 
 
 }
