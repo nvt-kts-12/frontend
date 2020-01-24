@@ -13,6 +13,8 @@ import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor } from './shared/config';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarModule } from './components/navbar/navbar.module';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { SnackbarComponent } from './components/common/snackbar/snackbar.component';
 import { AdminModule } from './components/admin/admin.module';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
@@ -22,8 +24,10 @@ export function HttpLoaderFactory(handler: HttpBackend) {
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    SnackbarComponent
   ],
+  entryComponents: [SnackbarComponent],
   imports: [
     CommonModule,
     BrowserModule.withServerTransition({ appId: 'angular-app' }),
@@ -45,6 +49,7 @@ export function HttpLoaderFactory(handler: HttpBackend) {
   providers: [
     { provide: LOCALE_ID, useValue: 'en' },
     { provide: HTTP_INTERCEPTORS, useClass: HttpApiInterceptor, multi: true },
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 5000, horizontalPosition: "right", verticalPosition: "bottom"},}
   ]
 })
 export class AppModule {

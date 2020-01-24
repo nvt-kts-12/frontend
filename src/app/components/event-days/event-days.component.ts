@@ -36,7 +36,6 @@ export class EventDaysComponent implements OnInit {
   }
 
   fetchData() {
-
     this.eventService.getEventDays(this.eventId).subscribe((res) => {
       this.eventDays = res;
       this.event = res[0].event;

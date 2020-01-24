@@ -7,6 +7,7 @@ import { EventDayComponent } from '../event-day/event-day.component';
 import { SearchComponent } from '../common/search/search.component';
 import { FilterComponent } from '../filter/filter.component';
 import { DatePipe } from '@angular/common';
+import { UserProfileModule } from '../user-profile/user-profile.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DatePipe } from '@angular/common';
     FilterComponent,
   ],
   imports: [
-    CoreModulesModule
+    CoreModulesModule,
+    UserProfileModule
   ],
   providers: [
     DatePipe

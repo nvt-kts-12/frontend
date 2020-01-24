@@ -1,16 +1,22 @@
 {
   "COMMON": {
+    "REGISTER" : "Register",
     "LOGIN": "Login",
     "EMAIL": "Email",
     "USERNAME": "Username",
-    "PASSWORD": "Password"
+    "PASSWORD": "Password",
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name"
   },
   "VALIDATION": {
     "EMAIL_NOT_VALID": "Not a valid email",
+    "EMAIL_REQUIRED": "Email is required",
     "USERNAME_REQUIRED": "Username is required",
     "PASSWORD_REQUIRED": "Password field is required",
     "EVENT_NAME_REQUIRED": "Event name is required",
     "EVENT_DESCRIPTION_REQUIRED": "Event description is required",
-    "EVENT_CATEGORY_REQUIRED": "Event category is required"
+    "EVENT_CATEGORY_REQUIRED": "Event category is required",
+    "FIRSTNAME_REQUIRED" : "First name is required",
+    "LASTNAME_REQUIRED" : "Last name is required"
   }
 }
