@@ -53,6 +53,7 @@ const MATERIAL_MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatExpansionModule
 ];
 
 @NgModule({

@@ -2,16 +2,23 @@ import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { MatDialog } from '@angular/material';
-import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
+import { ParterPopupComponent } from '../parter-popup/parter-popup.component';
 import { EventDay } from '../../shared/model/EventDay';
 import { Sector } from '../../shared/model/Sector';
-import { EventDayReservationDTO } from '../../shared/model/EventDayReservationDto';
+import { EventDayReservationDto } from '../../shared/model/EventDayReservationDto';
 import { SectorComponent } from '../sector/sector.component';
-import { ParterDto } from 'src/app/shared/model/ParterDto';
-import { SectorPopupComponent } from '../sector-popup/sector-popup.component';
+import { Parter } from 'src/app/shared/model/Parter';
+import { GrandstandPopupComponent } from '../grandstand-popup/grandstand-popup.component';
 import { TicketService } from 'src/app/shared/services/ticket/ticket.service';
+import { Seat } from 'src/app/shared/model/Seat';
+import { AuthService, AuthQuery } from 'src/app/shared/store';
+import { ParterDto } from 'src/app/shared/model/ParterDto';
 import { SeatDto } from 'src/app/shared/model/SeatDto';
 
+/**
+ * Main component for ticket purchase. Contains location layout, 
+ * picked seats review and buttons for reserving an buying tickets.
+ */
 @Component({
   selector: 'app-ticket-reservation',
   templateUrl: './ticket-reservation.component.html',
@@ -23,8 +30,8 @@ export class TicketReservationComponent implements OnInit {
   eventDayId: string;
   eventDay: EventDay;
   sectors: any;
-  displayedColumns: string[] = ['sectorId', 'numberOfTickets', 'price'];
-  displayedColumnsSeats: string[] = ['sectorId', 'row/col', 'vip', 'price', 'cancel'];
+  displayedColumnsParter: string[] = ['sectorId', 'numberOfTickets', 'cancel'];
+  displayedColumnsSeats: string[] = ['sectorId', 'row/col', 'vip', 'cancel'];
   numberOfTickets: number;
 
 
@@ -35,6 +42,7 @@ export class TicketReservationComponent implements OnInit {
   parters: any;
   seats: any;
   totalPrice: number;
+  user: any;
 
 
   constructor(
@@ -44,10 +52,17 @@ export class TicketReservationComponent implements OnInit {
     private router: Router,
     public parterDialog: MatDialog,
     public grandstandDialog: MatDialog,
-    private changeDetectorRefs: ChangeDetectorRef
+    private changeDetectorRefs: ChangeDetectorRef,
+    private authQuery: AuthQuery,
+    private auth: AuthService,
   ) {
     this.eventId = route.snapshot.params['eventId'];
     this.eventDayId = route.snapshot.params['dayId'];
+
+    this.authQuery.user$.subscribe((user) => {
+      this.user = user;
+    });
+
   }
 
 
@@ -55,25 +70,61 @@ export class TicketReservationComponent implements OnInit {
     this.numberOfTickets = 0;
     this.totalPrice = 0;
     this.sectors = new Array<Sector>();
-    this.parters = new Array<ParterDto>();
-    this.seats = new Array<SeatDto>();
+    this.parters = new Array<Parter>();
+    this.seats = new Array<Seat>();
     this.fetchData();
   }
 
-  cancelSeat(seat: any): void{
+  /**
+   * Deletes seat from table of picked seats
+   * @param seat 
+   */
+  cancelSeat(seat: any): void {
     const index: number = this.seats.indexOf(seat);
     console.log(index);
     if (index !== -1) {
-        this.seats.splice(index, 1);
-        let cloned = this.seats.slice();
-        this.seats = cloned;
-        this.totalPrice -= seat.price;
-    }  
+      this.seats.splice(index, 1);
+      let cloned = this.seats.slice();
+      this.seats = cloned;
+      this.totalPrice -= seat.price;
+    }
   }
 
+  /**
+   * Deletes tickets for certain parter from parter tickets table
+   * @param parter 
+   */
+  cancelParter(parter: any): void {
+    let index: number;
+    this.parters.forEach((par) => {
+      if (par.id === parter.id) {
+        index = this.parters.indexOf(par);
+      }
+    })
+    this.parters.splice(index, 1)
+    this.recalculateTotalPrice();
+  }
+
+  /**
+   * Recalculates total price of all tickets after removing some seats
+   */
+  recalculateTotalPrice(): void {
+    this.totalPrice = 0;
+    this.seats.forEach((seat) => {
+      this.totalPrice += seat.price;
+    })
+    this.parters.forEach((parter) => {
+      this.totalPrice += parter.price;
+    })
+  }
+
+  /**
+   * Opens dialog for entering number of tickets in case of parter, or for picking seat in case of grandstand
+   * @param sector 
+   */
   openPopup(sector: any): void {
     if (sector.type === "PARTER") {
-      const dialogRef = this.parterDialog.open(PopupDialogComponent, {
+      const dialogRef = this.parterDialog.open(ParterPopupComponent, {
         data: sector
       });
 
@@ -86,8 +137,9 @@ export class TicketReservationComponent implements OnInit {
     } else if (sector.type === "GRANDSTAND") {
 
       this.ticektService.getAllTickets(sector.id, Number(this.eventDayId)).subscribe((res) => {
-        console.log(sector);
-        const dialogRef = this.grandstandDialog.open(SectorPopupComponent, {
+        console.log(res);
+        res = this.updateTickest(res);
+        const dialogRef = this.grandstandDialog.open(GrandstandPopupComponent, {
           data: {
             sector: sector,
             tickets: res
@@ -96,9 +148,11 @@ export class TicketReservationComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
           if (result != undefined) {
+
+            result.user = this.user;
             this.seats.push(result);
             this.totalPrice += result.price;
-            
+
             let cloned = this.seats.slice();
             this.seats = cloned;
           }
@@ -107,8 +161,24 @@ export class TicketReservationComponent implements OnInit {
     }
 
   }
+
+  /**
+   * Makes changes in tickets list based on currently picked seats
+   * @param res 
+   */
+  updateTickest(res: any): any {
+    res.forEach(ticket => {
+      this.seats.forEach(seat => {
+        if (seat.id === ticket.id) {
+          ticket.user = this.user;
+        }
+      });
+    });
+    return res;
+  }
+
   updateParter(sector: any, result: any) {
-    let parter: ParterDto;
+    let parter: Parter;
     let exists = false;
     this.totalPrice += result * sector.price;
 
@@ -131,13 +201,13 @@ export class TicketReservationComponent implements OnInit {
 
     let cloned = this.parters.slice();
     this.parters = cloned;
-    
+
     this.sectors.forEach(singleSector => {
-      if(singleSector.id === sector.id){
+      if (singleSector.id === sector.id) {
         singleSector.numOfAvailablePlaces -= result;
       }
     });
-    
+
     let clonedSec = this.sectors.slice();
     this.sectors = clonedSec;
   }
@@ -147,10 +217,60 @@ export class TicketReservationComponent implements OnInit {
     this.eventService.getEventDay(this.eventDayId).subscribe((res) => {
       this.eventDay = res;
       console.log(this.eventDay);
+    },
+      error => {
+        this.router.navigate(['/']);
+      });
+  }
 
-      /*Hard code **********************************************************/
-      /* */
-      /*********************************************************************/
+
+  purchase(buy: boolean): void {
+    let pickedParters = new Array<ParterDto>();
+    let pickedSeats = new Array<SeatDto>();
+
+    this.parters.forEach(parter => {
+      pickedParters.push({
+        sectorId: parter.sectorId,
+        numberOfTickets: parter.numberOfTickets
+      });
+    });
+    this.seats.forEach(seat => {
+      pickedSeats.push({
+        sectorId: seat.sectorId,
+        row: seat.seatRow,
+        col: seat.seatCol
+      });
+    })
+
+    let reservationDto: EventDayReservationDto = {
+      eventDayId: Number(this.eventDayId),
+      parters: pickedParters,
+      seats: pickedSeats,
+      purchase: buy
+    }
+    console.log(reservationDto);
+  }
+
+  reserve(): void {
+    if (confirm("Are you sure you want to reserve these tickets?")) {
+      this.purchase(false);
+    }
+  }
+
+  buy(): void {
+    if (confirm("Are you sure you want to buy these tickets?")) {
+      this.purchase(true);
+    }
+  }
+
+
+
+}
+
+
+/*Hard code **********************************************************/
+/* */
+/*********************************************************************/
       // this.eventDay.sectors[0].topLeftX = 25;
       // this.eventDay.sectors[0].topLeftY = 10;
       // this.eventDay.sectors[0].bottomRightX = 65;
@@ -165,16 +285,8 @@ export class TicketReservationComponent implements OnInit {
       // this.eventDay.sectors[2].topLeftY = 10;
       // this.eventDay.sectors[2].bottomRightX = 215;
       // this.eventDay.sectors[2].bottomRightY = -20;
-      /*********************************************************************/
-      /* */
-      /*Hard code ************************************************************/
+/*********************************************************************/
+/* */
+/*Hard code ************************************************************/
 
       // todo: get places left by sector
-    },
-      error => {
-        this.router.navigate(['/']);
-      });
-  }
-}
-
-

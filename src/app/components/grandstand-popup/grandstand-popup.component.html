@@ -1,21 +1,36 @@
 <div *ngIf="data!=undefined">
   <h1 mat-dialog-title>Sector {{data.sector.type}} {{data.sector.id}}</h1>
   <mat-divider></mat-divider>
-  <h2>Seat price: {{data.sector.price}}</h2>
+  <h2>Seats</h2>
   <div *ngIf="data.tickets.length > 0">
     <mat-grid-list [cols]="data.sector.colNum" rowHeight="2:1" width="100px">
       <mat-grid-tile *ngFor="let seat of data.tickets">
-        <button width="50px" height="100px" [disabled]="checkDisabled(seat)"
-          (click)="seatPicked(seat)">{{seat.seatRow}}/{{seat.seatCol}}</button>
+        <button ng-class="seat.user!=null ? 'seatBtn' : 'seatDisabledBtn'"
+        width="50px" height="100px" [disabled]="seat.user!=null" class="seatBtn"
+          (click)="seatPicked(seat)">{{seat.seatRow}}/{{seat.seatCol}}
+        </button>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
   <div *ngIf="data.tickets.length < 1">
     <h1>Sorry, no seats for you here.</h1>
   </div>
-  <div *ngIf="chosenSeat!=undefined">
-    <mat-divider></mat-divider>
-    <table>
+  <mat-divider></mat-divider>
+  <div *ngIf="chosenSeats.length > 0">
+    <h1>Chosen seats:</h1>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let seat of chosenSeats">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{seat.seatRow}}/{{seat.seatCol}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+
+    <!-- <table>
       <tr>
         <td>Seat row:</td>
         <td>{{chosenSeat.seatRow}}</td>
@@ -33,9 +48,7 @@
         <td>Price:</td>
         <td>{{chosenSeat.price}}</td>
       </tr>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </table> -->
   </div>
 
   <div mat-dialog-actions>

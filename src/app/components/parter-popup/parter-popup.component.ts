@@ -10,17 +10,17 @@ export interface PopupData {
 }
 
 @Component({
-  selector: 'app-popup-dialog',
-  templateUrl: './popup-dialog.component.html',
-  styleUrls: ['./popup-dialog.component.scss']
+  selector: 'parter-popup',
+  templateUrl: './parter-popup.component.html',
+  styleUrls: ['./parter-popup.component.scss']
 })
-export class PopupDialogComponent implements OnInit {
+export class ParterPopupComponent implements OnInit {
 
   ngOnInit(): void {
   }
 
   constructor(
-    public dialogRef: MatDialogRef<PopupDialogComponent>,
+    public dialogRef: MatDialogRef<ParterPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PopupData
   ) { }
 

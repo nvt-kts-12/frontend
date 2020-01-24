@@ -29,10 +29,6 @@
         <th mat-header-cell *matHeaderCellDef> vip </th>
         <td mat-cell *matCellDef="let element"> {{element.vip}} </td>
       </ng-container>
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> price </th>
-        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-      </ng-container>
       <ng-container matColumnDef="cancel">
         <th mat-header-cell *matHeaderCellDef> cancel </th>
         <td mat-cell *matCellDef="let element"> 
@@ -59,22 +55,42 @@
         <th mat-header-cell *matHeaderCellDef> sectorId </th>
         <td mat-cell *matCellDef="let element"> {{element.sectorId}} </td>
       </ng-container>
-      <!-- Sector id Column -->
+      <!-- numberOfTickets Column -->
       <ng-container matColumnDef="numberOfTickets">
         <th mat-header-cell *matHeaderCellDef> numberOfTickets </th>
         <td mat-cell *matCellDef="let element"> {{element.numberOfTickets}} </td>
       </ng-container>
-      <!-- Sector id Column -->
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> price </th>
-        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      <!-- cancel Column -->
+      <ng-container matColumnDef="cancel">
+        <th mat-header-cell *matHeaderCellDef> cancel </th>
+        <td mat-cell *matCellDef="let element"> 
+          <button mat-raised-button class="cancel-button" color='error' (click)="cancelParter(element)">
+            Cancel
+          </button> 
+        </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsParter"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsParter;"></tr>
     </table>
   </mat-card>
 </div>
 <div *ngIf="totalPrice > 0">
-  <h1>Total price: {{totalPrice}}</h1>
+  <table>
+    <tr>
+      <td>
+        <h1>Total price: {{totalPrice}}</h1>
+      </td>
+      <td>
+        <button mat-raised-button class="cancel-button" color='error' (click)="reserve()">
+          MAKE RESERVATION
+        </button> 
+      </td>
+      <td>
+        <button mat-raised-button class="cancel-button" color='error' (click)="buy()">
+          MAKE PURCHASE
+        </button> 
+      </td>
+    </tr>
+  </table>
 </div>

@@ -1,0 +1,33 @@
+mat-grid-tile {
+  background: red;
+}
+
+.seatBtn {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  text-align: center;
+  color: green;
+  padding: 8px 0;
+  display: inline-block;
+  line-height: 24px;
+}
+
+.seatDisabledBtn {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  text-align: center;
+  cursor: default;
+  color: red;
+  padding: 8px 0;
+  display: inline-block;
+  line-height: 24px;
+}

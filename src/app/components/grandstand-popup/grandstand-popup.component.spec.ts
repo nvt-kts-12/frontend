@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectorPopupComponent } from './sector-popup.component';
+import { GrandstandPopupComponent } from './grandstand-popup.component';
 
-describe('SectorPopupComponent', () => {
-  let component: SectorPopupComponent;
-  let fixture: ComponentFixture<SectorPopupComponent>;
+describe('GrandstandPopupComponent', () => {
+  let component: GrandstandPopupComponent;
+  let fixture: ComponentFixture<GrandstandPopupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectorPopupComponent ]
+      declarations: [ GrandstandPopupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SectorPopupComponent);
+    fixture = TestBed.createComponent(GrandstandPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
