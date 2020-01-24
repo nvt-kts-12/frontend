@@ -18,31 +18,13 @@
   <mat-divider></mat-divider>
   <div *ngIf="chosenSeats.length > 0">
     <h1>Chosen seats:</h1>
-    <div class="seats">
-      <mat-card *ngFor="let seat of chosenSeats" (click)="removeSeat(date)">{{seat.seatRow}}/{{seat.seatCol}}</mat-card>
-    </div>
-
-
-
-    <!-- <table>
-      <tr>
-        <td>Seat row:</td>
-        <td>{{chosenSeat.seatRow}}</td>
+    <table>
+      <tr *ngFor="let seat of chosenSeats" (click)="removeSeat(date)">
+        <td>{{seat.seatRow}}/{{seat.seatCol}}</td>
+        <td>{{seat.price}} eur</td>
+        <td><button>Remove</button>Remove</td>
       </tr>
-      <tr>
-        <td>Seat col:</td>
-        <td>{{chosenSeat.seatCol}}</td>
-      </tr>
-      <tr>
-        <td>Type:</td>
-        <td *ngIf="chosenSeat.vip">VIP</td>
-        <td *ngIf="!chosenSeat.vip">REGULAR</td>
-      </tr>
-      <tr>
-        <td>Price:</td>
-        <td>{{chosenSeat.price}}</td>
-      </tr>
-    </table> -->
+    </table>
   </div>
 
   <div mat-dialog-actions>
