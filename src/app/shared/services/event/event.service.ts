@@ -44,4 +44,8 @@ export class EventService {
   getEventDays(eventId: string): Observable<any> {
     return this.http.get(ENDPOINTS.EVENT + eventId);
   }
+
+  createEvent(eventData: any): Observable<any> {
+    return this.http.post(ENDPOINTS.EVENT, eventData);
+  }
 }

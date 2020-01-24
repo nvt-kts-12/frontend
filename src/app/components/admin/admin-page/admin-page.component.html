@@ -1,3 +1,28 @@
-<p>
-  admin-page works!
-</p>
+<div class="options">
+  <mat-grid-list gutterSize="50px" cols="2" rowHeight="2:1">
+    <mat-grid-tile (click)="goToCreateEvent()">
+      <div>
+        <mat-icon id="create_event">add_box</mat-icon>
+        <p>Create an event</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <mat-icon id="edit_event">edit</mat-icon>
+        <p>Edit an event</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <mat-icon id="create_location">add_location</mat-icon>
+        <p>Add a new location</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <mat-icon id="edit_location">edit_location</mat-icon>
+        <p>Edit a location</p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

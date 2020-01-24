@@ -1,0 +1,21 @@
+mat-card {
+    border: solid 0.5px;
+    border-radius: 10px;
+    border-color: #8f8f8f;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.expiration_date_input {
+    width: 50%;
+    margin-right: 26px;
+}
+
+.select_input {
+    width: 50%;
+}

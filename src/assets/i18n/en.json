@@ -8,6 +8,9 @@
   "VALIDATION": {
     "EMAIL_NOT_VALID": "Not a valid email",
     "USERNAME_REQUIRED": "Username is required",
-    "PASSWORD_REQUIRED": "Password field is required"
+    "PASSWORD_REQUIRED": "Password field is required",
+    "EVENT_NAME_REQUIRED": "Event name is required",
+    "EVENT_DESCRIPTION_REQUIRED": "Event description is required",
+    "EVENT_CATEGORY_REQUIRED": "Event category is required"
   }
 }
