@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from './../../../shared/store';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,9 +11,23 @@ import { AuthService } from './../../../shared/store';
 })
 export class RegisterComponent {
   title = 'Register';
-  public email = '';
-  public password = '';
-  public username = '';
+  
+  public username = new FormControl('', [
+    Validators.required
+  ]);
+  public password = new FormControl('', [
+    Validators.required
+  ]);
+  public firstName = new FormControl('', [
+    Validators.required
+  ]);
+  public lastName = new FormControl('', [
+    Validators.required
+  ]);
+  public email = new FormControl('', [
+    Validators.required
+  ]);
+  
 
   constructor(
     private authService: AuthService,
@@ -26,11 +41,26 @@ export class RegisterComponent {
    */
   onSubmit(): void {
     this.authService.register({
-      email: this.email,
-      password: this.password,
-      name: this.username
+      username: this.username.value,
+      password: this.password.value,
+      firstName : this.firstName.value,
+      lastName : this.lastName.value,
+      email: this.email.value  
     }).subscribe(() => {
       this.router.navigate(['/']);
     });
+  }
+
+    /**
+   * Get error message
+   * @method getErrorMessage
+   * @param fieldName
+   * @returns string
+   */
+  getErrorMessage(fieldName) {
+    if (this[fieldName].hasError('required'))  {
+      return `VALIDATION.${fieldName.toUpperCase()}_REQUIRED`;
+    }
+    return '';
   }
 }
