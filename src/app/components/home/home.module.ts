@@ -11,6 +11,7 @@ import { FilterComponent } from '../filter/filter.component';
 import { DatePipe } from '@angular/common';
 import { SectorComponent } from '../sector/sector.component';
 import { GrandstandPopupComponent } from '../grandstand-popup/grandstand-popup.component';
+import { UserProfileModule } from '../user-profile/user-profile.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GrandstandPopupComponent } from '../grandstand-popup/grandstand-popup.c
     GrandstandPopupComponent
   ],
   imports: [
-    CoreModulesModule
+    CoreModulesModule,
+    UserProfileModule
   ],
   providers: [
     DatePipe

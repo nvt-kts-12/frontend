@@ -1,0 +1,45 @@
+.add-event-form {
+    border: solid 0.5px;
+    border-radius: 15px;
+    border-color: #4131cc;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.create-event-title {
+    text-align: center;
+    margin-top: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+}
+
+.buttons {
+    text-align: center;
+}
+
+button {
+    margin: 2px;
+}
+
+.mat-card {
+    margin: 2px;
+    cursor: pointer;
+    border: solid 0.5px;
+    border-radius: 5px;
+    border-color: #c9c9c9;
+}
+
+.dates-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+
+.click-to-remove-label {
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+}

@@ -1,6 +1,7 @@
+
 <mat-toolbar>
   <button mat-icon-button color="primary" aria-label="Home" routerLink="/">
-    <mat-icon>home</mat-icon>
+    <mat-icon *ngIf="!admin">home</mat-icon>
   </button>
   <span class="navbar-spacer"></span>
 

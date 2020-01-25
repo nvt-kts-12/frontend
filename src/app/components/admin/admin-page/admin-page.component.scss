@@ -1,0 +1,44 @@
+mat-grid-tile {
+    background-color: #4131cc;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+mat-grid-list {
+    padding-top: 70px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+mat-icon {
+    color: white;
+    font-size: 10vw;
+    margin-top: 3vh;
+    margin-bottom: 0;
+}
+
+#create_event {
+    margin-left: 2vw;
+}
+
+#create_location {
+    margin-left: 3.5vw;
+}
+
+#edit_location {
+    margin-left: 1.4vw;
+}
+
+#edit_event {
+    margin-left: 1.6vw;
+}
+
+p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 2vw;
+    position: relative;
+    margin-bottom: 3vh;
+    margin-top: 0;
+}
