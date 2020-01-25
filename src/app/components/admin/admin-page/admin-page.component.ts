@@ -17,4 +17,8 @@ export class AdminPageComponent implements OnInit {
     this.router.navigate(['/create-event']);
   }
 
+  goToCreateLocationScheme() {
+    this.router.navigate(['/create-location-scheme']);
+  }
+
 }
