@@ -1,3 +1,4 @@
+import { EventCategory } from "./EventCategory"
 export type Event = {
     id: number,
     description: string,

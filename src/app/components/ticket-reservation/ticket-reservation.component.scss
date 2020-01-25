@@ -5,6 +5,10 @@ table {
   width: 100%;
 }
 
+th.mat-header-cell, td.mat-cell, .mat-raised-button {
+  text-align: center !important;
+}
+
 #locationCanvas {
   width: 50%;
   height: 50%;

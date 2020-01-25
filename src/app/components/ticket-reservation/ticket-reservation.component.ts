@@ -30,8 +30,8 @@ export class TicketReservationComponent implements OnInit {
   eventDayId: string;
   eventDay: EventDay;
   sectors: any;
-  displayedColumnsParter: string[] = ['sectorId', 'numberOfTickets', 'cancel'];
-  displayedColumnsSeats: string[] = ['sectorId', 'row/col', 'vip', 'cancel'];
+  displayedColumnsParter: string[] = ['sectorId', 'numberOfTickets', 'remove'];
+  displayedColumnsSeats: string[] = ['sectorId', 'row/col', 'vip', 'remove'];
   numberOfTickets: number;
 
 
@@ -79,7 +79,7 @@ export class TicketReservationComponent implements OnInit {
    * Deletes seat from table of picked seats
    * @param seat 
    */
-  cancelSeat(seat: any): void {
+  removeSeat(seat: any): void {
     const index: number = this.seats.indexOf(seat);
     console.log(index);
     if (index !== -1) {
@@ -94,11 +94,16 @@ export class TicketReservationComponent implements OnInit {
    * Deletes tickets for certain parter from parter tickets table
    * @param parter 
    */
-  cancelParter(parter: any): void {
+  removeParter(parter: any): void {
     let index: number;
     this.parters.forEach((par) => {
       if (par.id === parter.id) {
         index = this.parters.indexOf(par);
+      }
+    })
+    this.eventDay.sectors.forEach(eventDaySector => {
+      if(eventDaySector.id === parter.sectorId){
+        eventDaySector.numOfAvailablePlaces += parter.numberOfTickets;
       }
     })
     this.parters.splice(index, 1)
@@ -148,11 +153,11 @@ export class TicketReservationComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
           if (result != undefined) {
-
-            result.user = this.user;
-            this.seats.push(result);
-            this.totalPrice += result.price;
-
+            result.forEach(seat => {
+              seat.user = this.user;
+              this.seats.push(seat);
+              this.totalPrice += seat.price;
+            });
             let cloned = this.seats.slice();
             this.seats = cloned;
           }
@@ -181,6 +186,12 @@ export class TicketReservationComponent implements OnInit {
     let parter: Parter;
     let exists = false;
     this.totalPrice += result * sector.price;
+
+    this.eventDay.sectors.forEach(eventDaySector => {
+      if(eventDaySector.id === sector.id){
+        eventDaySector.numOfAvailablePlaces -= result;
+      }
+    })
 
     this.parters.forEach((par) => {
       if (par.sectorId === sector.id) {
@@ -225,8 +236,8 @@ export class TicketReservationComponent implements OnInit {
 
 
   purchase(buy: boolean): void {
-    let pickedParters = new Array<ParterDto>();
-    let pickedSeats = new Array<SeatDto>();
+    let pickedParters: Array<ParterDto> = new Array<ParterDto>();
+    let pickedSeats: Array<SeatDto> = new Array<SeatDto>();
 
     this.parters.forEach(parter => {
       pickedParters.push({
@@ -248,7 +259,14 @@ export class TicketReservationComponent implements OnInit {
       seats: pickedSeats,
       purchase: buy
     }
+    console.log("This is reservation dto i am sending");
     console.log(reservationDto);
+    this.eventService.reserve(reservationDto).subscribe((res) => {
+      console.log(res);
+    },
+    error => {
+      console.log("And he sais error");
+    })
   }
 
   reserve(): void {

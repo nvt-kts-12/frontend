@@ -1,4 +1,5 @@
 import { Sector } from "./Sector";
+import {EventDayState} from "./EventDayState"
 
 export type EventDay = {
     event: Event,

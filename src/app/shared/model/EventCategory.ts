@@ -1,3 +1,3 @@
-enum EventCategory{
+export enum EventCategory{
     SPORT, CULTURAL, ENTERTAINMENT
 }

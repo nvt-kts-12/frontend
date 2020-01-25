@@ -11,8 +11,10 @@ import { Seat } from 'src/app/shared/model/Seat';
 export class GrandstandPopupComponent implements OnInit {
 
   @Output() onSelect = new EventEmitter();
-  // chosenSeat: any;
+  
+  totalPrice: number = 0;
   chosenSeats: Array<Seat> = new Array<Seat>();
+
   constructor(
     public grandstandDialog: MatDialogRef<GrandstandPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PopupData
@@ -21,10 +23,31 @@ export class GrandstandPopupComponent implements OnInit {
   onCancelClick(): void {
     this.grandstandDialog.close();
   }
+
+  checkDisabled(seat: Seat): any{
+    let disabled = false;
+    if(seat.user!=null){
+      disabled = true;
+    }else{
+      this.chosenSeats.forEach(chosenSeat =>{
+        if(chosenSeat.id === seat.id){
+          disabled = true;
+        }
+      })
+    }
+    return disabled;
+  }
   
+  removeSeat(seat: Seat): void{
+    this.totalPrice -= seat.price;
+    this.chosenSeats.splice(this.chosenSeats.indexOf(seat), 1);
+    let clone = this.chosenSeats.slice();
+    this.chosenSeats = clone;
+  }
 
   seatPicked(seat: any): void {
     this.chosenSeats.push(seat);
+    this.totalPrice += seat.price;
   }
 
   ngOnInit() {

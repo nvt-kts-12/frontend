@@ -1,3 +1,5 @@
+import { SectorType } from "./SectorType"
+
 export type SectorDto = {
     sectorType: SectorType,
     sectorId: number,

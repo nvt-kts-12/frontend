@@ -1,7 +1,9 @@
 mat-grid-tile {
   background: red;
 }
-
+.mat-raised-button, .mat-button {
+  text-align: center !important;
+}
 .seatBtn {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;

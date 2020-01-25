@@ -1,4 +1,5 @@
 import { EventDay } from "./EventDay";
+import {EventDayState} from "./EventDayState"
 
 export type Seat = {
     id: number

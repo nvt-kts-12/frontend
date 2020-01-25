@@ -1,3 +1,5 @@
+import {SectorType} from "./SectorType"
+
 export type Sector = {
     id: number,
     deleted: boolean,
@@ -10,6 +12,8 @@ export type Sector = {
     capacity: number,
     rowNum: number,
     colNum: number,
-    type: SectorType
+    type: SectorType,
+    
+    numOfAvailablePlaces: number
   }
   

@@ -1,3 +1,3 @@
-enum SectorType {
+export enum SectorType {
     PARTER, GRANDSTAND
 }

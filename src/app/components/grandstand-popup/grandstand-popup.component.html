@@ -5,8 +5,8 @@
   <div *ngIf="data.tickets.length > 0">
     <mat-grid-list [cols]="data.sector.colNum" rowHeight="2:1" width="100px">
       <mat-grid-tile *ngFor="let seat of data.tickets">
-        <button ng-class="seat.user!=null ? 'seatBtn' : 'seatDisabledBtn'"
-        width="50px" height="100px" [disabled]="seat.user!=null" class="seatBtn"
+        <button
+        width="50px" height="100px" [disabled]="checkDisabled(seat)" class="seatBtn"
           (click)="seatPicked(seat)">{{seat.seatRow}}/{{seat.seatCol}}
         </button>
       </mat-grid-tile>
@@ -20,15 +20,18 @@
     <h1>Chosen seats:</h1>
     <table>
       <tr *ngFor="let seat of chosenSeats" (click)="removeSeat(date)">
-        <td>{{seat.seatRow}}/{{seat.seatCol}}</td>
-        <td>{{seat.price}} eur</td>
-        <td><button>Remove</button>Remove</td>
+        <td>Seat in row {{seat.seatRow}}, column {{seat.seatCol}}.</td>
+        <td>Price {{seat.price}} eur </td>
+        <td><button mat-raised-button color="error" (click)="removeSeat(seat)">Remove</button></td>
       </tr>
     </table>
+  </div>
+  <div *ngIf="totalPrice > 0">
+    <mat-card>Total price {{totalPrice}}</mat-card>
   </div>
 
   <div mat-dialog-actions>
     <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="chosenSeat" [disabled]="chosenSeat===undefined">Pick</button>
+    <button mat-button [mat-dialog-close]="chosenSeats" [disabled]="chosenSeats.length < 1">Pick</button>
   </div>
 </div>
