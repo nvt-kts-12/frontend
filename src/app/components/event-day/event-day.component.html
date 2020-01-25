@@ -2,9 +2,9 @@
   <mat-divider></mat-divider>
   <div>
     <h5>When?</h5>
-      <h3>
-        {{eventDay.date}}
-      </h3>
+    <h3>
+      {{eventDay.date}}
+    </h3>
     <h5>Where?</h5>
     <h3>
       {{eventDay.locationName}} ({{eventDay.locationAddress}})
@@ -30,6 +30,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <button mat-raised-button class="continue-button" color='primary' (click)="continue()">Continue</button>
+    <button mat-raised-button class="continue-button" color='primary'
+      [routerLink]="['event-day', eventDay.id]">Continue</button>
   </div>
 </div>

@@ -1,0 +1,32 @@
+<div *ngIf="data!=undefined">
+  <h1 mat-dialog-title>Sector {{data.type}} {{data.id}}</h1>
+  <p *ngIf="data.vip">Vip type</p>
+  <p *ngIf="!data.vip">Regular type</p>
+  <mat-divider></mat-divider>
+  <div mat-dialog-content>
+    <table>
+      <tr>
+        <td>Price</td>
+        <td>{{data.price}}</td>
+      </tr>
+      <tr>
+        <td>Capacity</td>
+        <td>{{data.capacity}}</td>
+      </tr>
+      <tr>
+        <td>Places left</td>
+        <td>{{data.numOfAvailablePlaces}}</td>
+      </tr>
+      <tr aria-colspan="2">
+        <mat-form-field>
+          <input placeholder="Number of tickets" type="number" matInput [max]="data.numOfAvailablePlaces"
+            [(ngModel)]="numberOfTickets">
+        </mat-form-field>
+      </tr>
+    </table>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="numberOfTickets" [disabled]="!(numberOfTickets > 0)">Ok</button>
+  </div>
+</div>

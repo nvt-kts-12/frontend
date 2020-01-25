@@ -5,6 +5,7 @@ import { LoggedInGuard } from './guards/logged-in.guard';
 import { RegisterComponent } from '../components/account/register/register.component';
 import { LoginComponent } from '../components/account/login/login.component';
 import { EventDaysComponent } from '../components/event-days/event-days.component';
+import { TicketReservationComponent } from '../components/ticket-reservation/ticket-reservation.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
 import { AdminGuard } from './guards/admin-guard';
@@ -34,6 +35,10 @@ export const routes: Routes = [
     path: 'event/:id',
     component: EventDaysComponent,
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'event/:eventId/event-day/:dayId',
+    component: TicketReservationComponent
   },
   {
     path: 'admin',
