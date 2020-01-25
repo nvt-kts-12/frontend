@@ -265,7 +265,7 @@ export class TicketReservationComponent implements OnInit {
       this.router.navigate(['/']);
     },
     error => {
-      console.log("And he sais error");
+      alert("Unsuccessful");
     })
   }
 
@@ -281,30 +281,4 @@ export class TicketReservationComponent implements OnInit {
     }
   }
 
-
-
 }
-
-
-/*Hard code **********************************************************/
-/* */
-/*********************************************************************/
-      // this.eventDay.sectors[0].topLeftX = 25;
-      // this.eventDay.sectors[0].topLeftY = 10;
-      // this.eventDay.sectors[0].bottomRightX = 65;
-      // this.eventDay.sectors[0].bottomRightY = -100;
-
-      // this.eventDay.sectors[1].topLeftX = 235;
-      // this.eventDay.sectors[1].topLeftY = 10;
-      // this.eventDay.sectors[1].bottomRightX = 275;
-      // this.eventDay.sectors[1].bottomRightY = -100;
-
-      // this.eventDay.sectors[2].topLeftX = 85;
-      // this.eventDay.sectors[2].topLeftY = 10;
-      // this.eventDay.sectors[2].bottomRightX = 215;
-      // this.eventDay.sectors[2].bottomRightY = -20;
-/*********************************************************************/
-/* */
-/*Hard code ************************************************************/
-
-      // todo: get places left by sector

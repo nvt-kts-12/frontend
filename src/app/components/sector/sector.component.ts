@@ -19,14 +19,11 @@ export class SectorComponent implements OnInit {
   };
 
   calculateHeight(sector: Sector): any{
-    var height = sector.topLeftY - sector.bottomRightY;
+    var height = sector.bottomRightY - sector.topLeftY;
     return height;
   }
 
   open(sector: Sector): void{
-    console.log("saljem");
-    console.log(sector);
-
     this.onSelect.emit(sector);
   }
 
