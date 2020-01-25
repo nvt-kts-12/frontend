@@ -259,10 +259,10 @@ export class TicketReservationComponent implements OnInit {
       seats: pickedSeats,
       purchase: buy
     }
-    console.log("This is reservation dto i am sending");
-    console.log(reservationDto);
     this.eventService.reserve(reservationDto).subscribe((res) => {
       console.log(res);
+      alert("Successful!")
+      this.router.navigate(['/']);
     },
     error => {
       console.log("And he sais error");

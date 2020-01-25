@@ -1,13 +1,14 @@
-<div *ngIf="data!=undefined">
+<div *ngIf="data!=undefined" id="sector-popup-div">
   <h1 mat-dialog-title>Sector {{data.sector.type}} {{data.sector.id}}</h1>
   <mat-divider></mat-divider>
   <h2>Seats</h2>
   <div *ngIf="data.tickets.length > 0">
     <mat-grid-list [cols]="data.sector.colNum" rowHeight="2:1" width="100px">
-      <mat-grid-tile *ngFor="let seat of data.tickets">
-        <button
-        width="50px" height="100px" [disabled]="checkDisabled(seat)" class="seatBtn"
-          (click)="seatPicked(seat)">{{seat.seatRow}}/{{seat.seatCol}}
+      <mat-grid-tile *ngFor="let seat of data.tickets" 
+      [ngClass]="{freeSeat: !checkDisabled(seat), takenSeat: checkDisabled(seat)}">
+        <button width="50px" height="100px" [disabled]="checkDisabled(seat)" [ngClass]="{freeSeat: !checkDisabled(seat), takenSeat: checkDisabled(seat)}"
+          (click)="seatPicked(seat)">
+          {{seat.seatRow}}/{{seat.seatCol}}
         </button>
       </mat-grid-tile>
     </mat-grid-list>

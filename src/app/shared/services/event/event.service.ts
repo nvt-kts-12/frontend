@@ -23,7 +23,7 @@ export class EventService {
   ) { }
 
   reserve(eventDayReservationDto: EventDayReservationDto): Observable<any> {
-    return this.http.post(ENDPOINTS.RESERVE, eventDayReservationDto
+    return this.http.post<any>(ENDPOINTS.RESERVE, eventDayReservationDto
     ).pipe(
       tap(),
       catchError(err => { return this.errorHandler(err) }))

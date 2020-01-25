@@ -4,6 +4,21 @@ mat-grid-tile {
 .mat-raised-button, .mat-button {
   text-align: center !important;
 }
+
+#sector-popup-div{
+  overflow-y: scroll;
+  height:400px;
+  width: 400px;
+}
+
+.freeSeat{
+  background-color: green;
+}
+
+.takenSeat{
+  background-color: red;
+}
+
 .seatBtn {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
