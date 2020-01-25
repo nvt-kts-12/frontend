@@ -7,6 +7,7 @@ import { HttpErrorResponse} from '@angular/common/http';
 
 const ENDPOINTS = {
   LOCATION_SCHEMES: '/locationScheme',
+  LOCATION_SCHEME_SECTORS: '/locationSchemeSector'
 };
 
 @Injectable({
@@ -21,5 +22,9 @@ export class LocationSchemeService {
 
   getLocationSchemes(): Observable<any> {
     return this.http.get(ENDPOINTS.LOCATION_SCHEMES);
+  }
+
+  getLocationSchemeSectors(locationSchemeId): Observable<any> {
+    return this.http.get(ENDPOINTS.LOCATION_SCHEME_SECTORS + '/' + locationSchemeId);
   }
 }

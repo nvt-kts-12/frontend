@@ -1,0 +1,14 @@
+<p>
+  <app-create-event-day-info 
+    [name]="createEvent.name" 
+    [description]="createEvent.description" 
+    [category]="createEvent.category">
+  </app-create-event-day-info>
+  
+  <app-create-event-day *ngFor="let date of createEvent.dates" [date]="date" [locations]="locations"></app-create-event-day>
+
+  <mat-card>
+    <button (click)="goBackToCreateEvent()" mat-stroked-button color="primary">Back</button>
+    <button (click)="sendCreateRequest()" mat-raised-button color="primary">Finish</button>
+  </mat-card>
+</p>

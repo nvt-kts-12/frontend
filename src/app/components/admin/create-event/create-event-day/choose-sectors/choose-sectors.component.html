@@ -1,0 +1,101 @@
+<div>
+  <div *ngIf="locationPicked">
+    <svg width="600" height="70">
+      <rect
+        [attr.x]="5"
+        [attr.y]="5"
+        [attr.height]="20"
+        [attr.width]="70"
+        style="fill:rgb(117, 161, 250);stroke-width:1;stroke:rgb(173, 168, 168)"
+      />
+      <text
+        [attr.x]="80"
+        [attr.y]="22"
+      > - Grandstand </text>
+      <rect
+          [attr.x]="205"
+          [attr.y]="5"
+          [attr.height]="20"
+          [attr.width]="70"
+          style="fill:rgb(233, 233, 233);stroke-width:1;stroke:rgb(173, 168, 168)"
+      />
+      <text
+        [attr.x]="290"
+        [attr.y]="22"
+      > - Parter </text>
+      <rect
+          [attr.x]="385"
+          [attr.y]="5"
+          [attr.height]="20"
+          [attr.width]="70"
+          style="fill: #4bcc4e;stroke-width:1;stroke:rgb(173, 168, 168)"
+          *ngIf="sectorsSelected()"
+      />
+      <text
+        [attr.x]="470"
+        [attr.y]="21"
+        *ngIf="sectorsSelected()"
+      > - Selected </text>
+    </svg>
+    <h4>Click on a sector to make it available for this event. Click again to remove it.</h4>
+    <svg width="500" height="300">
+      <rect *ngFor="let sector of sectors" 
+        [attr.x]="sector.topLeftX" 
+        [attr.y]="sector.topLeftY" 
+        [attr.height]="sector.bottomRightY - sector.topLeftY"
+        [attr.width]="sector.bottomRightX - sector.topLeftX" 
+        [ngClass]="{'parter' : isParter(sector), 'grandstand' : isGrandstand(sector), 'added': isAdded(sector)}"
+        (click)="toggleSector(sector)"  
+      />
+      <text *ngFor="let sector of sectors"
+        [attr.x]="(sector.topLeftX + ((sector.bottomRightX - sector.topLeftX)/2)) - 3"
+        [attr.y]="(sector.topLeftY + ((sector.bottomRightY - sector.topLeftY)/2)) + 5 "
+      >{{sector.id}}</text>
+    </svg>
+
+    <div>
+      <h4 *ngIf="sectorsSelected()">Selected sectors: </h4>
+      <mat-card *ngFor="let selectedSector of selectedSectors">
+        <mat-grid-list cols="5" rowHeight="4:1">
+          <mat-grid-tile class="sector_info_border_bottom">
+            Sector id: {{ selectedSector.id }}
+          </mat-grid-tile>
+          <mat-grid-tile class="sector_info_border_bottom">
+            {{ selectedSector.type }}
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2">
+            <mat-form-field class="sector_enter_price">
+              <input 
+                matInput 
+                [(ngModel)]="sectorPrices[selectedSector.id]" 
+                placeholder="Enter the price for this sector">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile class="sector_info_element">
+            Price: {{ (sectorPrices[selectedSector.id] == undefined) ? 0 : sectorPrices[selectedSector.id] }}
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2">
+            <mat-form-field class="sector_enter_capacity">
+              <input 
+                matInput 
+                [(ngModel)]="sectorCapacities[selectedSector.id]" 
+                placeholder="Enter the capacity for this sector">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile class="sector_info_element">
+            Capacity: {{ (checkIfNaN(min(sectorCapacities[selectedSector.id], selectedSector.capacity))) ? invalid : min(sectorCapacities[selectedSector.id], selectedSector.capacity) }}
+          </mat-grid-tile>
+          <mat-grid-tile class="sector_info_element">
+            Maximum capacity: {{ selectedSector.capacity }}
+          </mat-grid-tile>
+          <mat-grid-tile class="sector_info_vip">
+            <mat-checkbox
+              (change)="toggleSectorVip($event, selectedSector.id)"
+            > VIP
+            </mat-checkbox>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+    </div>
+  </div>
+</div>

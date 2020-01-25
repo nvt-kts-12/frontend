@@ -10,6 +10,8 @@ import { EditProfileComponent } from '../components/edit-profile/edit-profile.co
 import { AdminGuard } from './guards/admin-guard';
 import { NotAdminGuard } from './guards/not-admin-guard';
 import { AdminPageComponent } from '../components/admin/admin-page/admin-page.component';
+import { CreateEventComponent } from '../components/admin/create-event/create-event.component';
+import { CreateEventDaysComponent } from '../components/admin/create-event/create-event-days/create-event-days.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +38,16 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminPageComponent,
+    canActivate: [NotAdminGuard]
+  },
+  {
+    path: 'create-event',
+    component: CreateEventComponent,
+    canActivate: [NotAdminGuard]
+  },
+  {
+    path: 'create-event-days',
+    component: CreateEventDaysComponent,
     canActivate: [NotAdminGuard]
   },
   {

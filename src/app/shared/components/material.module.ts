@@ -20,6 +20,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatGridListModule,
   MatSnackBarModule,
   MatDialogModule,
 } from '@angular/material';
@@ -48,6 +49,7 @@ const MATERIAL_MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatGridListModule,
   MatSnackBarModule,
   MatDialogModule
 ];

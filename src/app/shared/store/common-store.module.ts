@@ -5,6 +5,8 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AuthStore } from './auth.store';
 import { AuthService } from './auth.service';
 import { AuthQuery } from './auth.query';
+import { CreateEventStore } from './create-event/create-event.store';
+import { CreateEventQuery } from './create-event/create-event.query';
 
 /*
 * all stores stated in include
@@ -22,7 +24,9 @@ persistState({
   providers: [
     AuthStore,
     AuthService,
-    AuthQuery
+    AuthQuery,
+    CreateEventStore,
+    CreateEventQuery
   ]
 })
 export class CommonStoreModule {}
