@@ -13,9 +13,10 @@ import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor } from './shared/config';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarModule } from './components/navbar/navbar.module';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatOptionModule,MatSelectModule,MatTabsModule } from '@angular/material';
 import { SnackbarComponent } from './components/common/snackbar/snackbar.component';
 import { AdminModule } from './components/admin/admin.module';
+import { ReportsComponent } from './components/reports/reports.component';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
@@ -25,7 +26,8 @@ export function HttpLoaderFactory(handler: HttpBackend) {
   declarations: [
     AppComponent,
     NavbarComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    ReportsComponent
   ],
   entryComponents: [SnackbarComponent],
   imports: [
@@ -34,6 +36,9 @@ export function HttpLoaderFactory(handler: HttpBackend) {
     AppRoutingModule,
     NavbarModule,
     HomeModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTabsModule,
     AccountModule,
     FormsModule,
     HttpClientModule,

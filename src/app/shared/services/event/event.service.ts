@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { EventDayReservationDto } from '../../model/EventDayReservationDto';
 
 const ENDPOINTS = {
+  ALLEVENTS : '/event/getAll',
   EVENTS: '/event/show-events',
   EVENT: "/event/",
   EVENTDAY: "/event/eventDay/",
@@ -21,6 +22,11 @@ export class EventService {
   constructor(
     private http: HttpClient,
   ) { }
+
+  
+  getAllEvents():Observable<any>{
+    return this.http.get(ENDPOINTS.ALLEVENTS); 
+  }
 
   reserve(eventDayReservationDto: EventDayReservationDto): Observable<any> {
     return this.http.post<any>(ENDPOINTS.RESERVE, eventDayReservationDto
