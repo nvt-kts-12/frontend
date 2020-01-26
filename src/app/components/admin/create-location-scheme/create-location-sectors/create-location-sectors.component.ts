@@ -143,7 +143,7 @@ export class CreateLocationSectorsComponent implements OnInit {
 })
 export class SectorDataDialogComponent {
   
-  constructor(public dialogRef: MatDialogRef<SectorDataDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  constructor(public dialogRef: MatDialogRef<SectorDataDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void {
     this.dialogRef.close();
