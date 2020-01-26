@@ -5,6 +5,8 @@ import { CreateEventDayComponent } from '../create-event-day/create-event-day.co
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { Router } from '@angular/router';
 import { SiteRoutes } from 'src/app/shared/constants/site-routes';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-create-event-days',
@@ -27,7 +29,8 @@ export class CreateEventDaysComponent implements OnInit {
     private createEventQuery: CreateEventQuery,
     private locationSchemeService: LocationSchemeService,
     private eventService: EventService,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
   ) { }
 
   
@@ -47,23 +50,7 @@ export class CreateEventDaysComponent implements OnInit {
 
   sendCreateRequest() {
 
-    if (!this.checkIfAllPricesFilledOut()) {
-      //TODO u snack
-      alert("Please fill out all the prices of sectors");
-    } else if (!this.datesValid()) {
-      //TODO u snack
-      alert("Not all reservation expiration dates are valid!");
-    } else if (!this.locationsPicked()) {
-      //TODO u snack
-      alert("Please pick a location for every event day.");
-    } else if (!this.atLeastOneSectorPicked()) {
-      //TODO u snack
-      alert("Please pick at least one sector for every event day.");
-    } else if (!this.checkIfAllCapacitiesFilledOut()) {
-       //TODO u snack
-       alert("Please fill out all the capacities of sectors");
-    }
-    else {
+    if (this.validOnFrontend()) {
 
       this.getDatafromEveryEventDay();
 
@@ -75,20 +62,13 @@ export class CreateEventDaysComponent implements OnInit {
         },
         eventDays: this.eventDaysDataSet
       }).subscribe(response => {
-        //TODO ovo u snackbar
-        alert("you have successfully created the event!")
+        this.snackbar.openFromComponent(SnackbarComponent, {
+          data: "you have successfully created the event!",
+          panelClass: ['snackbar-success']
+        });
         this.router.navigate([SiteRoutes.CREATE_EVENT]);
       }, errorResponse => {
-        if (errorResponse.error.message.startsWith("JSON parse error: Cannot deserialize value of type `double` from String")) {
-          //TODO u snack
-          alert("You have entered an invalid price.");
-        } else if (errorResponse.error.message.startsWith("JSON parse error: Cannot deserialize value of type `int` from String")) {
-          //TODO u snack
-          alert("You have entered an invalid capacity.");
-        } 
-        else {
-          alert("Something went wrong.");
-        }
+        this.showErrorFromBackend(errorResponse);
         this.eventDaysDataSet = [];
       });
 
@@ -96,6 +76,48 @@ export class CreateEventDaysComponent implements OnInit {
     }
   }
 
+  validOnFrontend() {
+    let valid = true;
+
+    if (!this.checkIfAllPricesFilledOut()) {
+      this.showSnackbarError("Please fill out all the prices of sectors");
+      valid = false;
+    } else if (!this.datesValid()) {
+      this.showSnackbarError("Not all reservation expiration dates are valid!");
+      valid = false;
+    } else if (!this.locationsPicked()) {
+      this.showSnackbarError("Please pick a location for every event day.");
+      valid = false;
+    } else if (!this.atLeastOneSectorPicked()) {
+      this.showSnackbarError("Please pick at least one sector for every event day.");
+      valid = false;
+    } else if (!this.checkIfAllCapacitiesFilledOut()) {
+      this.showSnackbarError("Please fill out all the capacities of sectors");
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  showErrorFromBackend(errorResponse) {
+
+    if(errorResponse.error.message != null) {
+      if (errorResponse.error.message.startsWith("JSON parse error: Cannot deserialize value of type `double` from String")) {
+        this.showSnackbarError("You have entered an invalid price.");
+      } else if (errorResponse.error.message.startsWith("JSON parse error: Cannot deserialize value of type `int` from String")) {
+        this.showSnackbarError("You have entered an invalid capacity.");
+      } else if (errorResponse.error.errors[0].codes[6] == "Positive.capacity") {
+        this.showSnackbarError("Capacity can't be negative.");
+      } else if (errorResponse.error.errors[0].codes[6] == "PositiveOrZero.price") {
+        this.showSnackbarError("Capacity can't be negative.");
+      } else {
+        this.showSnackbarError("Something went wrong.");
+      }
+    }
+    else {
+      this.showSnackbarError(errorResponse.error);
+    }
+  }
   
   getDatafromEveryEventDay() {
     this.eventDayComponents.forEach(childComponent => {
@@ -174,5 +196,12 @@ export class CreateEventDaysComponent implements OnInit {
 
     return result; 
 
+  }
+
+  showSnackbarError(message) {
+    this.snackbar.openFromComponent(SnackbarComponent, {
+      data: message,
+      panelClass: ['snackbar-error']
+    });
   }
 }

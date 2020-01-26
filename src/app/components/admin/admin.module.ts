@@ -10,6 +10,7 @@ import { ChooseSectorsComponent } from './create-event/create-event-day/choose-s
 import { CreateLocationSchemeComponent } from './create-location-scheme/create-location-scheme.component';
 import { LocationSchemeInfoComponent } from './create-location-scheme/location-scheme-info/location-scheme-info.component';
 import { CreateLocationSectorsComponent } from './create-location-scheme/create-location-sectors/create-location-sectors.component';
+import { DrawSectorsComponent } from './create-location-scheme/create-location-sectors/draw-sectors/draw-sectors.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CreateLocationSectorsComponent } from './create-location-scheme/create-
     ChooseSectorsComponent,
     CreateLocationSchemeComponent,
     LocationSchemeInfoComponent,
-    CreateLocationSectorsComponent
+    CreateLocationSectorsComponent,
+    DrawSectorsComponent
   ],
   imports: [
     CoreModulesModule

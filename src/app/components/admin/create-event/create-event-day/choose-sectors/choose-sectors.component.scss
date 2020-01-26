@@ -3,15 +3,15 @@ div {
 }
 
 .parter {
-    fill:rgb(233, 233, 233);
+    fill:#ffaa00;
     stroke-width:1;
-    stroke:rgb(173, 168, 168)
+    stroke:#b3a120;
 }
 
 .grandstand {
     fill:rgb(117, 161, 250);
     stroke-width:1;
-    stroke:rgb(173, 168, 168)
+    stroke: #0c1142;
 }
 
 .parter:hover {
@@ -67,3 +67,7 @@ mat-card {
     border-right: solid 0.5px;
     border-top: solid 0.5px;
 }
+
+.sectors-svg {
+    background-color: #e3e3e3;
+} 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-page',
@@ -8,17 +7,9 @@ import { Router } from '@angular/router';
 })
 export class AdminPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  goToCreateEvent() {
-    this.router.navigate(['/create-event']);
-  }
-
-  goToCreateLocationScheme() {
-    this.router.navigate(['/create-location-scheme']);
   }
 
 }

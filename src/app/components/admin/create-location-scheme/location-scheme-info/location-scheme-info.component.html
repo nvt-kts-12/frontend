@@ -4,10 +4,16 @@
       Enter location information: 
     </mat-card-title>
     <mat-form-field>
-      <input matInput placeholder="Location name">
+      <input matInput [formControl]="name" type="text" placeholder="Location name">
+      <mat-error>
+        {{ getErrorMessage('name') | translate }}
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Address">
+      <input matInput [formControl]="address" type="text" placeholder="Address">
+      <mat-error>
+        {{ getErrorMessage('address') | translate }}
+      </mat-error>
     </mat-form-field>
   </mat-card>
 </div>

@@ -1,0 +1,23 @@
+<svg class="drawing_area" 
+    [attr.width]="svgWidth" 
+    [attr.height]="svgHeight"
+    [ngClass]="{'draw-cursor' : (activeOption == 'GRANDSTAND' || activeOption == 'PARTER'), 'remove-cursor' : activeOption == 'DELETE'}"
+    >
+    <rect 
+      *ngFor="let sector of sectors" 
+      [attr.x]="sector.topLeftX"
+      [attr.y]="sector.topLeftY" 
+      [attr.height]="sector.height"
+      [attr.width]="sector.width"
+      (click)="removeSector(sector)"
+      [ngClass]="{'grandstand' : sector.type == 'GRANDSTAND', 'parter' : sector.type == 'PARTER', 'delete-hover' : activeOption == 'DELETE' }" 
+    />
+    <rect
+      [ngClass]="{'grandstand' : activeOption == 'GRANDSTAND', 'parter' : activeOption == 'PARTER'}"  
+      [attr.x]="sector.topLeftX"
+      [attr.y]="sector.topLeftY" 
+      [attr.height]="sector.height"
+      [attr.width]="sector.width" 
+    />
+</svg>
+  
