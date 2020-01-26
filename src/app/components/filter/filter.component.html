@@ -1,5 +1,6 @@
-<div>
+<div id="filter">
   <mat-radio-group
+    id="filter-type-radio-group"
     aria-labelledby="example-radio-group-label"
     class="example-radio-group"
     [(ngModel)]="eventType"
@@ -8,17 +9,17 @@
       {{eventType}}
     </mat-radio-button>
   </mat-radio-group>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="dateChanged($event)" [(ngModel)]="filter.date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+  <mat-form-field id="filter-date-form">
+    <input id="filter-date-input" matInput disabled [matDatepicker]="picker" [min]="minDate" placeholder="Choose a date" (dateChange)="dateChanged($event)" [(ngModel)]="filter.date" >
+    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+    <mat-datepicker disabled="false" #picker></mat-datepicker>
     <button mat-button *ngIf='filter.date' matSuffix mat-icon-button aria-label="Clear" (click)="clearDate()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field id="filter-location-form">
     <mat-label>Location</mat-label>
-    <mat-select (selectionChange)="locationChanged($event)">
+    <mat-select (selectionChange)="locationChanged($event)" id="filter-location-select">
       <mat-option>None</mat-option>
       <mat-option *ngFor="let location of locationSchemes" [value]="location.name">
         {{location.name}}

@@ -3,7 +3,7 @@
     {{event.name}}
   </h1>
   <div>
-      <span *ngFor="let date of event.dates" class="event-date">{{date}}</span>
+      <p *ngFor="let el of event.dateAndLocationDTO" class="event-date">{{el.date | date: 'dd/MM/yyyy'}} - {{el.location}} </p>
   </div>
   <p>
     {{event.category}}
