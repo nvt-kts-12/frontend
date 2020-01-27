@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDatepickerInputEvent } from '@angular/material';
+import { MatDatepickerInputEvent, MatDatepicker, MatInput, MatSnackBar } from '@angular/material';
 import { formatDate } from '@angular/common';
 import { FormControl, Validators } from '@angular/forms';
 import { CreateEventStore } from '../../../shared/store/create-event/create-event.store';
+import { SnackbarComponent } from '../../common/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-create-event',
@@ -24,24 +25,23 @@ export class CreateEventComponent implements OnInit {
     Validators.required
   ]);
 
-  // pickedCategory:string = '';
-
   category = new FormControl('', [
     Validators.required
   ])
 
   today = new Date();
 
+  @ViewChild('dateInput', {
+    read: MatInput
+  }) dateInput: MatInput;
+
   constructor(
     private router: Router,
-    private createEventStore: CreateEventStore
+    private createEventStore: CreateEventStore,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
-  }
-
-  goBackToMenu() {
-    this.router.navigate(['/admin']);
   }
 
   addDate(date: MatDatepickerInputEvent<Date>) {
@@ -49,10 +49,12 @@ export class CreateEventComponent implements OnInit {
     if (!this.datePicked(formattedDate)){
       this.dates.push(formattedDate);
     } else {
-      //TODO: ovo treba da ide u snackbar
-      alert('Date is already added!');
+      this.snackbar.openFromComponent( SnackbarComponent, {
+        data: "Date is already added!",
+        panelClass: ['snackbar-error']
+      });
     }
-    
+    this.dateInput.value = '';
   }
 
   datePicked(date: string):boolean {

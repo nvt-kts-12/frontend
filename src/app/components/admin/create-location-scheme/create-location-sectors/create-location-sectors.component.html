@@ -1,0 +1,33 @@
+<div class="container">
+
+  <h3>Draw sectors: </h3>
+
+  <div>
+      
+    <mat-grid-list gutterSize="30px" class="admin-options" cols="3" rowHeight="6:1">
+      <mat-grid-tile [ngClass]="{'grandstand-selected' : activeOption == 'GRANDSTAND'}" (click)="setOption('GRANDSTAND')" class="admin-option">
+        <mat-icon>event_seat</mat-icon>
+        <mat-icon>event_seat</mat-icon>
+        <mat-icon>event_seat</mat-icon>
+      </mat-grid-tile>
+      <mat-grid-tile [ngClass]="{'parter-selected' : activeOption == 'PARTER'}" (click)="setOption('PARTER')" class="admin-option">
+        <mat-icon>accessibility_new</mat-icon>
+        <mat-icon>accessibility_new</mat-icon>
+        <mat-icon>accessibility_new</mat-icon>
+      </mat-grid-tile>
+      <mat-grid-tile [ngClass]="{'delete-selected' : activeOption == 'DELETE'}" (click)="setOption('DELETE')" class="admin-option">
+        <mat-icon>delete</mat-icon>
+      </mat-grid-tile>
+      <mat-grid-tile class="option-header">Grandstand</mat-grid-tile>
+      <mat-grid-tile class="option-header">Parter</mat-grid-tile>
+      <mat-grid-tile class="option-header">Remove</mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <app-draw-sectors 
+    [sectors]="sectorsForDrawing" 
+    [activeOption]="activeOption" 
+    (onDraw)="getNewSector($event)"
+    (onRemove)="removeSector($event)"
+  ></app-draw-sectors>
+</div>

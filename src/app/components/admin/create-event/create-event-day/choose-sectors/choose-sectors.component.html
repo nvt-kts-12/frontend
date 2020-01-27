@@ -6,7 +6,7 @@
         [attr.y]="5"
         [attr.height]="20"
         [attr.width]="70"
-        style="fill:rgb(117, 161, 250);stroke-width:1;stroke:rgb(173, 168, 168)"
+        style="fill:rgb(117, 161, 250);stroke-width:1;stroke:#0c1142;"
       />
       <text
         [attr.x]="80"
@@ -17,7 +17,7 @@
           [attr.y]="5"
           [attr.height]="20"
           [attr.width]="70"
-          style="fill:rgb(233, 233, 233);stroke-width:1;stroke:rgb(173, 168, 168)"
+          style="fill:#ffaa00;stroke-width:1;stroke:#b3a120"
       />
       <text
         [attr.x]="290"
@@ -38,7 +38,7 @@
       > - Selected </text>
     </svg>
     <h4>Click on a sector to make it available for this event. Click again to remove it.</h4>
-    <svg width="500" height="300">
+    <svg class="sectors-svg" width="500" height="300">
       <rect *ngFor="let sector of sectors" 
         [attr.x]="sector.topLeftX" 
         [attr.y]="sector.topLeftY" 
@@ -48,7 +48,7 @@
         (click)="toggleSector(sector)"  
       />
       <text *ngFor="let sector of sectors"
-        [attr.x]="(sector.topLeftX + ((sector.bottomRightX - sector.topLeftX)/2)) - 3"
+        [attr.x]="(sector.topLeftX + ((sector.bottomRightX - sector.topLeftX)/2)) - 7"
         [attr.y]="(sector.topLeftY + ((sector.bottomRightY - sector.topLeftY)/2)) + 5 "
       >{{sector.id}}</text>
     </svg>
