@@ -17,6 +17,8 @@
     "EVENT_DESCRIPTION_REQUIRED": "Event description is required",
     "EVENT_CATEGORY_REQUIRED": "Event category is required",
     "FIRSTNAME_REQUIRED" : "First name is required",
-    "LASTNAME_REQUIRED" : "Last name is required"
+    "LASTNAME_REQUIRED" : "Last name is required",
+    "LOCATION_ADDRESS_REQUIRED" : "Location address is required",
+    "LOCATION_NAME_REQUIRED" : "Location name is required"
   }
 }

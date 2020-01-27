@@ -15,6 +15,7 @@ import { CreateEventComponent } from '../components/admin/create-event/create-ev
 import { CreateEventDaysComponent } from '../components/admin/create-event/create-event-days/create-event-days.component';
 import { componentFactoryName } from '@angular/compiler';
 import { ReportsComponent } from '../components/reports/reports.component';
+import { CreateLocationSchemeComponent } from '../components/admin/create-location-scheme/create-location-scheme.component';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,11 @@ export const routes: Routes = [
   {
     path:'reports',
     component:ReportsComponent
+  },
+  {
+    path: 'create-location-scheme',
+    component: CreateLocationSchemeComponent,
+    canActivate: [NotAdminGuard]
   },
   ...accountRouting
 ];
