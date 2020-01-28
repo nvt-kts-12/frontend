@@ -49,20 +49,21 @@
   <mat-error>
     {{ getErrorMessage('lastName') | translate }}
   </mat-error>
-  </mat-form-field>
+  
+</mat-form-field>
 
-  <mat-form-field>
+<mat-form-field>
     <input
     matInput
     placeholder="{{ 'COMMON.EMAIL' | translate }}"
     [formControl]="email"
     required
-    type="text"
-  >
-  <mat-error>
-    {{ getErrorMessage('email') | translate }}
-  </mat-error>
+    type="email"
+    >
+  
+    <mat-error *ngIf="email.invalid">{{getErrorMessage('email') | translate}}</mat-error>
+
 </mat-form-field>
    
-  <button mat-button (click)="onSubmit()">Register</button>
+  <button mat-button (click)="onSubmit()" [disabled]="!firstName.valid || !email.valid || !password.valid || !lastName.valid || !lastName.valid" >Register</button>
 </div>

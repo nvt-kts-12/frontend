@@ -5,7 +5,6 @@ import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient, HttpBackend } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 import { AppRoutingModule } from './router/app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './components/home/home.module';
@@ -16,7 +15,6 @@ import { NavbarModule } from './components/navbar/navbar.module';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatOptionModule,MatSelectModule,MatTabsModule } from '@angular/material';
 import { SnackbarComponent } from './components/common/snackbar/snackbar.component';
 import { AdminModule } from './components/admin/admin.module';
-import { ReportsComponent } from './components/reports/reports.component';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
@@ -26,8 +24,7 @@ export function HttpLoaderFactory(handler: HttpBackend) {
   declarations: [
     AppComponent,
     NavbarComponent,
-    SnackbarComponent,
-    ReportsComponent
+    SnackbarComponent
   ],
   entryComponents: [SnackbarComponent],
   imports: [

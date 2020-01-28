@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from 'src/app/shared/services/reports/report.service';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import {Chart} from 'chart.js'
@@ -9,6 +9,7 @@ import { LocationRep } from 'src/app/shared/model/LocationRep.model';
 import { EventDayRep } from 'src/app/shared/model/EventDayRep.model';
 import { User, CommonStoreModule } from 'src/app/shared/store';
 import { element } from 'protractor';
+import { MatSelect } from '@angular/material';
 
 
 @Component({
@@ -19,11 +20,16 @@ import { element } from 'protractor';
 
 export class ReportsComponent implements OnInit {
 
+  @ViewChild('selectEvent') selectEvent : MatSelect; 
+  @ViewChild('selectShowBy') selectShowBy : MatSelect; 
+  @ViewChild('selectLocation') selectLocation : MatSelect;
+  
   chart : Chart
   
   events = []
   eventDays =[]
   locations =[]
+
  
   event : EventRep
   location : LocationRep
@@ -56,7 +62,7 @@ export class ReportsComponent implements OnInit {
     this.eventDaysReport(id)
     });
   }
-
+ 
    eventDaysReport(id){
     this.reportService.getEventDaysReport(id).subscribe(res=>{
       this.eventDays = res
@@ -113,6 +119,23 @@ export class ReportsComponent implements OnInit {
     this.drawChart(data,labels)      
     }
   }
+
+  changeSelection($event){
+    this.event=null
+    this.location=null;
+    
+    if(this.chart){
+      this.chart.destroy()
+    }
+    
+    this.selectEvent.value=0
+    this.selectShowBy.value=0
+    this.selectLocation.value=0
+  }
+
+  resetShowBy($event){
+    this.selectShowBy.value = 0
+  }
  
   drawChart(data,labels){
     this.chart = new Chart('canvas',{
@@ -142,5 +165,4 @@ export class ReportsComponent implements OnInit {
     }
     })
   }
-
 }

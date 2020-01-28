@@ -16,6 +16,7 @@ import { CreateEventDaysComponent } from '../components/admin/create-event/creat
 import { componentFactoryName } from '@angular/compiler';
 import { ReportsComponent } from '../components/reports/reports.component';
 import { CreateLocationSchemeComponent } from '../components/admin/create-location-scheme/create-location-scheme.component';
+import { PayPalComponent } from '../components/pay-pal/pay-pal.component';
 
 export const routes: Routes = [
   {
@@ -71,6 +72,12 @@ export const routes: Routes = [
   {
     path:'reports',
     component:ReportsComponent
+  
+  },
+  {
+    path: 'pay-pal',
+    component: PayPalComponent,
+    canActivate: [ LoggedInGuard ]
   },
   {
     path: 'create-location-scheme',

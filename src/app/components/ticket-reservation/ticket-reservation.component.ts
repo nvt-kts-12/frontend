@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/shared/services/event/event.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ParterPopupComponent } from '../parter-popup/parter-popup.component';
 import { EventDay } from '../../shared/model/EventDay';
 import { Sector } from '../../shared/model/Sector';
@@ -14,6 +14,9 @@ import { Seat } from 'src/app/shared/model/Seat';
 import { AuthService, AuthQuery } from 'src/app/shared/store';
 import { ParterDto } from 'src/app/shared/model/ParterDto';
 import { SeatDto } from 'src/app/shared/model/SeatDto';
+import { PayPalService } from 'src/app/shared/services/paypal/paypal.service';
+import { SnackbarComponent } from '../common/snackbar/snackbar.component';
+import { ConfirmDialogComponent } from '../common/confirm-dialog/confirm-dialog.component';
 
 /**
  * Main component for ticket purchase. Contains location layout, 
@@ -44,17 +47,22 @@ export class TicketReservationComponent implements OnInit {
   totalPrice: number;
   user: any;
 
+  loadingNeeded: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private auth: AuthService,
     private eventService: EventService,
     private ticektService: TicketService,
-    private router: Router,
+    private payPalService: PayPalService,
     public parterDialog: MatDialog,
     public grandstandDialog: MatDialog,
     private changeDetectorRefs: ChangeDetectorRef,
     private authQuery: AuthQuery,
-    private auth: AuthService,
+    private snackbar: MatSnackBar,
+    public confirmDialog: MatDialog,
   ) {
     this.eventId = route.snapshot.params['eventId'];
     this.eventDayId = route.snapshot.params['dayId'];
@@ -102,7 +110,7 @@ export class TicketReservationComponent implements OnInit {
       }
     })
     this.eventDay.sectors.forEach(eventDaySector => {
-      if(eventDaySector.id === parter.sectorId){
+      if (eventDaySector.id === parter.sectorId) {
         eventDaySector.numOfAvailablePlaces += parter.numberOfTickets;
       }
     })
@@ -188,7 +196,7 @@ export class TicketReservationComponent implements OnInit {
     this.totalPrice += result * sector.price;
 
     this.eventDay.sectors.forEach(eventDaySector => {
-      if(eventDaySector.id === sector.id){
+      if (eventDaySector.id === sector.id) {
         eventDaySector.numOfAvailablePlaces -= result;
       }
     })
@@ -236,6 +244,8 @@ export class TicketReservationComponent implements OnInit {
 
 
   purchase(buy: boolean): void {
+    this.loadingNeeded = true;
+    
     let pickedParters: Array<ParterDto> = new Array<ParterDto>();
     let pickedSeats: Array<SeatDto> = new Array<SeatDto>();
 
@@ -259,26 +269,53 @@ export class TicketReservationComponent implements OnInit {
       seats: pickedSeats,
       purchase: buy
     }
+
     this.eventService.reserve(reservationDto).subscribe((res) => {
       console.log(res);
-      alert("Successful!")
-      this.router.navigate(['/']);
+      if(buy){
+        window.location.replace(res.redirect_url);
+      }else{
+        this.snackbar.openFromComponent(SnackbarComponent, {
+          data: "Reservation was successful!", 
+          panelClass: ['snackbar-success'],
+        });
+  
+        this.router.navigate(['/']);
+      }
     },
-    error => {
-      alert("Unsuccessful");
-    })
+      error => {
+        this.snackbar.openFromComponent(SnackbarComponent, {
+          data: "Reservation failed!", 
+          panelClass: ['snackbar-error'],
+        });
+        this.router.navigate(['/']);
+      })
   }
 
   reserve(): void {
-    if (confirm("Are you sure you want to reserve these tickets?")) {
-      this.purchase(false);
-    }
+    const dialogRef = this.confirmDialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: {
+        title: "Confirm reservation",
+        message: "Are you sure?",
+        ok: "Yes",
+        cancel: "No",
+        okCallback: () => this.purchase(false)
+      }
+    });
   }
 
   buy(): void {
-    if (confirm("Are you sure you want to buy these tickets?")) {
-      this.purchase(true);
-    }
+    const dialogRef = this.confirmDialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: {
+        title: "Confirm purchase",
+        message: "Are you sure?",
+        ok: "Yes",
+        cancel: "No",
+        okCallback: () => this.purchase(true)
+      }
+    });
   }
 
 }

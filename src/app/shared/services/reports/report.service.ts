@@ -7,7 +7,7 @@ const ENDPOINTS = {
   EVENTREPORT: '/reports/event/',
   EVENTDAYSREPORT: '/reports/eventDay/',
   LOCATIONREPORT: '/reports/location/',
-  ALLLOCATIONS: '/locationScheme/getAll'
+  ALLLOCATIONS: '/locationScheme'
 };
 
 @Injectable({
