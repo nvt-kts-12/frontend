@@ -16,13 +16,14 @@ import {
   MatExpansionModule,
   MatDividerModule,
   MatChipsModule,
+  MatGridListModule,
+  MatTooltipModule,
+  MatDialogModule,
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
-  MatGridListModule,
   MatSnackBarModule,
-  MatDialogModule,
 } from '@angular/material';
 
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -45,13 +46,19 @@ const MATERIAL_MODULES = [
   MatExpansionModule,
   MatDividerModule,
   MatChipsModule,
+  MatGridListModule,
+  MatTooltipModule,
+  MatDialogModule,
+  MatChipsModule,
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatExpansionModule,
   MatGridListModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

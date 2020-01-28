@@ -11,7 +11,8 @@ export class EventDayComponent implements OnInit {
 
   displayedColumns: string[] = ['type', 'price', 'vip'];
 
-  constructor() { }
+  constructor(
+    ) { }
 
   continue() {
 

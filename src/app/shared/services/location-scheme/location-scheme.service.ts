@@ -27,4 +27,8 @@ export class LocationSchemeService {
   getLocationSchemeSectors(locationSchemeId): Observable<any> {
     return this.http.get(ENDPOINTS.LOCATION_SCHEME_SECTORS + '/' + locationSchemeId);
   }
+
+  createLocationScheme(data): Observable<any> {
+    return this.http.post(ENDPOINTS.LOCATION_SCHEME_SECTORS, data);
+  }
 }

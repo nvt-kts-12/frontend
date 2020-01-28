@@ -1,0 +1,51 @@
+.container {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 1%;
+    border: solid 0.5px;
+    border-color: darkblue;
+    border-radius: 15px;
+    text-align: center;
+}
+
+div {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+rect {
+    fill: cornflowerblue;
+}
+
+.admin-options {
+    margin-right: 30%;
+    margin-left: 30%;
+}
+
+.admin-option {
+    cursor: pointer;
+    border: solid 0.5px;
+    border-color: darkblue;
+    border-radius: 15px;
+    min-height: 30px;
+    
+}
+
+.option-header {
+    min-height: 25px;
+}
+
+.admin-option:hover {
+    background-color: darkgray;
+}
+
+.grandstand-selected {
+    background-color: #93abed;
+}
+
+.parter-selected {
+    background-color: #79ab72;
+}
+
+.delete-selected {
+    background-color: #bf3636;
+}

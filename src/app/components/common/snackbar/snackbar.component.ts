@@ -5,7 +5,7 @@ import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
   selector: 'snackbar',
   templateUrl: './snackbar.component.html',
   styles: [`#snackbar {
-    color: black;
+    color: white;
   }`]
 })
 export class SnackbarComponent {
