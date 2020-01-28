@@ -5,7 +5,9 @@ table {
   width: 100%;
 }
 
-th.mat-header-cell, td.mat-cell, .mat-raised-button {
+th.mat-header-cell,
+td.mat-cell,
+.mat-raised-button {
   text-align: center !important;
 }
 
@@ -22,4 +24,10 @@ th.mat-header-cell, td.mat-cell, .mat-raised-button {
 #layout {
   margin: 0 auto;
   text-align: center;
+}
+
+.centered {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }

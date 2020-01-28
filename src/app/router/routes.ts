@@ -14,6 +14,7 @@ import { AdminPageComponent } from '../components/admin/admin-page/admin-page.co
 import { CreateEventComponent } from '../components/admin/create-event/create-event.component';
 import { CreateEventDaysComponent } from '../components/admin/create-event/create-event-days/create-event-days.component';
 import { CreateLocationSchemeComponent } from '../components/admin/create-location-scheme/create-location-scheme.component';
+import { PayPalComponent } from '../components/pay-pal/pay-pal.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,11 @@ export const routes: Routes = [
   {
     path: 'edit-profile',
     component: EditProfileComponent,
+    canActivate: [ LoggedInGuard ]
+  },
+  {
+    path: 'pay-pal',
+    component: PayPalComponent,
     canActivate: [ LoggedInGuard ]
   },
   {
