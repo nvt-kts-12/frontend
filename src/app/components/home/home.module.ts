@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 import { SectorComponent } from '../sector/sector.component';
 import { GrandstandPopupComponent } from '../grandstand-popup/grandstand-popup.component';
 import { UserProfileModule } from '../user-profile/user-profile.module';
+import { PayPalComponent } from '../pay-pal/pay-pal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UserProfileModule } from '../user-profile/user-profile.module';
     TicketReservationComponent,
     ParterPopupComponent,
     SectorComponent,
-    GrandstandPopupComponent
+    GrandstandPopupComponent,
+    PayPalComponent
   ],
   imports: [
     CoreModulesModule,

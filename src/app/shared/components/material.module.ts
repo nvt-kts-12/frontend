@@ -57,7 +57,8 @@ const MATERIAL_MODULES = [
   MatExpansionModule,
   MatGridListModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

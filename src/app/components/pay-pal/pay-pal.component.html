@@ -1,0 +1,15 @@
+<html>
+<mat-card *ngIf="success && !loading" class="centered">
+  <mat-card-title>Your tickets purchace was successful</mat-card-title>
+  <mat-card-actions>
+    <button mat-raised-button routerLink='/'>
+      <mat-icon>home</mat-icon>
+      Go to home page
+    </button>
+  </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="loading">
+  <mat-spinner *ngIf="!success" class="centered"></mat-spinner>
+</mat-card>
+
+</html>
