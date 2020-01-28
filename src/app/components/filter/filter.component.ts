@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common'
 import { LocationSchemeService } from 'src/app/shared/services/location-scheme/location-scheme.service';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange, DateAdapter } from '@angular/material';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -26,16 +26,19 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   locationSchemes: [];
-
+  minDate: Date;
   getLocationSchemeSub: Subscription;
 
   constructor(public datepipe: DatePipe,
-              public locationSchemeService: LocationSchemeService) {
+              public locationSchemeService: LocationSchemeService,
+              private _adapter: DateAdapter<any>) {
     this.filter ={
       type: '',
       date: '',
       location: ''
     }
+    this._adapter.setLocale('en-GB');
+    this.minDate = new Date();
    }
 
   ngOnInit() {
@@ -57,7 +60,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   dateChanged(e: MatDatepickerInputEvent<Date>) {
     let date = this.datepipe.transform(e.value, 'yyyy-MM-dd');
-    this.filter.date = date ? date.toString() : "";
+    this.filter.date = date ? date.toString() : ""; 
     this.emitAction();
   }
 

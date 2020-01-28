@@ -1,6 +1,6 @@
 <div>
   <mat-form-field class="example-form-field">
-    <input matInput type="text" placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="search($event)">
+    <input id="search" matInput type="text" placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="search($event)">
     <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="search('')">
       <mat-icon>close</mat-icon>
     </button>
