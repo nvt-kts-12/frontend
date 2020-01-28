@@ -1,0 +1,16 @@
+<div mat-dialog-content>
+  <p style="font-family: Roboto, 'Helvetica Neue', sans-serif;">Please enter sector capacity</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.capacity" placeholder="Capacity">
+  </mat-form-field>
+  <mat-form-field *ngIf="data.activeOption != 'PARTER'">
+    <input matInput [(ngModel)]="data.rowNum" placeholder="Number of rows">
+  </mat-form-field>
+  <mat-form-field *ngIf="data.activeOption != 'PARTER'">
+    <input matInput [(ngModel)]="data.colNum" placeholder="Number of columns">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

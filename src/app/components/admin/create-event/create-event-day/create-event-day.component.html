@@ -3,10 +3,10 @@
     <h2>Event day on date: {{date}}</h2>
     <div class="inputs">
       <mat-form-field class="expiration_date_input">
-        <input matInput [min]="today" [max]="date" [matDatepicker]="picker" placeholder="Choose reservation expiration date"
-              (dateChange)="setExpirationDate($event)">
+        <input matInput [min]="today" [max]="date" [matDatepicker]="picker" placeholder="Choose reservation expiration date on the right"
+              (dateChange)="setExpirationDate($event)" disabled>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="select_input">
         <mat-select (selectionChange)="onChange($event)" placeholder="Choose a location">

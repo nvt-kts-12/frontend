@@ -7,6 +7,10 @@ import { CreateEventDaysComponent } from './create-event/create-event-days/creat
 import { CreateEventDayComponent } from './create-event/create-event-day/create-event-day.component';
 import { CreateEventDayInfoComponent } from './create-event/create-event-days/create-event-day-info/create-event-day-info.component';
 import { ChooseSectorsComponent } from './create-event/create-event-day/choose-sectors/choose-sectors.component';
+import { CreateLocationSchemeComponent } from './create-location-scheme/create-location-scheme.component';
+import { LocationSchemeInfoComponent } from './create-location-scheme/location-scheme-info/location-scheme-info.component';
+import { CreateLocationSectorsComponent } from './create-location-scheme/create-location-sectors/create-location-sectors.component';
+import { DrawSectorsComponent } from './create-location-scheme/create-location-sectors/draw-sectors/draw-sectors.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,11 @@ import { ChooseSectorsComponent } from './create-event/create-event-day/choose-s
     CreateEventDaysComponent,
     CreateEventDayComponent,
     CreateEventDayInfoComponent,
-    ChooseSectorsComponent
+    ChooseSectorsComponent,
+    CreateLocationSchemeComponent,
+    LocationSchemeInfoComponent,
+    CreateLocationSectorsComponent,
+    DrawSectorsComponent
   ],
   imports: [
     CoreModulesModule
