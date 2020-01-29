@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="edit-event-form">
+    <h2 class="title">Edit event information</h2>
+    <mat-form-field>
+      <input matInput [(ngModel)]="event.name">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput [(ngModel)]="event.description">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-select [(ngModel)]="event.category" [placeholder]="event.category">
+        <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button [routerLink]="['/admin/edit-events']">Back</button>
+      <button mat-raised-button color="primary" [disabled]="!saveChangesEnabled()" (click)="saveChanges()">Save changes</button>
+    </div>
+  </div>
+
+  <h2 class="title">Edit event days information</h2>
+  <app-edit-event-day *ngFor="let eventDay of eventDays" [eventDay]="eventDay"></app-edit-event-day>
+</div>
+

@@ -65,4 +65,12 @@ export class EventService {
   createEvent(eventData: any): Observable<any> {
     return this.http.post(ENDPOINTS.EVENT, eventData);
   }
+
+  updateEvent(eventId: string, eventData: any): Observable<any> {
+    return this.http.put(ENDPOINTS.EVENT + eventId, eventData);
+  }
+  
+  updateEventDay(eventDayId: string, eventDayData: any): Observable<any> {
+    return this.http.put(ENDPOINTS.EVENTDAY + eventDayId, eventDayData);
+  }
 }
