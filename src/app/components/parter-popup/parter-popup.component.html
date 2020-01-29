@@ -20,13 +20,13 @@
       <tr aria-colspan="2">
         <mat-form-field>
           <input placeholder="Number of tickets" type="number" matInput [max]="data.numOfAvailablePlaces"
-            [(ngModel)]="numberOfTickets">
+            [(ngModel)]="numberOfTickets" id="parterInput">
         </mat-form-field>
       </tr>
     </table>
   </div>
   <div mat-dialog-actions>
-    <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="numberOfTickets" [disabled]="!(numberOfTickets > 0)">Ok</button>
+    <button mat-button cdkFocusInitial (click)="onCancelClick()" id="cancelBtn">Cancel</button>
+    <button mat-button [mat-dialog-close]="numberOfTickets" [disabled]="!(numberOfTickets > 0)" id="pickBtn">Pick</button>
   </div>
 </div>
