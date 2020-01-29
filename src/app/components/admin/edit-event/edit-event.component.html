@@ -2,15 +2,15 @@
   <div class="edit-event-form">
     <h2 class="title">Edit event information</h2>
     <mat-form-field>
-      <input matInput [(ngModel)]="event.name">
+      <input matInput [(ngModel)]="event.name" placeholder="Name">
     </mat-form-field>
   
     <mat-form-field>
-      <input matInput [(ngModel)]="event.description">
+      <input matInput [(ngModel)]="event.description" placeholder="Description">
     </mat-form-field>
   
     <mat-form-field>
-      <mat-select [(ngModel)]="event.category" [placeholder]="event.category">
+      <mat-select [(ngModel)]="event.category" placeholder="Category">
         <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
       </mat-select>
     </mat-form-field>

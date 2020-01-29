@@ -14,6 +14,7 @@ import { DrawSectorsComponent } from './create-location-scheme/create-location-s
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EditEventDayComponent } from './edit-event/edit-event-day/edit-event-day.component';
 import { LocationSchemesListComponent } from './location-schemes-list/location-schemes-list.component';
+import { EditLocationSchemeComponent } from './edit-location-scheme/edit-location-scheme.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LocationSchemesListComponent } from './location-schemes-list/location-s
     DrawSectorsComponent,
     EditEventComponent,
     EditEventDayComponent,
-    LocationSchemesListComponent
+    LocationSchemesListComponent,
+    EditLocationSchemeComponent
   ],
   imports: [
     CoreModulesModule

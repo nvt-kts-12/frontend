@@ -20,6 +20,7 @@ export class CreateLocationSchemeComponent implements OnInit {
   @ViewChild(LocationSchemeInfoComponent)
   infoComponent: LocationSchemeInfoComponent;
 
+
   constructor(
     private locationSchemeService: LocationSchemeService, 
     private snackbar: MatSnackBar,
@@ -27,7 +28,9 @@ export class CreateLocationSchemeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
   }
+
 
   createScheme() {
     

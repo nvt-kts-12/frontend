@@ -15,10 +15,6 @@ export class LocationSchemesListComponent implements OnInit {
   ngOnInit() {
     this.locationSchemeService.getLocationSchemes().subscribe(response => {
       this.locationSchemes = response
-      console.log(this.locationSchemes);
     });
   }
-
-
-
 }
