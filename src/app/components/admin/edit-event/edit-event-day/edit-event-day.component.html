@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="edit-event-day-form">
+    <mat-form-field>
+      <input matInput 
+        [matDatepicker]="picker" 
+        [(ngModel)]="eventDay.date" 
+        placeholder="Event day date" 
+        (dateChange)="setEventDayDate($event)"
+        [min]="today"
+      >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="eventDayDateError">Invalid date</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput 
+        [matDatepicker]="picker2" 
+        [(ngModel)]="eventDay.reservationExpireDate" 
+        (dateChange)="setReservationExpirationDate($event)" 
+        placeholder="Reservation expiration date"
+        [min]="today"
+        [max]="maxDateForExpiration"
+      >
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-error *ngIf="reservationExpirationError">Invalid date</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [(ngModel)]="eventDay.eventDayState" [placeholder]="eventDay.eventDayState">
+        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button [routerLink]="['/admin/edit-events']">Back</button>
+      <button mat-raised-button color="primary" [disabled]="!saveChangesEnabled()" (click)="saveChanges()">Save changes</button>
+    </div>
+  </div>
+</div>

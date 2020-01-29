@@ -9,6 +9,8 @@ export class EventComponent implements OnInit {
 
   @Input() event:any;
 
+  @Input() admin: boolean;
+
   constructor() { }
 
   ngOnInit() {

@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, Input, EventEmitter, Output } from '@ang
 import { fromEvent } from 'rxjs';
 import { takeUntil, switchMap } from 'rxjs/operators';
 import { DrawingDimensions } from 'src/app/shared/constants';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-draw-sectors',
@@ -45,7 +47,10 @@ export class DrawSectorsComponent implements OnInit {
   svgWidth:number = 0;
   svgHeight: number = 0;
   
-  constructor(private _el: ElementRef) { }
+  constructor(
+    private _el: ElementRef,
+    private snackbar: MatSnackBar
+  ) { }
 
   ngOnInit() {
 
@@ -69,7 +74,10 @@ export class DrawSectorsComponent implements OnInit {
     this.mouseup$.subscribe((e) => {
       if (e.which == 1 && this.activeOption != "DELETE") {
         if((this.sector.height < 20 || this.sector.width < 20) || this.sectorOverlap(this.sector)) {
-          console.log("sector is to small or overlapping");
+          this.snackbar.openFromComponent(SnackbarComponent, {
+            data: "Sector is too small or overlapping with another sector",
+            panelClass: ['snackbar-error']
+          });
           this.resetSector();
         } else {
           this.onDraw.emit(this.sector);
