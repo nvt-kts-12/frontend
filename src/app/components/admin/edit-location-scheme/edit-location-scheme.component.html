@@ -1,0 +1,16 @@
+<div class="form-container">
+  <mat-card class="edit-location-form">
+    <button class="delete-button" mat-raised-button color="warn" (click)="deleteLocationScheme()">Delete location scheme</button>
+    <h2 class="heading">Edit location scheme information: </h2>
+    <mat-form-field>
+      <input matInput [(ngModel)]="locationScheme.name" type="text" placeholder="Name" >
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="locationScheme.address" type="text" placeholder="Address">
+    </mat-form-field>
+    <div class="buttons">
+      <button mat-raised-button [routerLink]="['/admin/location-schemes-list']">Back</button>
+      <button mat-raised-button color="primary" (click)="saveChanges()" [disabled]="!saveEnabled()">Save changes</button>
+    </div>
+  </mat-card>
+</div>

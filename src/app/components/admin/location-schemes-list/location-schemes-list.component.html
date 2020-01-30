@@ -1,0 +1,7 @@
+<div>
+  <h2 class="title">Location schemes: </h2>
+  <mat-card *ngFor="let locationScheme of locationSchemes" class="scheme" [routerLink]="['/admin/edit-location-scheme/' + locationScheme.id]">
+    <mat-card-title>{{locationScheme.name}}</mat-card-title>
+    <mat-card-content>{{locationScheme.address}}</mat-card-content>
+  </mat-card>
+</div>

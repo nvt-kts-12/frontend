@@ -16,6 +16,8 @@ import { CreateEventDaysComponent } from '../components/admin/create-event/creat
 import { CreateLocationSchemeComponent } from '../components/admin/create-location-scheme/create-location-scheme.component';
 import { PayPalComponent } from '../components/pay-pal/pay-pal.component';
 import { EditEventComponent } from '../components/admin/edit-event/edit-event.component';
+import { LocationSchemesListComponent } from '../components/admin/location-schemes-list/location-schemes-list.component';
+import { EditLocationSchemeComponent } from '../components/admin/edit-location-scheme/edit-location-scheme.component';
 
 export const routes: Routes = [
   {
@@ -86,6 +88,16 @@ export const routes: Routes = [
   {
     path: 'admin/edit-events/edit-event/:id',
     component: EditEventComponent,
+    canActivate: [NotAdminGuard]
+  },
+  {
+    path: 'admin/location-schemes-list',
+    component: LocationSchemesListComponent,
+    canActivate: [NotAdminGuard]
+  },
+  {
+    path: 'admin/edit-location-scheme/:id',
+    component: EditLocationSchemeComponent,
     canActivate: [NotAdminGuard]
   },
   ...accountRouting
