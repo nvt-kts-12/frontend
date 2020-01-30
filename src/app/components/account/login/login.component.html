@@ -1,7 +1,7 @@
 <div class="login-container">
   <form (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <input
+      <input id="usernameInput"
         matInput
         placeholder="{{ 'COMMON.USERNAME' | translate }}"
         required
@@ -13,7 +13,7 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field>
-        <input
+        <input id="passwordInput"
           matInput
           placeholder="{{ 'COMMON.PASSWORD' | translate }}"
           [formControl]="password"
@@ -24,7 +24,7 @@
           {{ getErrorMessage('password') | translate }}
         </mat-error>
       </mat-form-field>
-      <button
+      <button id="submitLogin"
         mat-raised-button
         type="submit"
         color="primary"

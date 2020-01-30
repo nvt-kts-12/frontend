@@ -20,9 +20,9 @@
           required
           type="password"
         >
-        <mat-error>
-          {{ getErrorMessage('password') | translate }}
-        </mat-error>
+      
+        <mat-error *ngIf="password.invalid">{{getErrorMessage('password') | translate}}</mat-error>
+       
   </mat-form-field>
 
   <mat-form-field>
@@ -62,7 +62,6 @@
     >
   
     <mat-error *ngIf="email.invalid">{{getErrorMessage('email') | translate}}</mat-error>
-
 </mat-form-field>
    
   <button mat-button (click)="onSubmit()" [disabled]="!firstName.valid || !email.valid || !password.valid || !lastName.valid || !lastName.valid" >Register</button>
