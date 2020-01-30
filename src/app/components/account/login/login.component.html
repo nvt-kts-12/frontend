@@ -8,6 +8,7 @@
         required
         [formControl]="username"
         type="text"
+        id="usernameInput"
       >
       <mat-error>
         {{ getErrorMessage('username') | translate }}
@@ -21,6 +22,7 @@
           [formControl]="password"
           required
           type="password"
+          id="passwordInput"
         >
         <mat-error>
           {{ getErrorMessage('password') | translate }}
@@ -29,6 +31,7 @@
       <button
         id="submitLogin"
         mat-raised-button
+        id="submitLogin"
         type="submit"
         color="primary"
         [disabled]="!username.valid || !password.valid"

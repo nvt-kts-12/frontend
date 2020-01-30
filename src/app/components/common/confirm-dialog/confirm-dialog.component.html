@@ -3,6 +3,6 @@
   <p>{{data.message}}</p>
 </div>
 <div mat-dialog-actions>
-  <button id="confirm-dialog-button-cancel" mat-button (click)="onNoClick()" cdkFocusInitial>{{data.cancel}}</button>
-  <button id="confirm-dialog-button-ok" mat-button (click)="onOkClick()" >{{data.ok}}</button>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial id="popupCancelButton">{{data.cancel}}</button>
+  <button mat-button (click)="onOkClick()" id="popupOkButton" >{{data.ok}}</button>
 </div>
