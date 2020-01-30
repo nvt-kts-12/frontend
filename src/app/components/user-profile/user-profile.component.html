@@ -17,7 +17,7 @@
         <h3>Email : {{user.email}}</h3>    
     </mat-card-content>
   </mat-card>
-  <app-tickets [tickets]="reservations" title="Reservations" (refreshTable)="fetchData()"></app-tickets>
-  <app-tickets [tickets]="boughtTickets" title="Bought tickets"></app-tickets>
+  <app-tickets id="reservations" [tickets]="reservations" title="Reservations" (refreshTable)="fetchData()"></app-tickets>
+  <app-tickets id="boughtTickets" [tickets]="boughtTickets" title="Bought tickets"></app-tickets>
 
 </div>
