@@ -7,7 +7,7 @@ import { Event } from '@angular/router';
 import { EventRep } from 'src/app/shared/model/EventRep.model';
 import { LocationRep } from 'src/app/shared/model/LocationRep.model';
 import { EventDayRep } from 'src/app/shared/model/EventDayRep.model';
-import { User, CommonStoreModule } from 'src/app/shared/store';
+import { User, CommonStoreModule, AuthService } from 'src/app/shared/store';
 import { element } from 'protractor';
 import { MatSelect } from '@angular/material';
 
@@ -46,7 +46,6 @@ export class ReportsComponent implements OnInit {
    getAllEvents(){
     this.eventService.getAllEvents().subscribe(res => {
       this.events = res
- 
    });
   }
 

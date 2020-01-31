@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
 import { AuthStore } from './auth.store';
 import { Response } from '@angular/http';
 import { stringify } from 'querystring';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.component';
 
 const ENDPOINTS = {
   LOGIN: '/auth/login',
   REGISTER: '/auth/register',
-  ME: '/user/me'
+  ME: '/user/me',
 };
 
 @Injectable({
@@ -24,7 +26,8 @@ export class AuthService {
    */
   constructor(
     private http: HttpClient,
-    private authStore: AuthStore
+    private authStore: AuthStore,
+    private snackbar: MatSnackBar
   ) { }
 
   /**
@@ -39,13 +42,15 @@ export class AuthService {
       tap((data: { accessToken: string }) => {
         this.authStore.updateRoot((state) => ({
           token: data.accessToken
-        }));        
+        }));   
+      }, errorResponse =>{
+        console.log("AAAAA",errorResponse)
+        this.showErrorFromBackend_login(errorResponse);  
       })
     ).pipe(
       tap(() => {
         this.http.get<any>(ENDPOINTS.ME).subscribe(
           res => {
-            
             let userFromResponse = {
               username: res.username,
               firstName: res.firstName,
@@ -53,16 +58,14 @@ export class AuthService {
               email: res.email,
               authority: res.authorities[0].authority
             }
-            
             this.authStore.updateRoot((state) => ({
               user: userFromResponse
             }))
-          }
-        )
+          }) 
       })
     );
   }
-
+ 
   /**
    * Register user to the application and
    * save token from response to the localstorage
@@ -78,6 +81,9 @@ export class AuthService {
             email: 'jon@doe.com' // TODO: change this after implementation
           }
         });
+       }, errorResponse => {
+         console.log("register error",errorResponse)
+        this.showErrorFromBackend_register(errorResponse);
       })
     );
   }
@@ -94,4 +100,27 @@ export class AuthService {
       user: null
     })
   }
+  
+  showErrorFromBackend_login(errorResponse) {
+   if(errorResponse.error.message != null){
+     if(errorResponse.error.message.startsWith("Bad credentials")){
+        this.showSnackbarError("Bad credentials");
+    } 
+  }
+}
+
+showErrorFromBackend_register(errorResponse) {
+  if(errorResponse.error != null){
+    if(errorResponse.error.startsWith("Username already exist")){
+       this.showSnackbarError("Username already exist");
+   } 
+ }
+}
+
+showSnackbarError(message) {
+  this.snackbar.openFromComponent(SnackbarComponent, {
+    data: message,
+    panelClass: ['snackbar-error']
+  });
+}
 }

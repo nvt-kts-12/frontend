@@ -1,7 +1,7 @@
 <div class="register-container">
   <mat-form-field>
     <input
-          matInput
+          matInput id="usernameInput"
           placeholder="{{ 'COMMON.USERNAME' | translate }}"
           [formControl]="username"
           required
@@ -14,7 +14,7 @@
   
   <mat-form-field>
     <input
-          matInput
+          matInput id="passwordInput"
           placeholder="{{ 'COMMON.PASSWORD' | translate }}"
           [formControl]="password"
           required
@@ -27,7 +27,7 @@
 
   <mat-form-field>
     <input
-          matInput
+          matInput id="firstNameInput"
           placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"
           [formControl]="firstName"
           required
@@ -40,7 +40,7 @@
 
   <mat-form-field>
   <input
-    matInput
+    matInput id="lastNameInput"
     placeholder="{{ 'COMMON.LASTNAME' | translate }}"
     [formControl]="lastName"
     required
@@ -53,7 +53,7 @@
 </mat-form-field>
 
 <mat-form-field>
-    <input
+    <input id="emailInput"
     matInput
     placeholder="{{ 'COMMON.EMAIL' | translate }}"
     [formControl]="email"
@@ -64,5 +64,5 @@
     <mat-error *ngIf="email.invalid">{{getErrorMessage('email') | translate}}</mat-error>
 </mat-form-field>
    
-  <button mat-button (click)="onSubmit()" [disabled]="!firstName.valid || !email.valid || !password.valid || !lastName.valid || !lastName.valid" >Register</button>
+  <button mat-button id="regSubmit" (click)="onSubmit()" [disabled]="!firstName.valid || !email.valid || !password.valid || !lastName.valid || !lastName.valid" >Register</button>
 </div>

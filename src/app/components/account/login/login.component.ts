@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.component';
 
 import { AuthService } from './../../../shared/store';
 
@@ -11,6 +13,7 @@ import { AuthService } from './../../../shared/store';
 })
 
 export class LoginComponent {
+
   public username = new FormControl('', [
     Validators.required
   ]);
@@ -28,6 +31,7 @@ export class LoginComponent {
    * @method onSubmit
    * @returns void
    */
+  
   onSubmit(): void {
     if (!this.username.valid || !this.password.valid) {
       return;
@@ -53,4 +57,5 @@ export class LoginComponent {
     }
     return '';
   }
+
 }

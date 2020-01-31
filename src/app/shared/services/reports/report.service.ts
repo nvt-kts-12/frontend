@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 
 
 const ENDPOINTS = {
-  EVENTREPORT: '/reports/event/',
-  EVENTDAYSREPORT: '/reports/eventDay/',
-  LOCATIONREPORT: '/reports/location/',
-  ALLLOCATIONS: '/locationScheme'
+  EVENT_REPORT: '/reports/event/',
+  EVENTDAYS_REPORT: '/reports/eventDay/',
+  LOCATION_REPORT: '/reports/location/',
+  ALL_LOCATIONS: '/locationScheme'
 };
 
 @Injectable({
@@ -19,17 +19,17 @@ export class ReportService {
   ) { }
 
   getAllLocations():Observable<any>{
-    return this.http.get(ENDPOINTS.ALLLOCATIONS); 
+    return this.http.get(ENDPOINTS.ALL_LOCATIONS); 
   }
 
   getEventReport(eventId: string): Observable<any> {
-    return this.http.get(ENDPOINTS.EVENTREPORT + eventId); }
+    return this.http.get(ENDPOINTS.EVENT_REPORT + eventId); }
 
   getEventDaysReport(eventDayId : string):Observable<any> {
-    return this.http.get(ENDPOINTS.EVENTDAYSREPORT + eventDayId) }
+    return this.http.get(ENDPOINTS.EVENTDAYS_REPORT + eventDayId) }
 
   getLocationReport(locationId : string):Observable<any> {
-    return this.http.get(ENDPOINTS.LOCATIONREPORT + locationId) }
+    return this.http.get(ENDPOINTS.LOCATION_REPORT + locationId) }
   
 
 }
