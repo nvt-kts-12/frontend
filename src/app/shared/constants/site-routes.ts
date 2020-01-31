@@ -3,5 +3,6 @@ export const SiteRoutes = {
   REGISTER: '/register',
   HOME: '/',
   ADMIN: '/admin',
-  CREATE_EVENT: '/create-event'
+  CREATE_EVENT: '/admin/create-event',
+  LOCATION_SCHEMES: '/admin/location-schemes-list'
 };
