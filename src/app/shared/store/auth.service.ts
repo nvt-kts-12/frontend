@@ -40,6 +40,8 @@ export class AuthService {
         this.authStore.updateRoot((state) => ({
           token: data.accessToken
         }));        
+      }, error => {
+        console.log(error);
       })
     ).pipe(
       tap(() => {

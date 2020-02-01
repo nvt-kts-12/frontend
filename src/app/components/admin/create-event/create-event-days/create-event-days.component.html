@@ -1,4 +1,4 @@
-<p>
+<p id="create-event-days">
   <app-create-event-day-info 
     [name]="createEvent.name" 
     [description]="createEvent.description" 
@@ -9,6 +9,6 @@
 
   <mat-card>
     <button (click)="goBackToCreateEvent()" mat-stroked-button color="primary">Back</button>
-    <button (click)="sendCreateRequest()" mat-raised-button color="primary">Finish</button>
+    <button (click)="sendCreateRequest()" mat-raised-button color="primary" id="finish-button">Finish</button>
   </mat-card>
 </p>
