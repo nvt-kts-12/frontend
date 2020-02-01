@@ -1,21 +1,21 @@
 <div class="add-event-form">
   <p class="create-event-title">Create an event</p>
   <mat-form-field>
-    <input matInput [formControl]="name" type="text" placeholder="Event name">
+    <input matInput id="event_name_input" [formControl]="name" type="text" placeholder="Event name">
     <mat-error>
       {{ getErrorMessage('name') | translate }}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <textarea matInput [formControl]="description" placeholder="Event description"></textarea>
+    <textarea matInput id="event_description_input" [formControl]="description" placeholder="Event description"></textarea>
     <mat-error>
       {{ getErrorMessage('description') | translate }}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-select placeholder="Category" [formControl]="category">
+    <mat-select placeholder="Category" id="event_category_select" [formControl]="category">
       <mat-option *ngFor="let category of categories" [value]="category">
         {{category}}
       </mat-option>
@@ -25,7 +25,7 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field id="choose_date_form">
     <input #dateInput matInput [matDatepicker]="picker" [min]="today" placeholder="Choose dates on the right, they will be added as you pick them"
           (dateChange)="addDate($event)" disabled>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -33,7 +33,7 @@
   </mat-form-field>
   
   <p class="dates-title" *ngIf="datesPicked()">Dates:</p>
-  <div class="dates">
+  <div id="dates-list" class="dates">
     <mat-card *ngFor="let date of dates" (click)="removeDate(date)">{{date}}</mat-card>
   </div>
 
@@ -45,6 +45,7 @@
       (click)="goToNextStep()" 
       mat-raised-button color="primary" 
       [disabled]="!name.valid || !description.valid || !category.valid || !datesPicked()"
+      id="next_button"
     > Next
     </button>
   </div>

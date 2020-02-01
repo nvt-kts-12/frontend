@@ -2,7 +2,7 @@
   <mat-card>
     <h2>Event day on date: {{date}}</h2>
     <div class="inputs">
-      <mat-form-field class="expiration_date_input">
+      <mat-form-field id="choose_date_form" class="expiration_date_input">
         <input matInput [min]="today" [max]="date" [matDatepicker]="picker" placeholder="Choose reservation expiration date on the right"
               (dateChange)="setExpirationDate($event)" disabled>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -10,7 +10,7 @@
       </mat-form-field>
       <mat-form-field class="select_input">
         <mat-select (selectionChange)="onChange($event)" placeholder="Choose a location">
-          <mat-option *ngFor="let location of locations" [value]="location.id">{{ location.name }}</mat-option>
+          <mat-option *ngFor="let location of locations" [id]="getDayOfDate(location.id)" [value]="location.id">{{ location.name }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

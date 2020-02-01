@@ -37,7 +37,7 @@ export class AuthService {
    * @param data {any}
    * @returns Observable<any>
    */
-  login(data: any): Observable<any> {
+   login(data: any): Observable<any> {
      return this.http.post(ENDPOINTS.LOGIN, data).pipe(
       tap((data: { accessToken: string }) => {
         this.authStore.updateRoot((state) => ({
@@ -64,6 +64,7 @@ export class AuthService {
       })
     );
   }
+ 
  
   /**
    * Register user to the application and
