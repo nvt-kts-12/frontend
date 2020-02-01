@@ -64,5 +64,5 @@
     <mat-error *ngIf="email.invalid">{{getErrorMessage('email') | translate}}</mat-error>
 </mat-form-field>
    
-  <button mat-button id="regSubmit" (click)="onSubmit()" [disabled]="!firstName.valid || !email.valid || !password.valid || !lastName.valid || !lastName.valid" >Register</button>
+  <button mat-button id="regSubmit" (click)="onSubmit()" [disabled]="!username.valid ||!firstName.valid || !email.valid || !password.valid || !lastName.valid || !lastName.valid" >Register</button>
 </div>

@@ -3,6 +3,9 @@ import { User } from 'src/app/shared/store';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.component';
+
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,7 +18,7 @@ export class EditProfileComponent implements OnInit {
   test : any 
  
   constructor(private userService : UserService,
-              private router: Router) { 
+              private router: Router,private snackbar: MatSnackBar) { 
   }
 
   ngOnInit() {
@@ -27,16 +30,20 @@ export class EditProfileComponent implements OnInit {
     this.userService.update(this.user).subscribe(
       res => {
         this.router.navigate(["/profile"]);
-        // TODO SNACKBAR        
+        this.showSnackbarError("You have successfully updated your profile")
       },
       error => {
-        console.log("error");
-        // TODO SNACKBAR
+        this.showSnackbarError("Email format not valid")
       }
     )
   }
 
-  
+  showSnackbarError(message) {
+    this.snackbar.openFromComponent(SnackbarComponent, {
+      data: message,
+      panelClass: ['snackbar-error']
+    });
+  }
 
  
 }

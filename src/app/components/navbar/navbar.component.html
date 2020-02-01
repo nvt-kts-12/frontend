@@ -18,6 +18,6 @@
   <button mat-button (click)="logout()" *ngIf="loggedIn" >Logout</button>
   <div *ngIf="!loggedIn">
     <button mat-button routerLink="/register" *ngIf="!isRegistrationPage()">Register</button>
-    <button mat-button routerLink="/login" *ngIf="!isLoginPage()">Login</button>
+    <button id="loginButton" mat-button routerLink="/login" *ngIf="!isLoginPage()">Login</button>
   </div>
 </mat-toolbar>
