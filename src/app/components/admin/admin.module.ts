@@ -14,6 +14,10 @@ import { DrawSectorsComponent } from './create-location-scheme/create-location-s
 import { ReportsComponent } from '../reports/reports.component';
 import { MatOptionModule,MatSelectModule,MatTabsModule } from '@angular/material';
 
+import { EditEventComponent } from './edit-event/edit-event.component';
+import { EditEventDayComponent } from './edit-event/edit-event-day/edit-event-day.component';
+import { LocationSchemesListComponent } from './location-schemes-list/location-schemes-list.component';
+import { EditLocationSchemeComponent } from './edit-location-scheme/edit-location-scheme.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { MatOptionModule,MatSelectModule,MatTabsModule } from '@angular/material
     LocationSchemeInfoComponent,
     CreateLocationSectorsComponent,
     DrawSectorsComponent,
-    ReportsComponent
+    ReportsComponent,
+    EditEventComponent,
+    EditEventDayComponent,
+    LocationSchemesListComponent,
+    EditLocationSchemeComponent
   ],
   imports: [
     CoreModulesModule,

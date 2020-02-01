@@ -38,7 +38,7 @@
       > - Selected </text>
     </svg>
     <h4>Click on a sector to make it available for this event. Click again to remove it.</h4>
-    <svg class="sectors-svg" width="500" height="300">
+    <svg class="sectors-svg" id="choose-sectors" width="500" height="300">
       <rect *ngFor="let sector of sectors" 
         [attr.x]="sector.topLeftX" 
         [attr.y]="sector.topLeftY" 
@@ -46,10 +46,11 @@
         [attr.width]="sector.bottomRightX - sector.topLeftX" 
         [ngClass]="{'parter' : isParter(sector), 'grandstand' : isGrandstand(sector), 'added': isAdded(sector)}"
         (click)="toggleSector(sector)"  
+        id="sector-rect"
       />
       <text *ngFor="let sector of sectors"
-        [attr.x]="(sector.topLeftX + ((sector.bottomRightX - sector.topLeftX)/2)) - 7"
-        [attr.y]="(sector.topLeftY + ((sector.bottomRightY - sector.topLeftY)/2)) + 5 "
+        [attr.x]="sector.topLeftX + 5"
+        [attr.y]="sector.topLeftY + 17"
       >{{sector.id}}</text>
     </svg>
 
@@ -68,7 +69,9 @@
               <input 
                 matInput 
                 [(ngModel)]="sectorPrices[selectedSector.id]" 
-                placeholder="Enter the price for this sector">
+                placeholder="Enter the price for this sector"
+                class="sector-price-input"
+              >
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile class="sector_info_element">
@@ -79,7 +82,9 @@
               <input 
                 matInput 
                 [(ngModel)]="sectorCapacities[selectedSector.id]" 
-                placeholder="Enter the capacity for this sector">
+                placeholder="Enter the capacity for this sector"
+                class="sector-capacity-input"
+              >
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile class="sector_info_element">

@@ -95,4 +95,8 @@ export class CreateEventDayComponent implements OnInit {
   noSectorsPicked() {
     return this.chooseSectors.selectedSectors.length == 0;
   }
+
+  getDayOfDate (locationId) {
+    return this.date.split("-")[2] + "-" + locationId;
+  }
 }

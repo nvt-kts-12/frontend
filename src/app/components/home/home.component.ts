@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import {PageEvent} from '@angular/material/paginator';
@@ -7,6 +7,7 @@ import { SiteRoutes } from './../../shared/constants';
 import {EventService} from "../../shared/services/event/event.service";
 import { EventComponent } from '../event/event.component';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { AuthQuery } from 'src/app/shared/store';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: [ './home.scss' ]
 })
 export class HomeComponent implements OnInit, OnDestroy{
+
+  admin: boolean;
+
+  isAdminSub: Subscription;
 
   data = {
     events: [],
@@ -37,16 +42,21 @@ export class HomeComponent implements OnInit, OnDestroy{
   eventServiceGetEventsSub: Subscription;
 
   public constructor(
-    private eventService: EventService
+    private eventService: EventService,
+    private authQuery: AuthQuery
   ) {
   }
 
   ngOnInit() {
    this.fetchData(null);
+   this.isAdminSub = this.authQuery.isAdmin$.subscribe((admin) => {
+    this.admin = admin
+  })
   }
 
   ngOnDestroy() {
     this.eventServiceGetEventsSub.unsubscribe();
+    this.isAdminSub.unsubscribe();
   }
 
   searchChangedCallback(event: any) {
@@ -75,5 +85,9 @@ export class HomeComponent implements OnInit, OnDestroy{
     })
 
     return event;
+  }
+
+  isAdmin() {
+    return this.authQuery.isAdmin$
   }
 }

@@ -78,7 +78,7 @@ export class CreateEventComponent implements OnInit {
         dates: this.dates
       }
     }));
-    this.router.navigate(['/create-event-days']);
+    this.router.navigate(['/admin/create-event-days']);
   }
 
   getErrorMessage(fieldName) {

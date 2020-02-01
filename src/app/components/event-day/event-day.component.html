@@ -2,9 +2,9 @@
   <mat-divider></mat-divider>
   <div>
     <h5>When?</h5>
-    <h3>
-      {{eventDay.date}}
-    </h3>
+      <h3>
+        {{eventDay.date | date: 'dd/MM/yyyy'}}
+      </h3>
     <h5>Where?</h5>
     <h3>
       {{eventDay.locationName}} ({{eventDay.locationAddress}})
