@@ -10,6 +10,7 @@
   },
   "VALIDATION": {
     "EMAIL_NOT_VALID": "Not a valid email",
+    "PASSWORD_NOT_VALID": "Password must contain minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
     "EMAIL_REQUIRED": "Email is required",
     "USERNAME_REQUIRED": "Username is required",
     "PASSWORD_REQUIRED": "Password field is required",

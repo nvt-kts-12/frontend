@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthStore, User, AuthQuery } from 'src/app/shared/store';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -41,9 +43,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.getReservationsSub = this.userService.getReservations().subscribe((res) => {
       this.reservations = res.tickets;
     })
-
     this.getTicketsSub = this.userService.getBoughtTickets().subscribe((res) => {
       this.boughtTickets = res.tickets;
     })
   }
+
+  
 }

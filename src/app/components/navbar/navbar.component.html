@@ -8,6 +8,7 @@
   <div class="admin_panel_link" [routerLink]="['/admin']" *ngIf="isAdmin()">
     Admin Panel
   </div>
+
   <div *ngIf="isUser()">
     <button id="profile-button" mat-icon-button color="primary" aria-label="Profile" routerLink="/profile">
       <mat-icon>person</mat-icon>
@@ -17,6 +18,6 @@
   <button mat-button (click)="logout()" *ngIf="loggedIn" >Logout</button>
   <div *ngIf="!loggedIn">
     <button mat-button routerLink="/register" *ngIf="!isRegistrationPage()">Register</button>
-    <button mat-button routerLink="/login" *ngIf="!isLoginPage()">Login</button>
+    <button id="loginButton" mat-button routerLink="/login" *ngIf="!isLoginPage()">Login</button>
   </div>
 </mat-toolbar>

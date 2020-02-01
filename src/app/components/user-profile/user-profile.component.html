@@ -3,18 +3,21 @@
     <mat-card-header>
      <mat-card-title-group>
        <mat-card-title>
-         <h1>{{user.username}}</h1>
+         <h1 id="username">{{user.username}}</h1>
        </mat-card-title>
      </mat-card-title-group>
      <div fxFlex></div>
      <div fxLayoutAlign="center center">
-       <button mat-stroked-button [routerLink]="['/edit-profile']">Edit profile</button>
+       <button id="editProfileButton" mat-stroked-button [routerLink]="['/edit-profile']">Edit profile</button>
      </div>
     </mat-card-header> 
     <mat-card-content>
-        <h3>First name : {{user.firstName}}</h3>    
-        <h3>Last name : {{user.lastName}}</h3>    
-        <h3>Email : {{user.email}}</h3>    
+      <label for=firstName>First name:</label>
+        <h3 id="firstName">{{user.firstName}}</h3>    
+     <label for=firstName>Last name:</label>
+        <h3 id="lastName">{{user.lastName}}</h3>   
+     <label for=firstName>Email:</label>
+        <h3 id="email"> {{user.email}}</h3>    
     </mat-card-content>
   </mat-card>
   <app-tickets id="reservations" [tickets]="reservations" title="Reservations" (refreshTable)="fetchData()"></app-tickets>

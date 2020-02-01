@@ -16,7 +16,8 @@ export class RegisterComponent {
     Validators.required
   ]);
   public password = new FormControl('', [
-    Validators.required
+    Validators.required,
+    Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$')
   ]);
   public firstName = new FormControl('', [
     Validators.required
@@ -25,7 +26,8 @@ export class RegisterComponent {
     Validators.required
   ]);
   public email = new FormControl('', [
-    Validators.required
+    Validators.required,
+		Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}')
   ]);
   
 
@@ -50,7 +52,7 @@ export class RegisterComponent {
       this.router.navigate(['/']);
     });
   }
-
+  
     /**
    * Get error message
    * @method getErrorMessage
@@ -61,6 +63,10 @@ export class RegisterComponent {
     if (this[fieldName].hasError('required'))  {
       return `VALIDATION.${fieldName.toUpperCase()}_REQUIRED`;
     }
+    else if (this[fieldName].hasError('pattern')){
+      return `VALIDATION.${fieldName.toUpperCase()}_NOT_VALID`;
+    }   
     return '';
   }
+
 }

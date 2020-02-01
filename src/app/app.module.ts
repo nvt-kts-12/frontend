@@ -5,7 +5,6 @@ import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient, HttpBackend } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 import { AppRoutingModule } from './router/app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './components/home/home.module';
@@ -13,7 +12,7 @@ import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor } from './shared/config';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarModule } from './components/navbar/navbar.module';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatOptionModule,MatSelectModule,MatTabsModule } from '@angular/material';
 import { SnackbarComponent } from './components/common/snackbar/snackbar.component';
 import { AdminModule } from './components/admin/admin.module';
 
@@ -34,6 +33,9 @@ export function HttpLoaderFactory(handler: HttpBackend) {
     AppRoutingModule,
     NavbarModule,
     HomeModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTabsModule,
     AccountModule,
     FormsModule,
     HttpClientModule,
