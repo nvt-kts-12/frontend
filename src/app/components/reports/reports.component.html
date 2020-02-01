@@ -4,7 +4,7 @@
     <mat-form-field id="eventSelect">
       Event:
     <mat-select (selectionChange)="eventReport($event.value); resetShowBy($event.value)" #selectEvent>
-      <mat-option *ngFor="let event of events" #elem [id]="event.id" [value]="event.id" >
+      <mat-option *ngFor="let event of events" #elem [id]="event.id" [value]="event.id"  class="eventOptions">
         {{event.name}} 
       </mat-option>
     </mat-select>
@@ -13,13 +13,13 @@
   <mat-form-field id="showBySelect">
     Show by:
   <mat-select mat-select (selectionChange)="showStatistics($event.value);" #selectShowBy>
-     <mat-option [value]="1" id="selectOption1">
+     <mat-option [value]="1" id="selectOption1" class="showByOptions">
        Number of tickets
      </mat-option> 
-     <mat-option [value]="2">
+     <mat-option [value]="2" class="showByOptions">
       Number of reservations
     </mat-option> 
-    <mat-option [value]="3">
+    <mat-option [value]="3" class="showByOptions">
       Total income
     </mat-option>   
   </mat-select>
@@ -40,7 +40,7 @@
     <mat-form-field>
       Location:
     <mat-select (selectionChange)="locationReport($event.value);" #selectLocation id="locationSelect">
-      <mat-option *ngFor="let location of locations" #elem [id]="location.id" [value]="location.id">
+      <mat-option *ngFor="let location of locations" #elem [id]="location.id" [value]="location.id" class="locationOptions">
         {{location ? location.name: ""}}
       </mat-option>
     </mat-select>

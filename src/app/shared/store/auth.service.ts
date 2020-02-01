@@ -44,7 +44,6 @@ export class AuthService {
           token: data.accessToken
         }));   
       }, errorResponse =>{
-        console.log("AAAAA",errorResponse)
         this.showErrorFromBackend_login(errorResponse);  
       })
     ).pipe(

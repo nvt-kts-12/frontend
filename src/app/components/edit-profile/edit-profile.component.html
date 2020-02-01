@@ -1,17 +1,17 @@
 <div class="example-container">
  
   <mat-form-field>
-    <input matInput placeholder="First name" [(ngModel)]="user.firstName">
+    <input matInput placeholder="First name" id="firstNameInput" [(ngModel)]="user.firstName">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Last name" [(ngModel)]="user.lastName">
+    <input matInput placeholder="Last name"  id="lastNameInput" [(ngModel)]="user.lastName">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Email" [(ngModel)]="user.email">
+    <input matInput placeholder="Email" id="emailInput" [(ngModel)]="user.email">
   </mat-form-field>
 
-  <button mat-button class="button" (click)="update()">Update</button>
+  <button mat-button class="button" id="updateButton" (click)="update()">Update</button>
 
 </div>
