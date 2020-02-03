@@ -44,7 +44,7 @@ export class EditEventComponent implements OnInit {
   saveChanges() {
     this.eventService.updateEvent(this.eventId, this.event).subscribe(response => {
       this.snackbar.openFromComponent(SnackbarComponent, {
-        data: "You have succesfully edited the event.",
+        data: "You have successfully edited the event.",
         panelClass: ['snackbar-success']
       });
     }, 

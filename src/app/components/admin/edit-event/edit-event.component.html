@@ -2,26 +2,26 @@
   <div class="edit-event-form">
     <h2 class="title">Edit event information</h2>
     <mat-form-field>
-      <input matInput [(ngModel)]="event.name" placeholder="Name">
+      <input matInput [(ngModel)]="event.name" id="edit-event-name-input" placeholder="Name">
     </mat-form-field>
   
     <mat-form-field>
-      <input matInput [(ngModel)]="event.description" placeholder="Description">
+      <input matInput [(ngModel)]="event.description" id="edit-event-description-input" placeholder="Description">
     </mat-form-field>
   
     <mat-form-field>
-      <mat-select [(ngModel)]="event.category" placeholder="Category">
-        <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+      <mat-select [(ngModel)]="event.category" id="edit-event-category-select" placeholder="Category">
+        <mat-option *ngFor="let category of categories" class="edit-event-category-option" [value]="category">{{category}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="buttons">
       <button mat-raised-button [routerLink]="['/admin/edit-events']">Back</button>
-      <button mat-raised-button color="primary" [disabled]="!saveChangesEnabled()" (click)="saveChanges()">Save changes</button>
+      <button mat-raised-button color="primary" id="save-event-changes" [disabled]="!saveChangesEnabled()" (click)="saveChanges()">Save changes</button>
     </div>
   </div>
 
-  <h2 class="title">Edit event days information</h2>
+  <h2 id="edit-event-days-title" class="title">Edit event days information</h2>
   <app-edit-event-day *ngFor="let eventDay of eventDays" [eventDay]="eventDay"></app-edit-event-day>
 </div>
 

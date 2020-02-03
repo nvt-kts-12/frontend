@@ -70,7 +70,7 @@ export class EditEventDayComponent implements OnInit {
       }, 
       error => {
         this.snackbar.openFromComponent(SnackbarComponent, {
-        data: error.message,
+        data: error.error,
         panelClass: ['snackbar-error']
       });
     });
