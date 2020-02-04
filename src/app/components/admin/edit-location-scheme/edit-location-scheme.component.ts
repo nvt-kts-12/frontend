@@ -98,7 +98,7 @@ export class EditLocationSchemeComponent implements OnInit {
 
     this.locationSchemeService.deleteLocationScheme(locationSchemeSectors).subscribe(response => {
       this.snackbar.openFromComponent(SnackbarComponent, {
-        data: "Your have successfully deleted the location scheme",
+        data: "You have successfully deleted the location scheme",
         panelClass: ['snackbar-success']
       });
       this.router.navigate([SiteRoutes.LOCATION_SCHEMES]);
