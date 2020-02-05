@@ -1,4 +1,7 @@
-<div>
+<div *ngIf="loadingNeeded">
+  <mat-spinner class="centered"></mat-spinner>
+</div>
+<div *ngIf="!loadingNeeded">
   <h3>
     {{title}}:
   </h3>
@@ -68,7 +71,7 @@
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
           <button class="cancel-reservation-button" mat-button (click)="onCancelReservationButton(element.id)">Cancel</button>
-          <button mat-button>Buy</button>
+          <button id="buy-reservation-button" mat-button (click)="onConfirmReservation(element.id)">Buy</button>
         </td>
     </ng-container>
   
