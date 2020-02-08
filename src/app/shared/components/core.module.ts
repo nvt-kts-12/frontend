@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { MaterialModule } from './material.module'
 import { CommonStoreModule } from './../store'
 import { RouterModule } from '@angular/router';
-
-
 
 @NgModule({
   imports: [
@@ -17,7 +15,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MaterialModule,
     CommonStoreModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     TranslateModule,
@@ -26,7 +24,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MaterialModule,
     CommonStoreModule,
-    RouterModule
-  ]
+    RouterModule,
+  ],
+  providers: [DatePipe]
 })
 export class CoreModulesModule {}

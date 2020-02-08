@@ -8,7 +8,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { AuthStore } from './auth.store';
 import { MatSnackBar } from '@angular/material';
 import { Overlay } from '@angular/cdk/overlay';
-import { UserProfileComponent } from 'src/app/components/user-profile/user-profile.component';
+import { UserProfileComponent } from 'src/app/components/user/user-profile/user-profile.component';
 import { User } from '../model/User';
 import { tap } from 'rxjs/operators';
 

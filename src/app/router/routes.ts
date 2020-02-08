@@ -1,30 +1,30 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from '../components/home/home.component';
 import { accountRouting } from '../components/account/account.routing';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { RegisterComponent } from '../components/account/register/register.component';
 import { LoginComponent } from '../components/account/login/login.component';
-import { EventDaysComponent } from '../components/event-days/event-days.component';
-import { TicketReservationComponent } from '../components/ticket-reservation/ticket-reservation.component';
-import { UserProfileComponent } from '../components/user-profile/user-profile.component';
-import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
+import { EventDaysComponent } from '../components/home/event-view/event-days/event-days.component';
+import { TicketReservationComponent } from '../components/user/ticket-reservation/ticket-reservation.component';
+import { UserProfileComponent } from '../components/user/user-profile/user-profile.component';
+import { EditProfileComponent } from '../components/user/edit-profile/edit-profile.component';
 import { AdminGuard } from './guards/admin-guard';
 import { NotAdminGuard } from './guards/not-admin-guard';
 import { AdminPageComponent } from '../components/admin/admin-page/admin-page.component';
-import { CreateEventComponent } from '../components/admin/create-event/create-event.component';
-import { CreateEventDaysComponent } from '../components/admin/create-event/create-event-days/create-event-days.component';
+import { CreateEventComponent } from '../components/admin/event/create-event/create-event.component';
+import { CreateEventDaysComponent } from '../components/admin/event/create-event/create-event-days/create-event-days.component';
 import { componentFactoryName } from '@angular/compiler';
-import { ReportsComponent } from '../components/reports/reports.component';
-import { CreateLocationSchemeComponent } from '../components/admin/create-location-scheme/create-location-scheme.component';
-import { PayPalComponent } from '../components/pay-pal/pay-pal.component';
-import { EditEventComponent } from '../components/admin/edit-event/edit-event.component';
-import { LocationSchemesListComponent } from '../components/admin/location-schemes-list/location-schemes-list.component';
-import { EditLocationSchemeComponent } from '../components/admin/edit-location-scheme/edit-location-scheme.component';
+import { ReportsComponent } from '../components/admin/reports/reports.component';
+import { CreateLocationSchemeComponent } from '../components/admin/location/create-location-scheme/create-location-scheme.component';
+import { PayPalComponent } from '../components/home/event-reservation/pay-pal/pay-pal.component';
+import { EditEventComponent } from '../components/admin/event/edit-event/edit-event.component';
+import { LocationSchemesListComponent } from '../components/admin/location/location-schemes-list/location-schemes-list.component';
+import { EditLocationSchemeComponent } from '../components/admin/location/edit-location-scheme/edit-location-scheme.component';
+import { HomePageComponent } from '../components/home/event-view/home-page/home-page.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: HomePageComponent,
     // canActivate: [ LoggedInGuard ]
     canActivate: [AdminGuard]
   },
@@ -89,7 +89,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin/edit-events',
-    component: HomeComponent,
+    component: HomePageComponent,
     canActivate: [NotAdminGuard]
   },
   {
