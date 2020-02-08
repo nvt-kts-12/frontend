@@ -8,6 +8,7 @@ import { Response } from '@angular/http';
 import { stringify } from 'querystring';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.component';
+import { User } from '../model/User';
 
 const ENDPOINTS = {
   LOGIN: '/auth/login',
@@ -37,7 +38,7 @@ export class AuthService {
    * @param data {any}
    * @returns Observable<any>
    */
-   login(data: any): Observable<any> {
+   login(data: User): Observable<any> {
      return this.http.post(ENDPOINTS.LOGIN, data).pipe(
       tap((data: { accessToken: string }) => {
         this.authStore.updateRoot((state) => ({
