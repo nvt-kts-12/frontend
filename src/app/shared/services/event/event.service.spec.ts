@@ -89,6 +89,22 @@ describe('EventService', () => {
       tick();
 
       expect(eventDays.length).toBe(2);
+      expect(eventDays[0].event.name).toBe("Film 1");
+      expect(eventDays[0].event.category).toBe(EventCategory.ENTERTAINMENT);
+      expect(eventDays[0].date).toBe("2020-02-15");
+      expect(eventDays[0].reservationExpireDate).toBe("2020-02-12");
+      expect(eventDays[0].eventDayState).toBe(EventDayState.RESERVABLE_AND_BUYABLE);
+      expect(eventDays[0].locationSchemeId).toBe(1);
+      expect(eventDays[0].locationName).toBe("Arena cineplex");
+      expect(eventDays[0].locationAdress).toBe("Bul. Mihajla Pupina 3, Novi Sad");
+      expect(eventDays[0].sectors[0].type).toBe(SectorType.GRANDSTAND);
+      expect(eventDays[0].sectors[0].id).toBe(1);
+      expect(eventDays[0].sectors[0].price).toBe(3);
+      expect(eventDays[0].sectors[0].vip).toBe(false);
+      expect(eventDays[0].sectors[1].type).toBe(SectorType.PARTER);
+      expect(eventDays[0].sectors[1].id).toBe(6);
+      expect(eventDays[0].sectors[1].price).toBe(5);
+      expect(eventDays[0].sectors[1].vip).toBe(true);
 
    })
  
