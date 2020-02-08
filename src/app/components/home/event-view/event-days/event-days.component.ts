@@ -13,7 +13,11 @@ import { EventDay } from 'src/app/shared/model/EventDay';
 export class EventDaysComponent implements OnInit {
 
   eventId: string;
-  event: any;
+  event = {
+    name: "",
+    category: "",
+    description: ""
+  }
   eventDays: EventDay[]
   errorMsg: string;
 
@@ -21,19 +25,14 @@ export class EventDaysComponent implements OnInit {
               private eventService:EventService,
               private router: Router) { 
 
-    this.eventId = route.snapshot.params['id'];
-
-    this.event = {
-      name: "",
-      category: "",
-      description: ""
-    }
-
     this.errorMsg = "";
   }
 
   ngOnInit() {
-    this.eventService.getEventDays(this.eventId).subscribe((res: EventDay[]) => {
+
+    this.eventId = this.route.snapshot.params['id'];
+
+    this.eventService.getEventDays(this.eventId).subscribe((res) => {
       this.eventDays = res;
       this.event = res[0].event;
     },

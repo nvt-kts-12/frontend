@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core'
 import { TranslateService, TranslateStore } from '@ngx-translate/core';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import {of} from "rxjs";
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
@@ -17,11 +19,16 @@ describe('LoginComponent', () => {
     let router: any;
     let translate: any
 
+    beforeAll(() => {
+        TestBed.resetTestEnvironment();
+        TestBed.initTestEnvironment(BrowserDynamicTestingModule,
+                                    platformBrowserDynamicTesting());
+      })
 
     beforeEach(() => {
         let authServiceMock = {
             login: jasmine.createSpy('login')
-                .and.returnValue(Promise.resolve())
+                .and.returnValue(of({}))
         }
 
         let routerMock = {
@@ -29,7 +36,7 @@ describe('LoginComponent', () => {
         }
 
         let translateMock = {
-            translate: jasmine.createSpy('translate')
+            translate: jasmine.createSpy('translate').and.returnValue(of({}))
         }
 
         TestBed.configureTestingModule({
@@ -57,9 +64,8 @@ describe('LoginComponent', () => {
     return evt;
   }
 
-    it('should bind data from input fields to username and password', fakeAsync(() => {
+    it('should bind data from input fields to username and password', function()  {
         fixture.detectChanges();
-        tick();
 
         // initially, username and password are empty strings
         expect(component.username.value).toEqual('');
@@ -72,7 +78,7 @@ describe('LoginComponent', () => {
         passwordInput.value = "User123!";
 
 
-        // bind data from HTML components to the student object
+        // bind data from HTML components to the object
         usernameInput.dispatchEvent(newEvent('input'))
         passwordInput.dispatchEvent(newEvent('input'));
 
@@ -81,13 +87,13 @@ describe('LoginComponent', () => {
         expect(component.password.value).toEqual("User123!");
         
 
-    }))
+    })
 
-    it('should click login button', fakeAsync(() => {
+    it('should click login button', function() {
         let button = fixture.debugElement.query(By.css("#submitLogin")).nativeElement;
         button.click();
 
-    }))
+    })
 
     it('should call login', () => {
         component.onSubmit();

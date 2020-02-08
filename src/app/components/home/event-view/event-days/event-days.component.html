@@ -1,15 +1,9 @@
 <div>
   <mat-card class="events-container">
     <div id="event-info">
-        <h3 id="event-name">
-          {{event.name}}
-        </h3>
-        <h4 id="event-category">
-          {{event.category}}
-        </h4>
-        <p id="event-description">
-          {{event.description}}
-        </p>
+        <h3 id="event-name">{{event.name}}</h3>
+        <h4 id="event-category">{{event.category}}</h4>
+        <p id="event-description">{{event.description}}</p>
     </div>
     <div>
         <app-event-day *ngFor="let eventDay of eventDays" [eventDay]="eventDay" ></app-event-day>
