@@ -33,6 +33,8 @@ export class LoginComponent {
    */
   
   onSubmit(): void {
+
+    console.log(this.username);
     if (!this.username.valid || !this.password.valid) {
       return;
     }

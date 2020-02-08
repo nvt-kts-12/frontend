@@ -1,0 +1,27 @@
+<div>
+  <mat-card class="events-container">
+    <h1 *ngIf="!admin, else isAdmin">Upcoming events</h1>
+    <ng-template #isAdmin>
+      <h1>Choose the event you want to edit</h1>
+    </ng-template>
+    <div fxLayout="row wrap">
+      <div fxFlex.lg="20%" fxFlex.md="20%">
+        <app-search (onChange)="searchChangedCallback($event)"></app-search>
+        <app-filter (onChange)="filterChangedCallback($event)"></app-filter>
+      </div>
+      <div id="event-list" fxLayout="column layout-wrap" fxLayoutAlign="stretch" fxLayout.xl="row wrap" fxLayout.lg="row wrap" fxLayout.md="row wrap" fxFlex="auto" fxFlex.lg="80%" fxFlex.md="80%"> 
+        <event-component class="event" [admin]="admin" *ngFor="let event of data.events" [event]="event" fxFlex.md="30%" fxFlex.lg="30%" fxFlex.xl="30%" ></event-component>
+        <h3 id="no-results" *ngIf="data.events.length === 0">No results</h3>
+      </div>
+    </div>
+    
+    <mat-paginator
+      id="paginator"
+      [length]="data.numberOfElements"
+      [pageSize]="pagination.pageSize"
+      [pageSizeOptions]="pagination.pageSizeOptions"
+      [pageIndex]="pagination.pageIndex"
+      (page)="pageEvent = fetchData($event)"
+    ></mat-paginator>
+  </mat-card>
+</div>
