@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { CoreModulesModule } from 'src/app/shared/components/core.module';
@@ -42,6 +42,7 @@ describe('LoginComponent', () => {
         fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
         authService = TestBed.get(AuthService);
+        translate = TestBed.get(TranslateService);
         router = TestBed.get(Router);
     })
 
@@ -57,16 +58,18 @@ describe('LoginComponent', () => {
   }
 
     it('should bind data from input fields to username and password', fakeAsync(() => {
-        
+        fixture.detectChanges();
+        tick();
+
         // initially, username and password are empty strings
         expect(component.username.value).toEqual('');
         expect(component.password.value).toEqual('');
 
         // insert data
-        let usernameInput = fixture.debugElement.query(By.css("#username")).nativeElement;
-        expect(usernameInput.value).toEqual("user");
-        let passwordInput = fixture.debugElement.query(By.css("#password")).nativeElement;
-        expect(passwordInput.value).toEqual("User123!");
+        let usernameInput = fixture.debugElement.query(By.css("#usernameInput")).nativeElement;
+        usernameInput.value = "user";
+        let passwordInput = fixture.debugElement.query(By.css("#passwordInput")).nativeElement;
+        passwordInput.value = "User123!";
 
 
         // bind data from HTML components to the student object
@@ -77,6 +80,12 @@ describe('LoginComponent', () => {
         expect(component.username.value).toEqual("user");
         expect(component.password.value).toEqual("User123!");
         
+
+    }))
+
+    it('should click login button', fakeAsync(() => {
+        let button = fixture.debugElement.query(By.css("#submitLogin")).nativeElement;
+        button.click();
 
     }))
 

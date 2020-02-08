@@ -13,6 +13,9 @@ export type Sector = {
     rowNum: number,
     colNum: number,
     type: SectorType,
+
+    vip: boolean,
+    price: number,
     
     numOfAvailablePlaces: number
   }
