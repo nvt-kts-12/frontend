@@ -264,7 +264,7 @@ export class TicketReservationComponent implements OnInit {
       console.log(this.eventDay);
     },
       error => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       });
   }
 
