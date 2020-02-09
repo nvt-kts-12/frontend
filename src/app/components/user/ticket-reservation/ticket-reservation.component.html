@@ -5,8 +5,8 @@
 
   <div *ngIf="eventDay != undefined" id="layout">
     <mat-card id="sector-layout" class="layout-container">
-      <h1>{{eventDay.event.name}}</h1>
-      <h2>{{eventDay.locationName}} layout:</h2>
+      <h1 id="eventNameTitle">{{eventDay.event.name}}</h1>
+      <h2 id="locationNameTitle">{{eventDay.locationName}} layout:</h2>
       <sector-component id="sectorComponent" [sectors]="eventDay.sectors" (onSelect)="openPopup($event)">
       </sector-component>
       <mat-divider></mat-divider>
