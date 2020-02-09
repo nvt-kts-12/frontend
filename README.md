@@ -1,5 +1,3 @@
-# VivifyIdeas Angular Boilerplate
-
 ## Development server
 
 Run `ng serve` for a dev server. Then you can navigate to [http://localhost:4200](http://localhost:4200) and you will see your application.
