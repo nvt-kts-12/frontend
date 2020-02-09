@@ -19,6 +19,7 @@ import { CommonComponentsModule } from '../../common/common-components.module';
   imports: [
     CoreModulesModule,
     CommonComponentsModule
-  ]
+  ],
+  entryComponents: [ParterPopupComponent, GrandstandPopupComponent]
 })
 export class EventReservationModule { }
