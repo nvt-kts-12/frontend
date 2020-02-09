@@ -6,7 +6,7 @@ import { SnackbarComponent } from 'src/app/components/common/snackbar/snackbar.c
 
 import { AuthService } from './../../../shared/store';
 import { filter } from 'rxjs/operators';
-import { PreviousRouteService } from 'src/app/shared/services/route/previousRouteService';
+import { PreviousRouteService } from 'src/app/shared/services/route/previous.route.service';
 
 @Component({
   selector: 'app-login',
