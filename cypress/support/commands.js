@@ -11,3 +11,19 @@ Cypress.Commands.add("SignInUser", () => {
     })
     cy.contains('Upcoming events', { timeout: 50000 }).should('be.visible')
 })
+
+Cypress.Commands.add("FindMonth", () => {
+    
+    cy.get('.mat-calendar-body-label').then(($month) => {
+        if ($month.text().includes('DEC')) {
+            cy.get('.mat-calendar-body-cell-content').then(($dayBtn) => {
+                if($dayBtn.is(':visible')){
+                    cy.get('.mat-calendar-body-cell-content').contains('28').click()
+                }
+            })
+        } else {
+            cy.get('.mat-calendar-next-button').click()
+        }
+
+    })
+})
