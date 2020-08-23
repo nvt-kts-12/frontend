@@ -1,9 +1,20 @@
 .example-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-  }
-  
-  .example-radio-button {
-    margin: 5px;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+#filter {
+  text-align: left;
+  width: 100%;
+}
+
+#filter-date-form, #filter-location-form {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
