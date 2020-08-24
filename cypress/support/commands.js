@@ -12,6 +12,21 @@ Cypress.Commands.add("SignInUser", () => {
     cy.contains('Upcoming events', { timeout: 50000 }).should('be.visible')
 })
 
+Cypress.Commands.add("SignInAdmin", () => {
+    cy.visit("/")
+    cy.get("#loginButton").contains("Login").should('be.visible').click()
+
+    cy.url().should('include', '/login')
+
+    cy.get('form').within(($form) => {
+        cy.get('input').first().type('admin')
+        cy.get('input').last().type('Admin021!')
+        cy.root().submit()
+    })
+    cy.url().should('include', '/admin')
+    cy.get('.mat-figure', { timeout: 50000 }).contains('Create an event').should('be.visible')
+})
+
 Cypress.Commands.add("FindMonth", () => {
     
     cy.get('.mat-calendar-body-label').then(($month) => {
