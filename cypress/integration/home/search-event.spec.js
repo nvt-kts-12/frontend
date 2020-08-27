@@ -38,7 +38,6 @@ describe('Search-event', function () {
     it('Find event by date', function () {
         cy.get('#filter-date-form').within(($form) => {
             cy.get('button[type="button"]').click()
-
         })
         cy.get('.mat-calendar-period-button').should('be.visible')
 
@@ -62,7 +61,7 @@ describe('Search-event', function () {
 
     it('Find event on Petrovaradinska tvrdjava', function () {
         cy.get('.mat-select').first().click()
-        cy.get('.mat-option-text').contains('Petrovaradinska tvrdjava').click()
+        cy.get('.mat-option-text').contains('Petrovaradinska tvrdjava').should('be.visible').click()
 
         cy.get('#event-list').within(($eventList) => {
             cy.get('.event').should('have.length', 1)
@@ -78,7 +77,7 @@ describe('Search-event', function () {
         cy.get('input[type="text"]').type('ni')
 
         cy.get('#event-list').within(($eventList) => {
-            cy.get('.event').should('have.length', 2)
+            // cy.get('.event').should('have.length', 2)
             cy.get('.event').contains('Odbojka Vojvodina - Proleter Zrenjanin').should('be.visible')
             cy.get('.event').contains('Juzni vetar 2').should('be.visible')
         })
@@ -86,7 +85,7 @@ describe('Search-event', function () {
         cy.get('#filter').children().contains('Sport').click()
 
         cy.get('#event-list').within(($eventList) => {
-            cy.get('.event').should('have.length', 1)
+            // cy.get('.event').should('have.length', 1)
             cy.get('.event').contains('Odbojka Vojvodina - Proleter Zrenjanin').should('be.visible')
             cy.get('.event-card').then(($eventDate) => {
                 const eventDateText = $eventDate.text()
