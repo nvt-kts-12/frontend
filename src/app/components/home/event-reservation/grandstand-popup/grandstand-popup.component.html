@@ -4,9 +4,9 @@
   <h2>Seats</h2>
   <div *ngIf="data.tickets.length > 0">
     <mat-grid-list [cols]="data.sector.colNum" rowHeight="2:1" width="100px">
-      <mat-grid-tile *ngFor="let seat of data.tickets" 
+      <mat-grid-tile *ngFor="let seat of data.tickets; let i = index" 
       [ngClass]="{freeSeat: !checkDisabled(seat), takenSeat: checkDisabled(seat)}">
-        <button width="50px" height="100px" [disabled]="checkDisabled(seat)" [ngClass]="{freeSeat: !checkDisabled(seat), takenSeat: checkDisabled(seat)}"
+        <button id="{{'seatId' + i}}" width="50px" height="100px" [disabled]="checkDisabled(seat)" [ngClass]="{freeSeat: !checkDisabled(seat), takenSeat: checkDisabled(seat)}"
           (click)="seatPicked(seat)">
           {{seat.seatRow}}/{{seat.seatCol}}
         </button>
@@ -19,7 +19,7 @@
   <mat-divider></mat-divider>
   <div *ngIf="chosenSeats.length > 0">
     <h1>Chosen seats:</h1>
-    <table>
+    <table id="chosenSeatsTable">
       <tr *ngFor="let seat of chosenSeats" (click)="removeSeat(date)">
         <td>Seat in row {{seat.seatRow}}, column {{seat.seatCol}}.</td>
         <td>Price {{seat.price}} eur </td>

@@ -5,7 +5,7 @@
   <h3>
     {{title}}:
   </h3>
-  <table mat-table [dataSource]="tickets" class="mat-elevation-z3">
+  <table mat-table id="ticketsTable" [dataSource]="tickets" class="mat-elevation-z3">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Ticket No.</th>

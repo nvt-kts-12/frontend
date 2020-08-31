@@ -1,7 +1,7 @@
 const { createYield } = require("typescript")
 
 describe('User editing profile information', function() {
-    it.only('Edit user information', function() {
+    it('Edit user information', function() {
         cy.SignInUser()
 
 

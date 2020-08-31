@@ -1,5 +1,3 @@
 {
-    "env": {
-        "date": "01"
-    }
+    "chromeWebSecurity" : false 
 }
