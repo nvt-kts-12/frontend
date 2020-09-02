@@ -58,7 +58,8 @@ describe('User reserving ticket', function () {
 
         cy.get('#profile-button').should('be.visible').click()
         cy.wait(2000)
-        cy.url().should('include', '/profile')
+        cy.get('#username').contains('user').should('be.visible')
+        // cy.url().should('include', '/profile')
 
         cy.get('#ticketsTable').find('tr').should('have.length', 3)
     })
@@ -147,31 +148,32 @@ describe('User reserving ticket', function () {
      *  UNABLE to browse through paypal site
      */
 
-    // it('Buy reserved ticket for Odbojka', function() {
-    //     expect(numberOfReservations).to.equal(3)
+    it('Buy reserved ticket for Odbojka', function() {
+        expect(numberOfReservations).to.equal(3)
         
-    //     cy.get('#ticketsTable').find('tr').eq(1).within(($row) => {
-    //             cy.get('#buy-reservation-button').click()
-    //     })
-    //     cy.get('.mat-dialog-title').contains('Confirm reservation').should('be.visible')
-    //     cy.get('#popupOkButton').should('be.visible').click()
+        cy.get('#ticketsTable').find('tr').eq(1).within(($row) => {
+                cy.get('#buy-reservation-button').click()
+        })
+        cy.get('.mat-dialog-title').contains('Confirm reservation').should('be.visible')
+        cy.get('#popupOkButton').should('be.visible').click()
 
 
-    //     cy.get('#headerText').contains('Pay with PayPal').should('be.visible')
-    //     cy.url().should('include', 'https://www.sandbox.paypal.com/cgi-bin')
+        cy.get('#headerText').contains('Pay with PayPal').should('be.visible')
+        cy.url().should('include', 'https://www.sandbox.paypal.com/cgi-bin')
 
-    //     cy.get('.proceed').within(($form) => {
-    //         cy.get('input[name="login_email"]').type('sb-arjxx785590@personal.example.com')
-    //         cy.get('input[name="login_password"]').type('0202998742015')
-    //         cy.root().submit()
-    //     })
+        cy.get('.proceed').within(($form) => {
+            cy.get('input[name="login_email"]').type('sb-arjxx785590@personal.example.com')
+            cy.get('#btnNext').should('be.visible').click()
+            cy.get('input[name="login_password"]').type('0202998742015')
+            cy.root().submit()
+        })
 
-    //     cy.url().should('include', '/webapps/hermes')
-    //     cy.get('.MerchantLogo_text_2mWpM').contains("John Doe's Test Store").should('be.visible')
+        cy.url().should('include', '/webapps/hermes')
+        cy.get('.MerchantLogo_text_2mWpM').contains("John Doe's Test Store").should('be.visible')
 
-    //     cy.get('[data-testid="submit-button-initial"]').should('be.visible').click()
+        cy.get('[data-testid="submit-button-initial"]').should('be.visible').click()
 
-    //     cy.url().should('include', '/pay-pal')
-    // })
+        cy.url().should('include', '/pay-pal')
+    })
     
 })

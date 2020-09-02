@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="16.1060" tests="5" failures="0">
+  <testsuite name="Root Suite" timestamp="2020-09-02T16:58:09" tests="0" file="cypress\integration\home\search-event.spec.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Search-event" timestamp="2020-09-02T16:58:09" tests="5" time="16.1060" failures="0">
+    <testcase name="Search-event Find event Tezina Lanaca" time="3.9250" classname="Find event Tezina Lanaca">
+    </testcase>
+    <testcase name="Search-event Find all Entertainment events" time="2.2780" classname="Find all Entertainment events">
+    </testcase>
+    <testcase name="Search-event Find event by date" time="4.5040" classname="Find event by date">
+    </testcase>
+    <testcase name="Search-event Find event on Petrovaradinska tvrdjava" time="2.1780" classname="Find event on Petrovaradinska tvrdjava">
+    </testcase>
+    <testcase name="Search-event Combined search" time="3.2210" classname="Combined search">
+    </testcase>
+  </testsuite>
+</testsuites>

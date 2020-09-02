@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="17.0020" tests="3" failures="0">
+  <testsuite name="Root Suite" timestamp="2020-09-02T16:57:46" tests="0" file="cypress\integration\admin\edit-location.spec.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Admin editing location scheme" timestamp="2020-09-02T16:57:46" tests="3" time="17.0020" failures="0">
+    <testcase name="Admin editing location scheme Edit Spens scheme adress" time="7.2470" classname="Edit Spens scheme adress">
+    </testcase>
+    <testcase name="Admin editing location scheme Delete Spens scheme - negative" time="5.0780" classname="Delete Spens scheme - negative">
+    </testcase>
+    <testcase name="Admin editing location scheme Delete Nisavski kej scheme - positive" time="4.6770" classname="Delete Nisavski kej scheme - positive">
+    </testcase>
+  </testsuite>
+</testsuites>

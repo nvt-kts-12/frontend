@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="25.5240" tests="3" failures="0">
+  <testsuite name="Root Suite" timestamp="2020-09-02T16:57:12" tests="0" file="cypress\integration\admin\edit-event.spec.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Admin editing event" timestamp="2020-09-02T16:57:12" tests="3" time="25.5240" failures="0">
+    <testcase name="Admin editing event Edit EXIT event" time="7.6240" classname="Edit EXIT event">
+    </testcase>
+    <testcase name="Admin editing event Edit EXIT event day date" time="6.3180" classname="Edit EXIT event day date">
+    </testcase>
+    <testcase name="Admin editing event Remove event day from sale" time="11.5820" classname="Remove event day from sale">
+    </testcase>
+  </testsuite>
+</testsuites>
