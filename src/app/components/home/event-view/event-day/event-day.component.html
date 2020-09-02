@@ -1,16 +1,14 @@
 <div>
   <mat-divider></mat-divider>
-  <div>
-    <h5>When?</h5>
-      <h3>
+  <div id="eventDayCard">
+      <h3 id="eventDayDate">
         {{eventDay.date | date: 'dd/MM/yyyy'}}
       </h3>
-    <h5>Where?</h5>
-    <h3>
+    <h3 id="eventDayLocation">
       {{eventDay.locationName}} ({{eventDay.locationAddress}})
     </h3>
     <h5>Tickets</h5>
-    <table mat-table [dataSource]="eventDay.sectors" class="mat-elevation-z3">
+    <table mat-table [dataSource]="eventDay.sectors" class="mat-elevation-z3" id="eventDayTable">
 
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef>Type</th>
@@ -31,6 +29,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <button mat-raised-button class="continue-button" color='primary'
-      [routerLink]="['event-day', eventDay.id]">Continue</button>
+      [routerLink]="['event-day', eventDay.id]" id="continueBtn">Continue</button>
   </div>
 </div>

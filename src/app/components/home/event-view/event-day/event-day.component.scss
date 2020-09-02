@@ -3,6 +3,31 @@ table {
 }
 
 .continue-button {
-    width: 50%;
     margin: 10px 0px;
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+h3#eventDayLocation {
+    text-align: center;
+}
+
+h3#eventDayDate {
+    font-size: 40px;
+    text-align: right;
+    background-color: #3fd9df;
+}
+
+#eventDayTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#eventDayCard {
+    background-color: #1abc9c;
 }

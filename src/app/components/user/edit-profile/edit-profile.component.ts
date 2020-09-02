@@ -30,12 +30,19 @@ export class EditProfileComponent implements OnInit {
     this.userService.update(this.user).subscribe(
       res => {
         this.router.navigate(["/profile"]);
-        this.showSnackbarError("You have successfully updated your profile")
+        this.showSnackbarSuccess("You have successfully updated your profile")
       },
       error => {
         this.showSnackbarError("Email format not valid")
       }
     )
+  }
+
+  showSnackbarSuccess(message) {
+    this.snackbar.openFromComponent(SnackbarComponent, {
+      data: message,
+      panelClass: ['snackbar-success']
+    });
   }
 
   showSnackbarError(message) {

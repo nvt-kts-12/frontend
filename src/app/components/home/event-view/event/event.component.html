@@ -8,8 +8,8 @@
   <p>
     {{event.category}}
   </p>
-  <button *ngIf="!admin, else isAdmin" mat-button [routerLink]="['event/', event.id]">+ More information</button>
+  <button *ngIf="!admin, else isAdmin" mat-button id="moreInfoBtn" [routerLink]="['event/', event.id]">+ More information</button>
   <ng-template #isAdmin>
-    <button mat-button [routerLink]="['edit-event/', event.id]">Edit event</button>
+    <button mat-button id="editBtn" [routerLink]="['edit-event/', event.id]">Edit event</button>
   </ng-template>
 </mat-card>

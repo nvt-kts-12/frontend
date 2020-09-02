@@ -1,12 +1,19 @@
 .event-card {
     margin: 5px;
+    background-color: #1abc9c;
 }
 
 .event-date {
     margin: 3px;
-    background-color: lightgray;
+    // background-color: lightgray;
+    background-color: #3fd9df;
+    border-left: 6px solid rgb(54, 82, 244);
 }
 
 p {
     word-wrap: break-word;
+}
+
+h1 {
+    text-align: center;
 }
