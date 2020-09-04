@@ -1,12 +1,12 @@
 describe('Admin adding new event', function () {
-    it('Create new event', function () {
+    it('should create new event', function () {
         cy.SignInAdmin()
         cy.get('.mat-figure').contains('Create an event').should('be.visible').click()
 
         cy.url().should('include', '/create-event')
 
-        cy.get('#event_name_input').type('Finale univerzitetske lige')
-        cy.get('#event_description_input').type('Utakmica između ekipa FTN-a i PMF-a.')
+        cy.get('#event_name_input').type('University league final')
+        cy.get('#event_description_input').type('Match between FTN and PMF teams.')
         cy.get('.mat-select-placeholder').click()
         cy.get('.mat-option').contains('SPORT').click()
 

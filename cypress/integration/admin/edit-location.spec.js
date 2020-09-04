@@ -1,5 +1,5 @@
 describe('Admin editing location scheme', function() {
-    it('Edit Spens scheme adress', function() {
+    it('should edit Spens scheme adress', function() {
         cy.SignInAdmin()
         
         cy.get('.mat-figure', { timeout: 50000 }).contains('Edit a location').should('be.visible').click()
@@ -21,7 +21,7 @@ describe('Admin editing location scheme', function() {
     })
 
 
-    it('Delete Spens scheme - negative', function() {
+    it('should not be able to delete Spens scheme because it is already being used', function() {
         cy.SignInAdmin()
 
         cy.get('.mat-figure', { timeout: 50000 }).contains('Edit a location').should('be.visible').click()
@@ -36,7 +36,7 @@ describe('Admin editing location scheme', function() {
         cy.get('.mat-snack-bar-container', { timeout: 50000 }).contains('Location scheme with id 2 can not be deleted because one of its sectors is used in some event.').should('be.visible')
     })
 
-    it('Delete Nisavski kej scheme - positive', function() {
+    it('should delete Nisavski kej scheme', function() {
         cy.SignInAdmin()
 
         cy.get('.mat-figure', { timeout: 50000 }).contains('Edit a location').should('be.visible').click()

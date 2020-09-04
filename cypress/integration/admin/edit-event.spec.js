@@ -15,7 +15,7 @@ describe('Admin editing event', function() {
     })
     
     
-    it('Edit EXIT event', function() {
+    it('should edit EXIT event', function() {
 
         /* Change description of an event and save it*/
         cy.get('#edit-event-description-input').clear().type('Postponed due to coronavirus.')
@@ -34,7 +34,7 @@ describe('Admin editing event', function() {
 
     })
 
-    it('Edit EXIT event day date', function() {
+    it('should edit EXIT event day date', function() {
         /* Open date picker for event day */
         cy.get('.edit-event-day-form').first().within(($firstDayForm) => {
             cy.get('#edit-event-day-date').within(($form) => {
@@ -72,7 +72,7 @@ describe('Admin editing event', function() {
         })
     })
 
-    it('Remove event day from sale', function() {
+    it('should remove event day from sale', function() {
 
         /* Change FIRST event day state to NOT_IN_SALE */
         cy.get('.edit-event-day-form').first().within(($firstDayForm) => {

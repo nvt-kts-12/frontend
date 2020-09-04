@@ -16,8 +16,8 @@ describe('User reserving ticket', function () {
 
     })
 
-    it('Reserve grandstand ticket for event Odbojka', function () {
-        
+    it('should reserve grandstand ticket for event Odbojka', function () {
+
         expect(numberOfReservations).to.equal(1)
 
         cy.get('[aria-label="Home"]').should('be.visible').click()
@@ -44,7 +44,7 @@ describe('User reserving ticket', function () {
 
         cy.get('#chosenSeatsTable').find('tr').should('have.length', 2)
 
-        cy.get('#sector-popup-div').scrollTo('bottom') 
+        cy.get('#sector-popup-div').scrollTo('bottom')
         cy.get('#pickBtn').should('be.visible').click()
 
         cy.scrollTo('bottom')
@@ -64,9 +64,9 @@ describe('User reserving ticket', function () {
         cy.get('#ticketsTable').find('tr').should('have.length', 3)
     })
 
-    it('Unable to pick reserved seat', function() {
+    it('should be unable to pick reserved seat', function () {
         expect(numberOfReservations).to.equal(3)
-        
+
         cy.get('[aria-label="Home"]').should('be.visible').click()
         cy.url().should('include', '/')
 
@@ -89,28 +89,28 @@ describe('User reserving ticket', function () {
         cy.get('#seatId0').should('be.disabled')
         cy.get('#seatId1').should('be.disabled')
     })
-    
-    it('Cancel reservation for seat on Odbojka event', function() {
+
+    it('should cancel reservation for seat on Odbojka event', function () {
         cy.get('#ticketsTable').should('be.visible').then(($ticketTable) => {
             numberOfReservations = $ticketTable.find('tr').length
         })
         expect(numberOfReservations).to.equal(3)
 
         cy.get('.cancel-reservation-button').contains('Cancel').first().click()
-        
+
         cy.get('.mat-dialog-title').contains('Cancel reservation').should('be.visible')
         cy.get('#popupOkButton').should('be.visible').click()
 
         cy.get('.mat-snack-bar-container', { timeout: 5000 }).contains('Reservation successfully canceled!').should('be.visible')
-        
+
         cy.reload()
         cy.get('#reservations').contains('Reservations:').should('be.visible')
         cy.get('#ticketsTable').find('tr').should('have.length', 2)
     })
 
-    it('Reserve parter ticket for Exit event', function() {
+    it('should reserve parter ticket for Exit event', function () {
         expect(numberOfReservations).to.equal(2)
-        
+
         cy.get('[aria-label="Home"]').should('be.visible').click()
         cy.url().should('include', '/')
 
@@ -122,7 +122,7 @@ describe('User reserving ticket', function () {
         cy.url().should('include', '/event-day/3')
 
         cy.get('[x="12"]').should('be.visible').click()
-        
+
         cy.get('.mat-dialog-title').contains('Sector PARTER 1').should('be.visible')
         cy.get('#parterInput').should('be.visible').type('1')
         cy.get('#pickBtn').should('be.visible').click()
@@ -141,18 +141,18 @@ describe('User reserving ticket', function () {
         cy.url().should('include', '/profile')
 
         cy.get('#ticketsTable').find('tr').should('have.length', 3)
-        
+
     })
 
     /**
      *  UNABLE to browse through paypal site
      */
 
-    it('Buy reserved ticket for Odbojka', function() {
+    it('should buy reserved ticket for Odbojka', function () {
         expect(numberOfReservations).to.equal(3)
-        
+
         cy.get('#ticketsTable').find('tr').eq(1).within(($row) => {
-                cy.get('#buy-reservation-button').click()
+            cy.get('#buy-reservation-button').click()
         })
         cy.get('.mat-dialog-title').contains('Confirm reservation').should('be.visible')
         cy.get('#popupOkButton').should('be.visible').click()
@@ -162,9 +162,19 @@ describe('User reserving ticket', function () {
         cy.url().should('include', 'https://www.sandbox.paypal.com/cgi-bin')
 
         cy.get('.proceed').within(($form) => {
-            cy.get('input[name="login_email"]').type('sb-arjxx785590@personal.example.com')
-            cy.get('#btnNext').should('be.visible').click()
+            cy.get('input[name="login_email"]').clear().type('sb-arjxx785590@personal.example.com')
             cy.get('input[name="login_password"]').type('0202998742015')
+
+
+            // cy.get('#btnLogin').then(($button) => {
+            //     if ($button.is(':visible')) {
+            //         cy.get('input[name="login_password"]').type('0202998742015')
+            //     } else {
+            //         cy.get('#btnNext').should('be.visible').click()
+            //         cy.get('input[name="login_password"]').type('0202998742015')
+            //     }
+            // })
+            
             cy.root().submit()
         })
 
@@ -175,5 +185,5 @@ describe('User reserving ticket', function () {
 
         cy.url().should('include', '/pay-pal')
     })
-    
+
 })

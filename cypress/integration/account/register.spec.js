@@ -1,5 +1,5 @@
 describe('Register', function() {
-    it('Sign up', function() {
+    it('should register new user', function() {
         cy.visit("/")
         cy.get('#registerButton').should('be.visible').click()
 
@@ -18,7 +18,7 @@ describe('Register', function() {
         })
     })
 
-    it.only('Not all fields fulfilled', function() {
+    it('should not be able to register new user because of missing input', function() {
         cy.visit("/")
         cy.get('#registerButton').should('be.visible').click()
 
@@ -32,7 +32,7 @@ describe('Register', function() {
         cy.get('.mat-button').should('be.disabled')
     })
 
-    it('Username already exists', function() {
+    it('should not be able to register new user because of already existent username', function() {
         cy.visit("/")
         cy.get('#registerButton').should('be.visible').click()
 

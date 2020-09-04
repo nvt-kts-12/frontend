@@ -1,7 +1,7 @@
 const { createYield } = require("typescript")
 
 describe('User editing profile information', function() {
-    it('Edit user information', function() {
+    it('should edit user information', function() {
         cy.SignInUser()
 
 
@@ -11,9 +11,9 @@ describe('User editing profile information', function() {
         cy.get('#editProfileButton').should('be.visible').click()
         cy.url().should('include', '/edit-profile')
 
-        cy.get('#firstNameInput').clear().type('Blagoje')
-        cy.get('#lastNameInput').clear().type('Jovović')
-        cy.get('#emailInput').clear().type('jovovic@gmail.com')
+        cy.get('#firstNameInput').clear().type('Arno')
+        cy.get('#lastNameInput').clear().type('Gujon')
+        cy.get('#emailInput').clear().type('arno.gujon@gmail.com')
     
         cy.get('#updateButton').should('be.visible').click()
 

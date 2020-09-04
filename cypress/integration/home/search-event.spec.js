@@ -9,7 +9,7 @@ describe('Search-event', function () {
         })
     })
 
-    it('Find event Tezina Lanaca', function () {
+    it('should find event Tezina Lanaca', function () {
         cy.get('input[type="text"]').type('Tez')
 
         cy.get('#event-list').within(($eventList) => {
@@ -19,7 +19,7 @@ describe('Search-event', function () {
 
     })
 
-    it('Find all Entertainment events', function () {
+    it('should find all Entertainment events', function () {
         cy.get('#filter').children().contains('Entertainment').click()
 
         cy.get('#event-list').within(($eventList) => {
@@ -35,7 +35,7 @@ describe('Search-event', function () {
         })
     })
 
-    it('Find event by date', function () {
+    it('should find event by date', function () {
         cy.get('#filter-date-form').within(($form) => {
             cy.get('button[type="button"]').click()
         })
@@ -59,13 +59,14 @@ describe('Search-event', function () {
         })
     })
 
-    it('Find event on Petrovaradinska tvrdjava', function () {
+    it('should find event on Petrovaradinska tvrdjava', function () {
         cy.get('.mat-select').first().click()
         cy.get('.mat-option-text').contains('Petrovaradinska tvrdjava').should('be.visible').click()
 
         cy.get('#event-list').within(($eventList) => {
             cy.get('.event').should('have.length', 1)
             cy.get('.event').contains('EXIT').should('be.visible')
+            cy.wait(2000)
             cy.get('.event-date').then(($eventDate) => {
                 const eventDateText = $eventDate.text()
                 expect(eventDateText).to.include('Petrovaradinska tvrdjava')
@@ -73,7 +74,7 @@ describe('Search-event', function () {
         })
     })
 
-    it('Combined search', function() {
+    it('should perform combined search', function() {
         cy.get('input[type="text"]').type('ni')
 
         cy.get('#event-list').within(($eventList) => {

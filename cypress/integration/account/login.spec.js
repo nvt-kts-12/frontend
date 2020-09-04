@@ -1,9 +1,9 @@
 describe('Login', function () {
-    it('Sign in', function () {
+    it('should sign user in', function () {
         cy.SignInUser()
     })
 
-    it('Bad username', function () {
+    it('should not be able to sign in user because of bad username', function () {
         cy.visit("/")
         cy.get("#loginButton").contains("Login").should('be.visible').click()
 
@@ -17,7 +17,7 @@ describe('Login', function () {
         cy.get('.snackbar-error', { timeout: 50000 }).contains('Bad credentials').should('be.visible')
     })
 
-    it('Bad password', function () {
+    it('should not be able to sign in user because of bad password', function () {
         cy.visit("/")
         cy.get("#loginButton").contains("Login").should('be.visible').click()
 
