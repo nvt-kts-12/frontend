@@ -3,7 +3,7 @@
     
     <mat-form-field id="eventSelect">
       Event:
-    <mat-select (selectionChange)="eventReport($event.value); resetShowBy($event.value)" #selectEvent>
+    <mat-select (selectionChange)="eventReport($event.value); resetShowBy($event.value)" #selectEvent id="matSelect">
       <mat-option *ngFor="let event of events" #elem [id]="event.id" [value]="event.id" class="eventOptions">
         {{event.name}} 
       </mat-option>
@@ -12,8 +12,8 @@
   
   <mat-form-field id="showBySelect">
     Show by:
-  <mat-select mat-select (selectionChange)="showStatistics($event.value);" #selectShowBy>
-     <mat-option [value]="1" class="showByOptions">
+  <mat-select  mat-select (selectionChange)="showStatistics($event.value);" #selectShowBy>
+     <mat-option [value]="1" class="showByOptions" id="eventOption">
        Number of tickets
      </mat-option> 
      <mat-option [value]="2" class="showByOptions">
@@ -58,3 +58,4 @@
 
 
 </mat-tab-group>
+

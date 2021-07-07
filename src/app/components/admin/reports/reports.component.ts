@@ -52,6 +52,7 @@ export class ReportsComponent implements OnInit {
   getAllLocations(){
     this.reportService.getAllLocations().subscribe(res => {
       this.locations = res
+      console.log(res)
    });
   }
 
@@ -69,10 +70,11 @@ export class ReportsComponent implements OnInit {
       
       let data=[]
       let labels=[]
-      
+      console.log(res)
       this.eventDays.forEach(element => {
         data.push(element.totalIncome)
         labels.push(element.eventDayDTO.date)
+        console.log(element.eventDayDTO)
       });
     
     });
